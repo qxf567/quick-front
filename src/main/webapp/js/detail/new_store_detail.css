@@ -1,0 +1,295 @@
+body {
+	color: #333333;
+}
+
+hr {
+	border-style: inset;
+	border-width: 1px;
+	display: block;
+}
+
+#position li {
+	background-color: #fff;
+	border-radius: 5px;
+	display: inline-block;
+	height: 4px;
+	margin: 0 2px;
+	opacity: 0.5;
+	width: 4px;
+}
+
+#position li.cur {
+	background-color: #fff;
+	opacity: 1;
+	width: 15px;
+}
+
+.store_info {
+	padding: 0 1rem 1.5rem;
+}
+
+p.store_name {
+	font-size: 1.2rem;
+	margin: 0.5rem 0 0.3rem;
+}
+
+p.price_main {
+	color: #45b5da;
+	font-size: 1.4rem;
+	margin-bottom: 0.8rem;
+}
+
+.price_main span {
+	color: #ffffff;
+}
+
+span.yuan {
+	color: #45b5da;
+	font-size: 1.8rem;
+	margin: 0 2px;
+}
+
+p.price_explain {
+	color: #999;
+	font-size: 1rem;
+	margin-top: 0.5rem;
+}
+
+span.price_label {
+	border: 1px solid rgba(248, 196, 178, 0.1);
+	border-radius: 5px;
+	color: #f8c4b2;
+	font-size: 0.9rem;
+	margin-right: 0.3rem;
+	padding: 0 0.3rem;
+}
+
+p.top10 {
+	margin-top: 1rem;
+}
+
+span.tips {
+	border-radius: 0.45rem;
+	color: #999;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	padding: 0 8px 0 0;
+}
+
+.tips img {
+	display: inline-block;
+	height: 1.45rem;
+	position: absolute;
+	width: auto;
+}
+
+span.tips_text {
+	padding-left: 1.8rem;
+}
+
+.gap {
+	background: #f1f1f1 none repeat scroll 0 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	height: 6px;
+}
+
+.info_list {
+	background: #fff none repeat scroll 0 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	color: #333333;
+	font-size: 1rem;
+	width: 100%;
+}
+
+.info_list a {
+	color: #333333;
+}
+
+.info_one_active {
+	background-color: #f2f2f2;
+}
+
+.info_one {
+	height: 3.2rem;
+	line-height: 3rem;
+	margin: 0 auto;
+	padding: 0 3%;
+	width: 94%;
+}
+
+.info_one img,.list_one img,.checked_right img {
+	display: inline-block;
+	height: auto;
+	vertical-align: middle;
+	width: 1.2rem;
+}
+
+.info_one span,.checked_info_main span,.list_one span {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.checked_info_main {
+	float: right;
+	height: 3rem;
+}
+
+.checked_info_main img {
+	height: 1.1rem;
+	vertical-align: middle;
+	width: auto;
+}
+
+span.checked_info {
+	color: #45b5da;
+	margin-right: 0.5rem;
+}
+
+span.checked_title {
+	margin-left: 0.5rem;
+}
+
+.list_one {
+	line-height: 1.5rem;
+	margin: 0 auto;
+	padding: 1rem 3%;
+	width: 94%;
+}
+
+.checked_right {
+	float: right;
+	margin: 0 auto;
+	padding: 0.8rem 0;
+	width: 1.2rem;
+}
+
+.checked_right img {
+	height: auto;
+	width: 1.1rem;
+}
+
+span.text_main {
+	margin-left: 5px;
+	max-width: 85%;
+}
+
+.split_line img,.mall_real_map img {
+	display: block;
+	width: 100%;
+}
+
+.cellphone {
+	font-size: 1.1rem;
+	letter-spacing: 1px;
+	margin: 0 auto;
+	padding: 1rem 0 3rem;
+	text-align: center;
+}
+
+.cellphone img {
+	margin: 0 auto 1rem;
+	width: 3rem;
+}
+
+.user_know {
+	padding: 1rem;
+}
+
+.user_know p {
+	color: #656565;
+	line-height: 1.5rem;
+	margin-top: 0.5rem;
+}
+
+p.title {
+	color: #999;
+}
+
+.user_know img {
+	float: left;
+	margin-right: 0.5rem;
+	margin-top: 0.45rem;
+	width: 0.5rem;
+}
+
+span.price_tag {
+	background: #e53c3c none repeat scroll 0 0;
+	display: inline-block;
+	font-size: 1rem;
+	margin-left: 1rem;
+	padding: 0 5px;
+	position: relative;
+}
+
+span.price_tag::before,span.price_tag::after {
+	background-size: 20px 6px;
+	content: "";
+	display: block;
+	height: 100%;
+	margin-top: 20px;
+	position: absolute;
+	top: -20px;
+	width: 10px;
+}
+
+span.price_tag::before {
+	background-color: #fff;
+	background-image: linear-gradient(-45deg, #e53c3c 25%, transparent 25%, transparent),
+		linear-gradient(-135deg, #e53c3c 25%, transparent 25%, transparent),
+		linear-gradient(-45deg, transparent 75%, #e53c3c 75%),
+		linear-gradient(-135deg, transparent 75%, #e53c3c 75%);
+	background-position: 100% 15%;
+	left: -8px;
+}
+
+span.price_tag::after {
+	background-color: #e53c3c;
+	background-image: linear-gradient(-45deg, #fff 25%, transparent 25%, transparent),
+		linear-gradient(-135deg, #fff 25%, transparent 25%, transparent),
+		linear-gradient(-45deg, transparent 75%, #fff 75%),
+		linear-gradient(-135deg, transparent 75%, #fff 75%);
+	background-position: 100% -7%;
+	right: -8px;
+}
+
+span.active_tag {
+	background: #f7c3b1 none repeat scroll 0 0;
+	display: inline-block;
+	font-size: 1rem;
+	margin-left: 1rem;
+	padding: 0 5px;
+	position: relative;
+}
+
+span.active_tag::before,span.active_tag::after {
+	background-size: 20px 6px;
+	content: "";
+	display: block;
+	height: 100%;
+	margin-top: 20px;
+	position: absolute;
+	top: -20px;
+	width: 10px;
+}
+
+span.active_tag::before {
+	background-color: #fff;
+	background-image: linear-gradient(-45deg, #f7c3b1 25%, transparent 25%, transparent),
+		linear-gradient(-135deg, #f7c3b1 25%, transparent 25%, transparent),
+		linear-gradient(-45deg, transparent 75%, #f7c3b1 75%),
+		linear-gradient(-135deg, transparent 75%, #f7c3b1 75%);
+	background-position: 100% 15%;
+	left: -8px;
+}
+
+span.active_tag::after {
+	background-color: #f7c3b1;
+	background-image: linear-gradient(-45deg, #fff 25%, transparent 25%, transparent),
+		linear-gradient(-135deg, #fff 25%, transparent 25%, transparent),
+		linear-gradient(-45deg, transparent 75%, #fff 75%),
+		linear-gradient(-135deg, transparent 75%, #fff 75%);
+	background-position: 100% -7%;
+	right: -8px;
+}

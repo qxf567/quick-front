@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<import resource="spring-props.xml"/>
+
+    <context:annotation-config />
+	<context:component-scan base-package="com.shear.front.controller" />
+
+    <!--<import resource="classpath:com/lashou/common/quartz/quartz.xml"/>-->
+    <!--<bean id="quartzScheduler"-->
+          <!--class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<property name="configLocation" value="classpath:quartz.properties" />-->
+        <!--<property name="dataSource">-->
+            <!--<ref bean="quartzDataSource" />-->
+        <!--</property>-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--&lt;!&ndash;<ref bean="dealLimitByTimeCronTrigger" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="ctripGroupProductListTrigger" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="ctripGroupProductChangeTrigger" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="setDealOnlineTrigger" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="dealOffline7DaysLaterAlertCronTrigger" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="businessServiceTodoAdviceTrigger" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="autoAuditDealTrigger" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="scanStoreSpJobTrigger"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="autoRefreshRedisTrigger"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="autoResendAssignTrigger"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="autoRecoveryDealOnlineTrigger"/>&ndash;&gt;-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="applicationContextSchedulerContextKey" value="applicationContext" />-->
+    <!--</bean>-->
+
+
+	<!-- <bean id="userEventAspect" class="com.lashou.crm.controller.UserEventAspect" />
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="userEventAspect">
+	    	<aop:after-returning pointcut="within(com.lashou.crm.service..*) and @annotation(com.lashou.common.userevent.UserEvent)" method="addLogSuccess" />
+		</aop:aspect>
+	</aop:config> -->
+
+	
+	
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+	
+<!-- 	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean
+				class="com.lashou.tools.MyWebBindingInitializer" >
+			</bean>
+		</property>
+	</bean> -->
+	<!--====================== Spring MVC Configuration ====================== -->
+	<!-- Static Resource -->
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/img/" mapping="/img/**" />
+	<!-- Spring MVC Annotation -->
+	<mvc:annotation-driven />
+	<!-- ViewResolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/view/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error/error</prop>
+				<prop key="java.lang.Throwable">error/error</prop>
+				<prop key="java.lang.RuntimeException">error/error</prop>
+				<prop key="java.sql.SQLException">error/error</prop>
+			</props>
+		</property>
+		<property name="statusCodes">
+			<props>
+				<prop key="error/error">500</prop>
+			</props>
+		</property>
+		<property name="warnLogCategory" value="WARN" />
+		<property name="defaultErrorView" value="error/error" />
+		<property name="defaultStatusCode" value="500" />
+	</bean>
+
+</beans>

@@ -1,0 +1,120 @@
+@charset "utf-8";
+html{ font-size:12px;}
+body {display: block; margin: 0;}
+p{margin: 0}
+a:link{
+    text-decoration:none;
+    color: #000000;
+}
+a:visited{
+    text-decoration:none;
+    color: #000000;
+}
+a:hover{
+    text-decoration:none;
+    color: #45b5da;
+}
+a:active{
+    text-decoration:none;
+    color: #45b5da;
+}
+ul{
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+@media screen and (min-width:321px) and (max-width:374px){html{font-size:14px}}
+@media screen and (min-width:375px) and (max-width:639px){html{font-size:16px}}
+@media screen and (min-width:640px){html{font-size:18px}}
+.container{min-width: 320px; max-width: 640px; overflow: hidden; margin:0 auto; background: #fff;}
+
+.hair_main{position:relative;padding-bottom: 35px;border-bottom: 1px solid rgba(0,0,0,.1)}
+#myCar{display: block; margin: 0 auto; background-repeat: no-repeat; margin-top: 8%;}
+.hair_list_top{height: 40px; position: absolute;width: 100%; max-width:640px;z-index: 99; top: 5px;}
+.hair_list_top span{float: right;color: #f8c4b2}
+span.hair_label{float: left;background: #f8c4b2; padding: 2px 4px; margin-top: .5rem;color: #ffffff;font-size: 14px;}
+.like{float: right;line-height: 2.5rem;margin-right: 3%;}
+.like span{color: #f8c4b2;}
+.love_btn{float: left;margin-top: 4px;margin-right: 7px}
+.love_btn img{width: 1.3rem;}
+.operation_tips{width: 100%; position:absolute; bottom: 35px; height: 30px; line-height:30px;text-align: center;color: #999}
+.prompt{ width: 80%; position:absolute; height: 30px; margin: 0 10%;}
+.prompt img{width: 35px;display: block;}
+.p_center {width: 40%; float: left; margin: 0 30%;}
+.p_center img{float: left}
+.onLoadingDiv{ width: 100%; height: 100%;}
+.onLoadingDiv img{ width:40px; margin: 0 auto;padding-top: 45%}
+.hair_list_bottom{text-align: center;}
+.hair_list_bottom span{color: #999999;font-size: 16px;}
+p.hair_name{font-size: 20px;margin: 10px auto;color: #333333}
+.like{float: right;line-height: 40px;}
+.like span{color: #F8C4B2;font-size: 16px}
+.love_btn{float: left}
+.love_btn img{width: 20px;}
+#VCc img{margin-top: 46%}
+.face{margin-top: 15px;margin-bottom: 5px;}
+.face li{display: inline; ;text-align: center;margin-right: 15px;border: 1px solid rgba(0,0,0,.1);padding: 1px 5px;color: #F8C4B2}
+li.title{margin-right: 30px;background: #F8C4B2;color: #ffffff}
+.fixed_bottom{position:fixed;bottom:0px; height:50px;background-color:#fff;width: 100%;max-width: 640px;z-index: 99;}
+.bottom_left{ float: left;width: 18%; }
+.bottom_left img{width: 3rem;padding-top: 0.2rem;display:block; margin:0 auto;}
+.cancel_button,.confirm_button{float: left;line-height: 50px;text-align: center;color: #ffffff;font-size: 1.2rem;letter-spacing: 3px;display:inline-block;color:#fff;}
+.cancel_button,.cancel_button:hover,.cancel_button:link,.cancel_button:visited,.confirm_button,.confirm_button:hover,.confirm_button:link,.confirm_button:visited{color:#fff;}
+
+.blue_btn{background: #45b5da}
+.pink_btn{background: #f8c4b2;}
+
+.split_line img{display: block;width: 100%;margin-top: 2rem; }
+.hair_details img{display: block;width: 100%;}
+/*.hair_details{padding-bottom: 3.4rem}*/
+.img_hand
+{
+    position:relative;
+    animation:left_to_right 1500ms ease-out 200ms infinite alternate;
+    -moz-animation:left_to_right 1500ms ease-out 200ms infinite alternate; /* Firefox: */
+    -webkit-animation:left_to_right 1500ms ease-out 200ms infinite alternate; /* Safari and Chrome: */
+    -o-animation:left_to_right 1500ms ease-out 200ms infinite alternate;/* Opera: */
+}
+.gap{height: 6px; background: #F6F6F6;border-bottom: 1px solid rgba(0,0,0,.1); border-top: 1px solid #f0f0f0;}
+.caption{border-bottom: 1px solid rgba(0,0,0,.1);line-height: 50px; color: #1C436F;font-size: 1rem;position: relative;}
+.pro_main { margin-top: 50px;}
+.left_label{width: 6px;height: 25px; background: #1C436F;float: left;margin-top: 12px; margin-right: 10px;}
+.product_list{ display: inline-block; width: 102%; white-space: nowrap; overflow: scroll; -webkit-overflow-scrolling: touch; z-index: 9;}
+.product_list li{width: 40%; text-align: center; margin-bottom:15px;margin-top: 15px; white-space: nowrap;display: inline-block;  position: relative;}
+.product_list img{ width: 80%; display: block; margin: 0 auto}
+.product_list p{ font-size: 1rem; line-height: 2rem;}
+.product_list span{color: #BFBFBF;}
+span.pro_label{font-size: 10px;background: #c83236;color: #ffffff; z-index: 10; position: absolute; padding: 2px 2px;left: 0;}
+li.nav_li span.hair_label{font-size: 10px;background: #fabcad;color: #ffffff; z-index: 10; position: absolute; padding: 2px 2px;left: 0; margin: 0;}
+.read_more{float: right; position: absolute;right: 8px; top: -25px;}
+.read_more img{width: 65px;}
+li.nav_li p{max-width: 80%;overflow: hidden;text-overflow: ellipsis;white-space:nowrap; margin: 0 auto }
+span.product_price{font-size: 18px;color: #0a2957}
+@keyframes left_to_right
+{
+    0%   {left:0%; top:0px;}
+    /*50%   {left:30%; top:0px;}*/
+    100% {left:80%; top:0px;}
+}
+
+@-moz-keyframes left_to_right /* Firefox */
+{
+    0%   {left:0%; top:0px;}
+    100% {left:80%; top:0px;}
+}
+
+@-webkit-keyframes left_to_right /* Safari and Chrome */
+{
+    0%   {left:0%; top:0px;}
+    100% {left:80%; top:0px;}
+}
+
+@-o-keyframes left_to_right /* Opera */
+{
+    0%   {left:0%; top:0px;}
+    100% {left:80%; top:0px;}
+}

@@ -1,0 +1,12 @@
+.classpath
+.project
+.settings/
+target/
+.checkstyle
+/bin
+/target
+overlays/
+.idea/
+v-crm.iml
+/target
+/pom.xml
