@@ -74,9 +74,9 @@
 		</section>
 		<div class="hpro-list">
 			<div class="list_store row">
-				<a class="" href="/shear/detail" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
-					<img src="/img/index/yingyezhong.png" class="status">
-					<img src="/img/index/dianpu.png" alt="250M" class="shop-img"/>
+				<a class="" href="/detail" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
+					<img src="img/index/yingyezhong.png" class="status">
+					<img src="img/index/dianpu.png" alt="250M" class="shop-img"/>
 					<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>
 				</a>
 				
@@ -86,10 +86,11 @@
 				
 			</div>
 			<div class="list_store row">
-				<a class="" href="/shear/detail" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
-					<img src="/img/index/yingyezhong.png" class="status">
-					<img src="/img/index/dianpu.png" alt="" class="shop-img"/>
+				<a class="" href="/detail" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
+					<img src="img/index/yingyezhong.png" class="status">
+					<img src="img/index/dianpu.png" alt="" class="shop-img"/>
 				</a>
+				<button id="btn">位置</button>
 					<p class="shop-title">金源店</p> 
 					<p class="shop-text">营业时间：10:00-21:30</p>
 					<p class="shop-text">地址：北京市通州区翠景北里1层</p>
@@ -118,7 +119,8 @@
 			</ul>
 		</div>
 	</div>
-	<script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
+<!-- 	<script type="text/javascript" src="shear/js/jquery-2.1.4.min.js"></script> -->
+    <script src="/js/detail/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="/js/zepto.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/touch.js"></script>
@@ -129,19 +131,21 @@
 		var url ='shop/list';
 		var debug = ${debug};
 		//微信jssdk调取地理位置的方法
-	   /*  wx.config({
+	     wx.config({
 	        debug: debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-	        appId: '${appid}', // 必填，公众号的唯一标识
-	        timestamp: '${timestamp}', // 必填，生成签名的时间戳
-	        nonceStr: 'wechat_code', // 必填，生成签名的随机串
-	        signature: '${sign}',// 必填，签名，见附录1
-	        jsApiList: ['openLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	        appId:'${appid}', // 必填，公众号的唯一标识
+	        timestamp:'${timestamp}' , // 必填，生成签名的时间戳
+	        nonceStr:'${nonceStr}', // 必填，生成签名的随机串
+	        signature:'${sign}',// 必填，签名，见附录1
+	        jsApiList: ['getLocation','openLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 	    });
 
 	    wx.ready(function () {
+	    	alert('enter....');
 	    	wx.getLocation({
 	    	    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
 	    	    success: function (res) {
+	    	    	alert(res);
 	    	        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
 	    	        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
 	    	        var speed = res.speed; // 速度，以米/每秒计
@@ -164,12 +168,18 @@
 	    	        	    alert( "finished" );
 	    	        	  });
 	    	        
-	    	    }
+	    	    },
+	            cancel: function (res) {
+	                alert('用户拒绝授权获取地理位置');
+	            },
+	            error: function (res) {
+	            	alert("定位失败！"); 
+	            }
 	    	});
-	    }); */
+	    	
+	    }); 
 	   
-	    
-	    $.ajax({
+	  /*   $.ajax({
 	        type : "post",
       	  url: url,
       	  data: {"latitude":39.56622,
@@ -178,9 +188,7 @@
       	  success : function(data){
       	    alert( "second success" +data);
       	  }
-	    });
-	    
-	    
+	    }); */
 	    
 		if (isWeiXin() || isIndex()) {
 			var backArea = document.getElementsByClassName('backArea')[0];

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="head.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -51,200 +52,39 @@
         <p class="checked_time_tips"><img src="/js/detail/list_style_solid.png">选好时段在此期间到店体验</p>
         <div class="checked_date">
             <li class="one_day">
-                <p class="date">3</p>
+                <p class="date"><fmt:formatDate value="${t1}" pattern="d"/></p>
                 <p>今天</p>
             </li>
             <li class="one_day">
-                <p class="date">4</p>
+                <p class="date"><fmt:formatDate value="${t2}" pattern="d"/></p>
                 <p>明天</p>
             </li>
             <li class="one_day">
-                <p class="date">5</p>
-                <p>后天</p>
+                <p class="date"><fmt:formatDate value="${t3}" pattern="d"/></p>
+                <p><fmt:formatDate value="${t3}" pattern="EEEE"/></p>
             </li>
             <li class="one_day">
-                <p class="date">6</p>
-                <p>星期日</p>
+                <p class="date"><fmt:formatDate value="${t4}" pattern="d"/></p>
+                <p><fmt:formatDate value="${t4}" pattern="EEEE"/></p>
             </li>
             <li class="one_day">
-                <p class="date">7</p>
-                <p>星期一</p>
+                <p class="date"><fmt:formatDate value="${t5}" pattern="d"/></p>
+                <p><fmt:formatDate value="${t5}" pattern="EEEE"/></p>
             </li>
         </div>
     </div>
     <div class="checked_time_slot">
         <input  value="" id="appointment_time" type="hidden"/>
         <input  value="" id="appointment_day" type="hidden"/>
-        <div class="one_time_slot" date="11月03号">
-                            <span  class="not_checked" appointment_day="2016-11-03">10:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">10:40</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">11:00</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">11:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">11:40</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">12:00</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">12:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">12:40</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">13:00</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">13:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">13:40</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">14:00</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">14:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">14:40</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">15:00</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">15:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">15:40</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">16:00</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">16:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">16:40</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">17:00</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">17:20</span>
-                                <span  class="not_checked" appointment_day="2016-11-03">17:40</span>
-                                <span  class="" appointment_day="2016-11-03">18:00</span>
-                                <span  class="" appointment_day="2016-11-03">18:20</span>
-                                <span  class="" appointment_day="2016-11-03">18:40</span>
-                                <span  class="" appointment_day="2016-11-03">19:00</span>
-                                <span  class="" appointment_day="2016-11-03">19:20</span>
-                                <span  class="" appointment_day="2016-11-03">19:40</span>
-                                <span  class="" appointment_day="2016-11-03">20:00</span>
-                                <span  class="" appointment_day="2016-11-03">20:20</span>
-                                <span  class="" appointment_day="2016-11-03">20:40</span>
-                        </div>
-        <div class="one_time_slot" date="11月04号">
-                                <span  class="" appointment_day="2016-11-04">10:20</span>
-                                    <span  class="" appointment_day="2016-11-04">10:40</span>
-                                    <span  class="" appointment_day="2016-11-04">11:00</span>
-                                    <span  class="" appointment_day="2016-11-04">11:20</span>
-                                    <span  class="" appointment_day="2016-11-04">11:40</span>
-                                    <span  class="" appointment_day="2016-11-04">12:00</span>
-                                    <span  class="" appointment_day="2016-11-04">12:20</span>
-                                    <span  class="" appointment_day="2016-11-04">12:40</span>
-                                    <span  class="" appointment_day="2016-11-04">13:00</span>
-                                    <span  class="" appointment_day="2016-11-04">13:20</span>
-                                    <span  class="" appointment_day="2016-11-04">13:40</span>
-                                    <span  class="" appointment_day="2016-11-04">14:00</span>
-                                    <span  class="" appointment_day="2016-11-04">14:20</span>
-                                    <span  class="" appointment_day="2016-11-04">14:40</span>
-                                    <span  class="" appointment_day="2016-11-04">15:00</span>
-                                    <span  class="" appointment_day="2016-11-04">15:20</span>
-                                    <span  class="" appointment_day="2016-11-04">15:40</span>
-                                    <span  class="" appointment_day="2016-11-04">16:00</span>
-                                    <span  class="" appointment_day="2016-11-04">16:20</span>
-                                    <span  class="" appointment_day="2016-11-04">16:40</span>
-                                    <span  class="" appointment_day="2016-11-04">17:00</span>
-                                    <span  class="" appointment_day="2016-11-04">17:20</span>
-                                    <span  class="" appointment_day="2016-11-04">17:40</span>
-                                    <span  class="" appointment_day="2016-11-04">18:00</span>
-                                    <span  class="" appointment_day="2016-11-04">18:20</span>
-                                    <span  class="" appointment_day="2016-11-04">18:40</span>
-                                    <span  class="" appointment_day="2016-11-04">19:00</span>
-                                    <span  class="" appointment_day="2016-11-04">19:20</span>
-                                    <span  class="" appointment_day="2016-11-04">19:40</span>
-                                    <span  class="" appointment_day="2016-11-04">20:00</span>
-                                    <span  class="" appointment_day="2016-11-04">20:20</span>
-                                    <span  class="" appointment_day="2016-11-04">20:40</span>
-                        </div>
-        <div class="one_time_slot" date="11月05号">
-                            <span  class="" appointment_day="2016-11-05">10:20</span>
-                            <span  class="" appointment_day="2016-11-05">10:40</span>
-                            <span  class="" appointment_day="2016-11-05">11:00</span>
-                            <span  class="" appointment_day="2016-11-05">11:20</span>
-                            <span  class="" appointment_day="2016-11-05">11:40</span>
-                            <span  class="" appointment_day="2016-11-05">12:00</span>
-                            <span  class="" appointment_day="2016-11-05">12:20</span>
-                            <span  class="" appointment_day="2016-11-05">12:40</span>
-                            <span  class="" appointment_day="2016-11-05">13:00</span>
-                            <span  class="" appointment_day="2016-11-05">13:20</span>
-                            <span  class="" appointment_day="2016-11-05">13:40</span>
-                            <span  class="" appointment_day="2016-11-05">14:00</span>
-                            <span  class="" appointment_day="2016-11-05">14:20</span>
-                            <span  class="" appointment_day="2016-11-05">14:40</span>
-                            <span  class="" appointment_day="2016-11-05">15:00</span>
-                            <span  class="" appointment_day="2016-11-05">15:20</span>
-                            <span  class="" appointment_day="2016-11-05">15:40</span>
-                            <span  class="" appointment_day="2016-11-05">16:00</span>
-                            <span  class="" appointment_day="2016-11-05">16:20</span>
-                            <span  class="" appointment_day="2016-11-05">16:40</span>
-                            <span  class="" appointment_day="2016-11-05">17:00</span>
-                            <span  class="" appointment_day="2016-11-05">17:20</span>
-                            <span  class="" appointment_day="2016-11-05">17:40</span>
-                            <span  class="" appointment_day="2016-11-05">18:00</span>
-                            <span  class="" appointment_day="2016-11-05">18:20</span>
-                            <span  class="" appointment_day="2016-11-05">18:40</span>
-                            <span  class="" appointment_day="2016-11-05">19:00</span>
-                            <span  class="" appointment_day="2016-11-05">19:20</span>
-                            <span  class="" appointment_day="2016-11-05">19:40</span>
-                            <span  class="" appointment_day="2016-11-05">20:00</span>
-                            <span  class="" appointment_day="2016-11-05">20:20</span>
-                            <span  class="" appointment_day="2016-11-05">20:40</span>
-                    </div>
-        <div class="one_time_slot" date="11月06号">
-                            <span  class="" appointment_day="2016-11-06">10:20</span>
-                            <span  class="" appointment_day="2016-11-06">10:40</span>
-                            <span  class="" appointment_day="2016-11-06">11:00</span>
-                            <span  class="" appointment_day="2016-11-06">11:20</span>
-                            <span  class="" appointment_day="2016-11-06">11:40</span>
-                            <span  class="" appointment_day="2016-11-06">12:00</span>
-                            <span  class="" appointment_day="2016-11-06">12:20</span>
-                            <span  class="" appointment_day="2016-11-06">12:40</span>
-                            <span  class="" appointment_day="2016-11-06">13:00</span>
-                            <span  class="" appointment_day="2016-11-06">13:20</span>
-                            <span  class="" appointment_day="2016-11-06">13:40</span>
-                            <span  class="" appointment_day="2016-11-06">14:00</span>
-                            <span  class="" appointment_day="2016-11-06">14:20</span>
-                            <span  class="" appointment_day="2016-11-06">14:40</span>
-                            <span  class="" appointment_day="2016-11-06">15:00</span>
-                            <span  class="" appointment_day="2016-11-06">15:20</span>
-                            <span  class="" appointment_day="2016-11-06">15:40</span>
-                            <span  class="" appointment_day="2016-11-06">16:00</span>
-                            <span  class="" appointment_day="2016-11-06">16:20</span>
-                            <span  class="" appointment_day="2016-11-06">16:40</span>
-                            <span  class="" appointment_day="2016-11-06">17:00</span>
-                            <span  class="" appointment_day="2016-11-06">17:20</span>
-                            <span  class="" appointment_day="2016-11-06">17:40</span>
-                            <span  class="" appointment_day="2016-11-06">18:00</span>
-                            <span  class="" appointment_day="2016-11-06">18:20</span>
-                            <span  class="" appointment_day="2016-11-06">18:40</span>
-                            <span  class="" appointment_day="2016-11-06">19:00</span>
-                            <span  class="" appointment_day="2016-11-06">19:20</span>
-                            <span  class="" appointment_day="2016-11-06">19:40</span>
-                            <span  class="" appointment_day="2016-11-06">20:00</span>
-                            <span  class="" appointment_day="2016-11-06">20:20</span>
-                            <span  class="" appointment_day="2016-11-06">20:40</span>
-                    </div>
-        <div class="one_time_slot" date="11月07号">
-                            <span  class="" appointment_day="2016-11-07">10:20</span>
-                            <span  class="" appointment_day="2016-11-07">10:40</span>
-                            <span  class="" appointment_day="2016-11-07">11:00</span>
-                            <span  class="" appointment_day="2016-11-07">11:20</span>
-                            <span  class="" appointment_day="2016-11-07">11:40</span>
-                            <span  class="" appointment_day="2016-11-07">12:00</span>
-                            <span  class="" appointment_day="2016-11-07">12:20</span>
-                            <span  class="" appointment_day="2016-11-07">12:40</span>
-                            <span  class="" appointment_day="2016-11-07">13:00</span>
-                            <span  class="" appointment_day="2016-11-07">13:20</span>
-                            <span  class="" appointment_day="2016-11-07">13:40</span>
-                            <span  class="" appointment_day="2016-11-07">14:00</span>
-                            <span  class="" appointment_day="2016-11-07">14:20</span>
-                            <span  class="" appointment_day="2016-11-07">14:40</span>
-                            <span  class="" appointment_day="2016-11-07">15:00</span>
-                            <span  class="" appointment_day="2016-11-07">15:20</span>
-                            <span  class="" appointment_day="2016-11-07">15:40</span>
-                            <span  class="" appointment_day="2016-11-07">16:00</span>
-                            <span  class="" appointment_day="2016-11-07">16:20</span>
-                            <span  class="" appointment_day="2016-11-07">16:40</span>
-                            <span  class="" appointment_day="2016-11-07">17:00</span>
-                            <span  class="" appointment_day="2016-11-07">17:20</span>
-                            <span  class="" appointment_day="2016-11-07">17:40</span>
-                            <span  class="" appointment_day="2016-11-07">18:00</span>
-                            <span  class="" appointment_day="2016-11-07">18:20</span>
-                            <span  class="" appointment_day="2016-11-07">18:40</span>
-                            <span  class="" appointment_day="2016-11-07">19:00</span>
-                            <span  class="" appointment_day="2016-11-07">19:20</span>
-                            <span  class="" appointment_day="2016-11-07">19:40</span>
-                            <span  class="" appointment_day="2016-11-07">20:00</span>
-                            <span  class="" appointment_day="2016-11-07">20:20</span>
-                            <span  class="" appointment_day="2016-11-07">20:40</span>
-                    </div>
+        
+        <c:forEach items="${avaiDate}" var="item">
+        	<div class="one_time_slot" date="<fmt:formatDate value="${item.key}" pattern="M月d号"/>">
+    			<c:forEach items="${item.value}" var="value">
+                	<span <c:if test="${value lt t1}" >class="not_checked"</c:if> appointment_day="<fmt:formatDate value="${value}" pattern="yyyy-mm-dd"/>"><fmt:formatDate value="${value}" pattern="HH:mm" /></span>
+                        <!--   class="not_checked" -->
+             	</c:forEach>
+            </div>
+		</c:forEach>
     </div>
     <div class="bottom_height"></div>
     <div class="fixed_menu">
@@ -253,12 +93,12 @@
     </div><!--底部固定End-->
 </div>
 <script type="text/javascript">
-    var f_user_id = '317926';
+    var f_user_id = '${order.customerId}';
     var time        = '1478159349';
     var get_token   = '7eb3fbd5383bf37489b71a318c0e3f98';
     var f_store_id   = '35';
-    var f_id = '7';
-    var select_hair_id =  '';
+    var f_id = '${order.shopId}';
+    var select_hair_id =  '${order.hairstyleId}';
 
     var ticket_num =  '1';
     var f_selected_ticket_type =  '1';
@@ -336,7 +176,9 @@
             var url_subfix = $.param(url_params);
 
             var url = url_prefix + '?' + url_subfix;
-            location.href = url;
+            //location.href = url;
+            
+            alert(url_subfix);
         });
 
     });

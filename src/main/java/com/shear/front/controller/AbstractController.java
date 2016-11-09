@@ -30,13 +30,12 @@ public abstract class AbstractController {
      * 
      * @param model
      * @param request
-     * @throws BusinessException
      */
     @ModelAttribute
     public void modelAttribute(Model model, WebRequest request) {
-       
-        model.addAttribute("debug", config.getEnv().equals("live")?true:false);
+        model.addAttribute("debug", config.getEnv().equals("live")?false:true);
         model.addAttribute("appid", config.getAppId());
+        model.addAttribute("appsecret", config.getAppSecret());
     }
 
 //    /**
