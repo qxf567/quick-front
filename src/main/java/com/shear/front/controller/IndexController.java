@@ -58,7 +58,12 @@ public class IndexController extends AbstractController {
 
     @RequestMapping("/detail")
     public String detail(Model model, Long id) {
-	Shop shop = shopService.findById(id);
+	Shop shop = null;
+	try {
+	    shop = shopService.findbyid(id);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
 	model.addAttribute("shop", shop);
 	return "detail";
     }
