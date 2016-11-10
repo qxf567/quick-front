@@ -4,10 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<%@ include file="common/meta.jsp"%>
     <title>店铺详情页</title>
     <script src="/js/detail/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/detail/common.js"></script>
@@ -75,7 +72,10 @@
                 <span></span><img src="/js/detail/appointment_icon.png"/>
                 <span class="checked_title">预约时间</span>
                 <div class="checked_info_main">
-                    <span class="checked_info">未选择</span>
+                    <span class="checked_info"> 
+                    	<c:if test="${!empty order.appointmentDay}">${order.appointmentDay} ${order.appointmentTime}</c:if>
+                   	 	<c:if test="${empty order.appointmentDay}">未选择</c:if>
+                   	</span>
                     <span></span><img src="/js/detail/checked_icon.png"/>
                 </div>
             </div>
@@ -86,7 +86,10 @@
                 <span></span><img src="/js/detail/hairstyle_icon.png"/>
                 <span class="checked_title">发型精选</span>
                 <div class="checked_info_main">
-                    <span class="checked_info">未选择</span>
+                    <span class="checked_info">
+        				 <c:if test="${!empty order.hairstyleId}">${order.hairstyleId}</c:if>
+        				 <c:if test="${empty order.hairstyleId}">未选择</c:if>         
+                    </span>
                     <span></span><img src="/js/detail/checked_icon.png"/>
                 </div>
             </div>
@@ -176,19 +179,19 @@
 
 <script type="text/javascript">
     //全局变量区域
-    var f_user_id = '317926';
-    var time = '1478159349';
+    var customerId = '${userId}';
+    var time = '${}';
     var get_token = '7eb3fbd5383bf37489b71a318c0e3f98';
-    var f_store_id = ${shop.id};
+    var shopId = '${shop.id}';
 
     var ticket_num = 1;   //小票数量
     var f_selected_ticket_type = '1';   //票据类型1全天票2限时票
 
-    var f_appointment_day = '';     //预约时段
+    var appointmentDay = '${order.appointmentDay}';     //预约时段
 
-    var f_appointment_time = '';     //预约分钟
+    var appointmentTime = '${order.appointmentTime}';     //预约分钟
 
-    var hair_id =  '';//发型ID
+    var hair_id =  '${order.hairstyleId}';//发型ID
 
     $(document).ready(function(){
 
@@ -211,18 +214,18 @@
             pop_up_loading();
 
             var url_params = {
-                'f_store_id'                :   f_store_id,
+                'shopId'                :   shopId,
                 'ticket_num'                :   ticket_num,
                 'f_selected_ticket_type'    :   f_selected_ticket_type,
-                'f_user_id'                 :   f_user_id,
+                'customerId'                 :   customerId,
                 'time'                      :   time,
                 'get_token'                 :   get_token,
                 'select_hair_id'            :   hair_id,
-                'f_appointment_day'         :   f_appointment_day,
-                'f_appointment_time'        :   f_appointment_time
+                'appointmentDay'         :   appointmentDay,
+                'appointmentTime'        :   appointmentTime
             };
 
-            var url_prefix = '/mobile3/hairstyle_list';
+            var url_prefix = '/shear/chose/hair';
             var url_subfix = $.param(url_params);
             var url = url_prefix + '?' + url_subfix;
 
@@ -234,15 +237,15 @@
             pop_up_loading();
 
             var url_params = {
-                'id'                :   f_store_id,
+                'shopId'                :   shopId,
                 'businessHours'                :   '${shop.businessHours}',
                 'f_selected_ticket_type'    :   f_selected_ticket_type,
-                'f_user_id'                 :   f_user_id,
+                'customerId'                 :   customerId,
                 'time'                      :   time,
                 'get_token'                 :   get_token,
                 'select_hair_id'            :   hair_id,
-                'f_appointment_day'         :   f_appointment_day,
-                'f_appointment_time'        :   f_appointment_time
+                'appointmentDay'         :   appointmentDay,
+                'appointmentTime'        :   appointmentTime
             };
 
             var url_prefix = '/shear/chose/time';
@@ -255,25 +258,20 @@
         //立即下单
         $("#payment").click(function(){
 
-                                            var url_params = {
-                    'shopId'                :   f_store_id,
-                    'ticket_num'                :   ticket_num,
-                    'f_selected_ticket_type'    :   f_selected_ticket_type,
-                    'f_user_id'                 :   f_user_id,
+                var url_params = {
+                    'shopId'                :   shopId,
+                    'customerId'                 :   customerId,
                     'time'                      :   time,
                     'get_token'                 :   get_token,
                     'hair_id'                   :   hair_id,
-                    'f_appointment_day'         :   f_appointment_day,
-                    'f_appointment_time'        :   f_appointment_time
+                    'appointmentDay'         :   appointmentDay,
+                    'appointmentTime'        :   appointmentTime
                 };
-
-                var url_prefix = '/mobile3/pay_detail.html';
+                var url_prefix = '/shear/pay/detail';
                 var url_subfix = $.param(url_params);
                 var url = url_prefix + '?' + url_subfix;
-
                 window.location.href = url;
-
-                                        });
+               });
 
 
 

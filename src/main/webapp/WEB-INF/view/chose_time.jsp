@@ -4,10 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+   	<%@ include file="common/meta.jsp"%>
     <title>时间预约</title>
     <script src="/js/detail/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/detail/common.js"></script>
@@ -80,8 +77,7 @@
         <c:forEach items="${avaiDate}" var="item">
         	<div class="one_time_slot" date="<fmt:formatDate value="${item.key}" pattern="M月d号"/>">
     			<c:forEach items="${item.value}" var="value">
-                	<span <c:if test="${value lt t1}" >class="not_checked"</c:if> appointment_day="<fmt:formatDate value="${value}" pattern="yyyy-mm-dd"/>"><fmt:formatDate value="${value}" pattern="HH:mm" /></span>
-                        <!--   class="not_checked" -->
+                	<span <c:if test="${value lt t1}" >class="not_checked"</c:if> appointment_day="<fmt:formatDate value="${value}" pattern="yyyy-MM-dd"/>"><fmt:formatDate value="${value}" pattern="HH:mm" /></span>
              	</c:forEach>
             </div>
 		</c:forEach>
@@ -93,12 +89,11 @@
     </div><!--底部固定End-->
 </div>
 <script type="text/javascript">
-    var f_user_id = '${order.customerId}';
+    var customerId = '${order.customerId}';
     var time        = '1478159349';
     var get_token   = '7eb3fbd5383bf37489b71a318c0e3f98';
-    var f_store_id   = '35';
-    var f_id = '${order.shopId}';
-    var select_hair_id =  '${order.hairstyleId}';
+    var shopId   = '${order.shopId}';
+    var hairstyleId =  '${order.hairstyleId}';
 
     var ticket_num =  '1';
     var f_selected_ticket_type =  '1';
@@ -129,11 +124,11 @@
         $("#default").click(function(){
 
             var url_params = {
-                'f_user_id'             :   f_user_id,
+                'customerId'             :   customerId,
                 'time'                  :   time,
                 'get_token'             :   get_token,
-                'f_store_id'            :   f_store_id,
-                'f_hair_id'             :   select_hair_id,
+                'shopId'            :   shopId,
+                'hairstyleId'             :   hairstyleId,
                 'f_appointment_day'     :   '',
                 'f_appointment_time'    :   '',
                 'f_selected_ticket_type' :  1,
@@ -160,25 +155,24 @@
             }
 
             var url_params = {
-                'f_user_id'             :   f_user_id,
+                'customerId'             :   customerId,
                 'time'                  :   time,
                 'get_token'             :   get_token,
-                'f_store_id'            :   f_store_id,
-                'f_hair_id'             :   select_hair_id,
-                'f_appointment_day'     :   f_appointment_day,
-                'f_appointment_time'    :   f_appointment_time,
+                'shopId'            :   shopId,
+                'hairstyleId'             :   hairstyleId,
+                'appointmentDay'     :   f_appointment_day,
+                'appointmentTime'    :   f_appointment_time,
                 'f_selected_ticket_type' :  f_selected_ticket_type,
             };
 
             pop_up_loading();
 
-            var url_prefix = '/mobile3/store_detail';
+            var url_prefix = '/shear/detail/'+shopId;
             var url_subfix = $.param(url_params);
 
             var url = url_prefix + '?' + url_subfix;
-            //location.href = url;
+            location.href = url;
             
-            alert(url_subfix);
         });
 
     });

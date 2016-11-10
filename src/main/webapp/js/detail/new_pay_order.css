@@ -1,0 +1,53 @@
+@charset "utf-8";
+body { margin: 0; font-family: "微软雅黑", Arial; color: #333}
+ul{list-style: none; padding: 0;margin: 0;}
+li{list-style: none;}
+p{margin: 0; padding: 0;}
+.container{min-width: 320px; max-width: 640px; overflow: hidden; margin:0 auto; background: #ffffff}
+.order_info{height: auto; width: 100%; padding: 0 15px;}
+p.store_name_id,.product_title{ height: 3rem; line-height: 3rem; border-bottom: 1px solid rgba(0,0,0,.1); font-size: 1.2rem; padding-left: 3%;}
+.store_img{ float: left; margin-right: 1rem; margin-top: 1.5rem;}
+.store_img img{height: 88px; width: auto; vertical-align: middle; margin: 0 auto;}
+.store_text{padding-top: 1.5rem;padding-bottom: 1.5rem;}
+.store_text p{line-height: 30px;color: #999;font-size: 1.1rem; width: 100%;}
+.caption{border-bottom: 1px solid rgba(0,0,0,.1);line-height: 3.2rem; color: #333;font-size: 1rem;position: relative;}
+.caption img{width: 1.5rem; height: auto; display: inline-block; vertical-align: middle; margin-right: 0.5rem;padding-left: 3%;}
+span.caption_tips{position: absolute;right: 1rem;color: #f8c4b2}
+.read_more{float: right; position: absolute;right:1%; top: -1.5rem;}
+.read_more img{width: 3.5rem;}
+span.checked_info{color: #f8c4b2;}
+
+
+.product_group{ padding: 10px 3%; font-size: 1rem; height: 100px; border-bottom: 1px solid rgba(0,0,0,.1)}
+.product_img{float: left; }
+.product_img img{ vertical-align: middle; dispaly:block; height:75px; width: auto; padding:10px 0;margin:0 auto; }
+.product_info{width: 60%;float: left; padding-left: 10px;font-size: 1.1rem;  padding-top: 2px;}
+.product_select{width: 10%;float: right;}
+.product_info p{ font-size: 1rem; line-height: 30px; color: #1c436f; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+p.name{color: #666; line-height: 30px;width: 100%;
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/}
+p.hair{color: #999; line-height: 30px;}
+.product_info span{text-decoration:line-through; color: #999;}
+.option_main{text-align: center;}
+.option_default{width: 22px; height: 22px; border: 1px solid rgba(0,0,0,.1);border-radius:50%;float: right;margin-top: 12px;margin-right: 13px}
+.option{width: 22px; height: 22px; border: 2px solid #1c436f;border-radius:50%;float: right;margin-top: 12px;margin-right: 13px}
+.option img,.option_default img{float: right;margin-top: 3px;margin-right: 4px; width: 15px;}
+.option_default img{display: none}
+.pitchon_act{border: 1px solid rgba(28,67,111,.1);}
+
+.store_info{float: left;}
+.store_info ul{color: #999; padding: 15px 15px 30px 15px; font-size:1rem;border-bottom: 1px solid #dadada;margin-bottom: 50px;}
+.store_info ul li{ line-height: 1.5rem; margin-bottom: 10px; list-style-image: url("../image/mobile3/list_style_solid.png"); margin-left:15px;}
+
+/*底部固定的代码*/
+.gap{height: 6px;background: #f1f1f1;border-top: 1px solid rgba(0,0,0,.1);border-bottom: 1px solid rgba(0,0,0,.1);}
+.bottom_height{height:50px}
+.fixed_menu{position:fixed;bottom:0px; height:50px;background-color:#fff;width: 100%;max-width: 640px;border-top: 1px solid rgba(0,0,0,.1);font-size: 15px;}
+.payment_btn{background: #1c436f;float: right;width: 40%;line-height: 50px;text-align: center;letter-spacing: 1px}
+.payment_btn a{color: #fff;}
+.amount{float:left;line-height: 50px;padding-left: 1rem;color: #1c436f;}
+span.discount_label{color: #f8c4b2;margin-left: 0.8rem}
+

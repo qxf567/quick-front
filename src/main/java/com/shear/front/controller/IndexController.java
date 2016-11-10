@@ -20,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lashou.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatManager;
-import com.quickshear.domain.Order;
+import com.quickshear.domain.Hairstyle;
 import com.quickshear.domain.Shop;
+import com.quickshear.domain.query.HairstyleQuery;
+import com.quickshear.service.HairstyleService;
 import com.quickshear.service.ShopService;
+import com.shear.front.vo.OrderVo;
 
 @Controller
 @RequestMapping("/shear")
@@ -34,6 +37,8 @@ public class IndexController extends AbstractController {
     private ShopService shopService;
     @Autowired
     private WechatManager wechatManager;
+    @Autowired
+    private HairstyleService hairstyleService;
 
     // 当前网页的URL，不包含#及其后面部分
     private String url = "http://qa-n.lashou.com/shear/shear/index";
@@ -58,7 +63,7 @@ public class IndexController extends AbstractController {
     }
 
     @RequestMapping("/detail/{id}")
-    public String detail(Model model,@PathVariable(value="id") Long id) {
+    public String detail(Model model,@PathVariable(value="id") Long id, @ModelAttribute OrderVo order) {
 	Shop shop = null;
 	try {
 	    shop = shopService.findbyid(id);
@@ -66,11 +71,12 @@ public class IndexController extends AbstractController {
 	    e.printStackTrace();
 	}
 	model.addAttribute("shop", shop);
+	model.addAttribute("order", order);
 	return "detail";
     }
 
     @RequestMapping("/chose/time")
-    public String chose(Model model,Shop shop, @ModelAttribute Order order) {
+    public String chose(Model model,Shop shop, @ModelAttribute OrderVo order) {
 
 	Map<Date, List<Date>> avaiDate = new TreeMap<Date, List<Date>>();
 
@@ -90,14 +96,37 @@ public class IndexController extends AbstractController {
 	    date = DateUtil.getDate(date, 1);
 	}
 	model.addAttribute("avaiDate", avaiDate);
+	model.addAttribute("order", order);
 	return "chose_time";
     }
 
     @RequestMapping("/chose/hair")
-    public String choseHair(Model model, @ModelAttribute Order order) {
-	LOGGER.debug("enter...chose");
-
+    public String choseHair(Model model,Shop shop, @ModelAttribute OrderVo order) {
+	
+	HairstyleQuery query = new HairstyleQuery();
+	//query.setStatus(1);
+	List<Hairstyle> hairList = null;
+	try {
+	    hairList = hairstyleService.selectByParam(query);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	model.addAttribute("hairList", hairList);
+	model.addAttribute("order", order);
 	return "chose_hair";
+    }
+    
+    @RequestMapping("/chose/hair/detail")
+    public String choseHairDetail(Model model,Shop shop, @ModelAttribute OrderVo order,Long hairstyleId) {
+	Hairstyle hair = null;
+	try {
+	    hair = hairstyleService.findbyid(hairstyleId);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	model.addAttribute("hair", hair);
+	model.addAttribute("order", order);
+	return "hair_detail";
     }
 
     @RequestMapping("/orderlist")
@@ -138,9 +167,6 @@ public class IndexController extends AbstractController {
 	    list.add(s.getTime());
 	}
 	list.remove(list.size() - 1);
-	for (Date a : list) {
-	    System.out.println(a);
-	}
 
 	return list;
     }

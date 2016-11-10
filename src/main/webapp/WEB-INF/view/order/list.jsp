@@ -2,14 +2,11 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>星客多快剪 - 订单列表页</title>
-    <script src="/js/detail/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/detail/mobile3/common.js"></script>
-    <script type="text/javascript" src="/js/detail/mobile3/btn_active.js"></script>
+	<%@ include file="common/meta.jsp"%> 
+	<title>订单列表页</title>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/detail/common.js"></script>
+    <script type="text/javascript" src="/js/detail/btn_active.js"></script>
     <script type="text/javascript" src="/js/detail/fastclick.js"></script>
     <script type="text/javascript">
         //移动设备快速响应点击事件

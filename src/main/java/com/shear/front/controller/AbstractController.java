@@ -36,6 +36,8 @@ public abstract class AbstractController {
         model.addAttribute("debug", config.getEnv().equals("live")?false:true);
         model.addAttribute("appid", config.getAppId());
         model.addAttribute("appsecret", config.getAppSecret());
+        //@TODO  
+        model.addAttribute("userId", "");
     }
 
 //    /**

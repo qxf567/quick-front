@@ -1,0 +1,44 @@
+@charset "utf-8";
+html{ font-size:12px;}
+body {display: block; margin: 0;}
+p{margin: 0}
+a:link{
+    text-decoration:none;
+    color: #000000;
+}
+a:visited{
+    text-decoration:none;
+    color: #000000;
+}
+a:hover{
+    text-decoration:none;
+    color: #1c436f;
+}
+a:active{
+    text-decoration:none;
+    color: #1c436f;
+}
+@media screen and (min-width:321px) and (max-width:374px){html{font-size:14px}}
+@media screen and (min-width:375px) and (max-width:639px){html{font-size:16px}}
+@media screen and (min-width:640px){html{font-size:18px}}
+.container{min-width: 320px; max-width: 640px; overflow: hidden; margin:0 auto; background: #fff;}
+.sex{text-align: center; height: 3.5rem; font-size: 1.2rem; color: #999999;  margin-bottom: 2%;border-bottom: 1px solid rgba(0,0,0,.1)}
+.container img{width: 100%}
+.gender{width: 50%;float: left;line-height: 3.4rem;}
+.sex_select{color: #1c436f;border-bottom: 2px solid #1c436f;}
+.gender p{width:50%;margin:0 auto;text-align:center;}
+.womanlist{padding:0 1%}
+.onelist{width:48%;padding:0% 1% 0 1%;float: left;position: relative;position: relative;text-align: center}
+.hair_pictures{position: relative;}
+.hair_pictures img{width: 100%;display: block}
+.hair_list_top{width: 96%; position: absolute;z-index: 99;}
+.hair_list_top img{margin-right: 5px}
+.hair_list_top span{float: right;color: #f8c4b2}
+.like{float: right;margin-right: 5%;}
+.like span{color: #f8c4b2; margin-top: 0.5rem;}
+.love_btn{float: left}
+.love_btn img{width: 1.1rem; margin-top: .5rem}
+span.hair_label{float: left;background: #f8c4b2; padding: 2px 4px; margin-top: .5rem;color: #ffffff;font-size: 10px;}
+p.hair_name{color: #333;font-size: 1.1rem;line-height: 3rem}
+p.english_label{color:#999999;margin-bottom: 1rem}
+img.the_end{margin: 2% 0 4% 0}

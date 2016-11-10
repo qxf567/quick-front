@@ -1,293 +1,620 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title>星客多精选发型360°旋转看发型效果</title>
+   <%@ include file="common/meta.jsp"%>
+    <title></title>
+    <!-- Pixel Admin's stylesheets -->
     <link type="text/css" rel="stylesheet" href="/js/detail/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/detail/hairstyle_detail.css" />
+    <link href="/js/detail/hairstyle.css" rel="stylesheet" type="text/css">
     <script src="/js/detail/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/detail/common.js"></script>
-    <script type="text/javascript" src="/js/detail/btn_active.js"></script>
     <script type="text/javascript" src="/js/detail/fastclick.js"></script>
     <script type="text/javascript" src="/js/detail/jquery.lazyload.js"></script>
-    <script type="text/javascript" src="/js/detail/new_3deye.js"></script>
-    <script src="/js/detail/jweixin-1.0.0.js"></script>
-    <script src="/js/detail/wechat_common.js"></script>
-    <script>
-        wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: 'wx8d0ca17fea670939', // 必填，公众号的唯一标识
-            timestamp: 1478501326, // 必填，生成签名的时间戳
-            nonceStr: 'wechat_code', // 必填，生成签名的随机串
-            signature: 'da85af1adeeff6f56716ebb0eea2c4fc9333058a',// 必填，签名，见附录1
-            jsApiList: ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-    </script>
-    <script type="text/javascript">
-        var f_user_id = '317926';
-        var time        = '1478501251';
-        var token   = '95cad45280b7b8a9287213c83ab4bad7';
-        var f_store_id   = '67';
-        var f_id = '10';
-        var select_hair_id =  '';
-
-        var ticket_num =  '1';
-        var f_selected_ticket_type =  '1';
-        var f_date =  '';
-        var f_appointment_day =  '';
-        var f_appointment_time =  '';
-        $(document).ready(function(){
-            FastClick.attach(document.body);
-            $("#hair_style_show").vc3dEye({
-                imagePath:"http://cdn.xingkeduo.com/imgs/4/",
-                totalImages:10,
-                imageExtension:"jpg"
-            });
-
-            $(".p_left").click(function(){
-                $("#hair_style_show").vc3dEye.d();
-            })
-
-            $(".p_right").click(function(){
-
-            })
-
-            $(".cancel_button").click(function(){
-                pop_up_loading();
-                location.href = "/mobile3/store_detail?f_user_id=" + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id + '&f_hair_id=' + select_hair_id + '&ticket_num=' + ticket_num + '&f_selected_ticket_type=' + f_selected_ticket_type + '&f_date=' + f_date + '&f_appointment_day=' + f_appointment_day + '&f_appointment_time=' + f_appointment_time;
-            });
-
-            $(".confirm_button").click(function(){
-                pop_up_loading();
-                location.href = "/mobile3/store_detail?f_user_id=" + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id + '&f_hair_id=' + f_id + '&ticket_num=' + ticket_num + '&f_selected_ticket_type=' + f_selected_ticket_type + '&f_date=' + f_date + '&f_appointment_day=' + f_appointment_day + '&f_appointment_time=' + f_appointment_time;
-
-            });
-            $("img").lazyload({
-                threshold:350
-            });
-        });
-    </script>
+    <script type="text/javascript" src="/js/detail/zepto_min.js"></script>
+    <script type="text/javascript" src="/js/detail/touchslider.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/js/detail/ie.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div class="container">
-    <div class="hair_list_top">
-        <span class="hair_label">型男必备</span>
-       <!--  <div class="like">
-            <div class="love_btn" rel="unlike">
-                <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
-            </div>
-            <span class="like_num" hair-id="10">249</span>
-        </div> -->
-    </div>
-    <div class="hair_main">
-        <div id="hair_style_show"></div>
-        <div class="operation_tips">可左右滑动</div>
-        <div class="prompt" id="prompt">
-            <div class="p_center" id="p_center"><img class="img_hand" src="/js/detail/hand.png"></div>
+<div class="container" style="position:relative;" id="hairstyle_list">
+    <div class="tab_switch">
+        <ul id="pagenavi" class="page fixed_top">
+            <li><a href="javascript:;" class="active">男 士</a></li>
+            <li><a href="javascript:;">女 士</a></li>
+        </ul>
+        <div id="slider" class="swipe">
+            <ul class="tab_switch_list" style="margin-top:4rem">
+                <li class="li_list">
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">型男必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">250</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="4" hair_id="10">
+                                <img src="http://cdn.xingkeduo.com/imgs/4/25.jpg">
+                            </div>
+                            <p class="hair_name">北方一哥</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">迷男必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">214</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="6" hair_id="12">
+                                <img src="http://cdn.xingkeduo.com/imgs/6/25.jpg">
+                            </div>
+                            <p class="hair_name">熟男迷妹</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">暖男必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">208</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="8" hair_id="14">
+                                <img src="http://cdn.xingkeduo.com/imgs/8/25.jpg">
+                            </div>
+                            <p class="hair_name">又赵又挺</p>
+                            <p class="english_label">HOLIDAY</p>
+                        </div>
+                        <!--  <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">随性标配</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">221</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="9" hair_id="15">
+                                <img src="http://cdn.xingkeduo.com/imgs/9/25.jpg">
+                            </div>
+                            <p class="hair_name">BAD BOY</p>
+                            <p class="english_label">HOLIDAY</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">男士必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">217</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="12" hair_id="18">
+                                <img src="http://cdn.xingkeduo.com/imgs/12/25.jpg">
+                            </div>
+                            <p class="hair_name">文创园胡子哥</p>
+                            <p class="english_label">HOLIDAY</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">宅男必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">202</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="17" hair_id="23">
+                                <img src="http://cdn.xingkeduo.com/imgs/17/25.jpg">
+                            </div>
+                            <p class="hair_name">海龟安全感</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">颜值担当</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">189</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="18" hair_id="24">
+                                <img src="http://cdn.xingkeduo.com/imgs/18/25.jpg">
+                            </div>
+                            <p class="hair_name">BOY LONDON</p>
+                            <p class="english_label">AUTUMN</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">颜值担当</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">214</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="19" hair_id="26">
+                                <img src="http://cdn.xingkeduo.com/imgs/19/25.jpg">
+                            </div>
+                            <p class="hair_name">IT攻城狮</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div> -->
+                     <img src="/js/detail/the_end.png" class="the_end">
+                </li>
+                <li class="li_list">
+                        <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">职场必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">241</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="1" hair_id="7">
+                                <img src="http://cdn.xingkeduo.com/imgs/1/25.jpg">
+                            </div>
+                            <p class="hair_name">高媛媛</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">居家必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">207</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="2" hair_id="8">
+                                <img src="http://cdn.xingkeduo.com/imgs/2/25.jpg">
+                            </div>
+                            <p class="hair_name">清爽迷你菇</p>
+                            <p class="english_label">AUTUMN</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">旅行必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">221</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="3" hair_id="9">
+                                <img src="http://cdn.xingkeduo.com/imgs/3/25.jpg">
+                            </div>
+                            <p class="hair_name">可爱邻家</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">淑女必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">217</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="5" hair_id="11">
+                                <img src="http://cdn.xingkeduo.com/imgs/5/25.jpg">
+                            </div>
+                            <p class="hair_name">恋秋</p>
+                            <p class="english_label">AUTUMN</p>
+                        </div>
+                           <!--                  <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">简约必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">214</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="7" hair_id="13">
+                                <img src="http://cdn.xingkeduo.com/imgs/7/25.jpg">
+                            </div>
+                            <p class="hair_name"> 可爱邻家</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">秋冬必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">188</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="10" hair_id="16">
+                                <img src="http://cdn.xingkeduo.com/imgs/10/25.jpg">
+                            </div>
+                            <p class="hair_name">柳颜</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">熟女必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">210</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="11" hair_id="17">
+                                <img src="http://cdn.xingkeduo.com/imgs/11/25.jpg">
+                            </div>
+                            <p class="hair_name">杏雨梨花</p>
+                            <p class="english_label">AUTUMN</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">职场达人</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">192</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="13" hair_id="19">
+                                <img src="http://cdn.xingkeduo.com/imgs/13/25.jpg">
+                            </div>
+                            <p class="hair_name">沈佳宜</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">秋冬必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">183</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="14" hair_id="20">
+                                <img src="http://cdn.xingkeduo.com/imgs/14/25.jpg">
+                            </div>
+                            <p class="hair_name">漫步云端</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">都市丽人</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">184</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="15" hair_id="21">
+                                <img src="http://cdn.xingkeduo.com/imgs/15/25.jpg">
+                            </div>
+                            <p class="hair_name">冬日恋歌</p>
+                            <p class="english_label">HOLIDAY</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">简约出行</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">217</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="16" hair_id="22">
+                                <img src="http://cdn.xingkeduo.com/imgs/16/25.jpg">
+                            </div>
+                            <p class="hair_name">穿PRADA的女王</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">秋冬必备</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">184</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="20" hair_id="27">
+                                <img src="http://cdn.xingkeduo.com/imgs/20/25.jpg">
+                            </div>
+                            <p class="hair_name">微微一笑倾城</p>
+                            <p class="english_label">HOLIDAY</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">可爱宝贝</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">4</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="21" hair_id="28">
+                                <img src="http://cdn.xingkeduo.com/imgs/21/25.jpg">
+                            </div>
+                            <p class="hair_name">亲亲我的宝贝</p>
+                            <p class="english_label">SWEETHONEY</p>
+                        </div>
+                                            <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">可爱宝贝</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">3</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="22" hair_id="29">
+                                <img src="http://cdn.xingkeduo.com/imgs/22/25.jpg">
+                            </div>
+                            <p class="hair_name">别人家孩儿</p>
+                            <p class="english_label">SWEETHONEY</p>
+                        </div> -->
+                     <img src="/js/detail/the_end.png" class="the_end">
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="hair_list_bottom">
-        <p class="hair_name">北方一哥</p>
-        <span>BUSINESS</span>
-        <ul class="face">
-            <li class="title">合适</li>
-                            <li>圆脸</li>
-                            <li>国字脸</li>
-                            <li>鹅蛋脸</li>
-                    </ul>
-        <p class="hair_describe"></p>
-    </div>
-    <div class="split_line"><img src="/js/detail/split_line.jpg"></div>
-    <div class="hair_details">
-        <img src="/js/detail/hair_details.jpg">
-    </div>
+<!--     <div class="sex">
+        <div class="gender man sex_select">
+            <p>男 士</p>
+        </div>
+        <div class="gender woman ">
+            <p>女 士</p>
+        </div>
+    </div> -->
 
-            <div class="gap"></div>
-        <div class="caption">
-            <div class="left_label"></div>
-            <span>发型精选</span>
-            <div class="read_more"><a href="/mobile3/hairstyle_list/?f_store_id=67&select_hair_id=&ticket_num=1&f_selected_ticket_type=1&f_date=&f_appointment_day=&f_appointment_time=&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/image/mobile/read_more.png"></a></div>
-        </div>
-        <div class="product_list">
-            <ul class= "nav_ul">
-                                    <li class="nav_li">
-                        <span class="hair_label">职场必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=7&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/1/25.jpg" />
-                        </a>
-                        <p>高媛媛</p>
-                        <span>BUSINESS</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">居家必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=8&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/2/25.jpg" />
-                        </a>
-                        <p>清爽迷你菇</p>
-                        <span>AUTUMN</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">旅行必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=9&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/3/25.jpg" />
-                        </a>
-                        <p>可爱邻家</p>
-                        <span>BUSINESS</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">淑女必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=11&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/5/25.jpg" />
-                        </a>
-                        <p>恋秋</p>
-                        <span>AUTUMN</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">迷男必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=12&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/6/25.jpg" />
-                        </a>
-                        <p>熟男迷妹</p>
-                        <span>BUSINESS</span>
-                    </li>
-                            </ul>
-        </div>
-    
-        
-    <div style="height: 3.4rem;width: 100%"></div>
-    <div class="fixed_bottom">
-        <a href="javascript:;" class="pink_btn cancel_button ">取消</a>
-        <a href="javascript:;" class="blue_btn confirm_button " id="confirm_button">选择</a>
+
+
+</div>
+
+
+<!-- Get jQuery from Google CDN -->
+<style>
+    #all_opcation{width:100%;overflow:hidden;height:100%;background-color:#000;top:0;opacity:0.6;z-index: 2001; display: none;
+        position:fixed!important;/*FF IE7*/
+        position:absolute;/*IE6*/
+
+
+    }
+    .pop_alert {height: 164px;width: 272px;background-color: #FFFFFF;border-radius:4px;z-index: 2002;position:absolute;margin-left: -136px;margin-top: -82px;top:50%;left:50%;display: none;
+        position:fixed!important;/*FF IE7*/
+        position:absolute;/*IE6*/
+        _top:       expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
+    }
+
+    .pop_rush_time{width: 278px;height: 376px;z-index: 2002;margin-left: -139px;margin-top: -232px;top:50%;left:50%;display: none;
+        position:fixed!important;/*FF IE7*/
+        position:absolute;/*IE6*/
+        _top:       expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
+    }
+    .rush_time_button{height: 44px;width: 23px;float:right;margin-right: 10px;}
+    .rush_time_con{height: 332px;width: 278px;padding-top:75px;background-color: #FFFFFF;border-radius:4px;}
+
+    /* 高峰时段样式 */
+    .submit{display:inline-block;background-color: #ff5f07;height:50px;line-height: 50px;text-align: center;color:#fff;font-size: 18px;}
+    .rush_time_con .defalt{display:inline-block;color: #ff5f08;border: 1px solid #ff5f08;height:42px;line-height: 42px;text-align: center;font-size: 18px;width: 252px;border-radius:4px;margin-top: 10px}
+
+</style>
+
+<!--蒙板-->
+<div id="all_opcation"></div>
+
+<!--弹窗-->
+<div class="pop_alert">
+    <div style="font-size: 18px;height: 60px;line-height: 60px;text-align: center"></div>
+    <div style="font-size: 14px;width:94%;margin-left: 5%;color:#999999;height: 60px"></div>
+    <div style="height: 44px;line-height: 44px;text-align: center;font-size: 16px;color:#ff5f08;border-top: 1px solid #dadada;" id="pop_alert_close">
+        知道了
     </div>
 </div>
+
+<!--高峰时段弹窗-->
+<div class="pop_rush_time">
+    <div id="close_rush_time_button" class="rush_time_button">
+        <img src="/js/detail/close_1.png"/>
+    </div>
+    <div style="clear: both"></div>
+    <div id="opcation" class="rush_time_con" align="center">
+        <div style="font-size: 18px;height: 26px;line-height: 26px;text-align: center;color:#000">高峰时段</div>
+        <div style="font-size: 14px;width:78%;margin-left: 5%;color:#999999;margin-top: 10px;line-height: 23px" align="left">现在正处于高峰时段，您可以选择特惠时段下单，享受优惠。</div>
+        <a href="javascript:;" class="submit" style="width: 252px;border-radius:4px;margin-top: 70px;height: 42px;line-height: 42px">我要优惠</a>
+        <a href="javascript:;" class="defalt" id="close_rush_time">不要优惠，高峰下单</a>
+    </div>
+</div><!--[if !IE]> -->
+<script
+    type="text/javascript"> window.jQuery || document.write('<script src="/js/detail/jquery-1.8.3.min.js">' + "<" + "/script>"); </script>
+<!-- <![endif]-->
+<!--[if lte IE 9]>
+<script
+    type="text/javascript"> window.jQuery || document.write('<script src="assets/javascripts/jquery-1.8.3.min.js">' + "<" + "/script>"); </script>
+<![endif]-->
+
+<!-- Pixel Admin's javascripts -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/detail/pixel-admin.min.js"></script>
+<script src="/js/detail/hammer.min.js"></script>
+<script src="/js/detail/jquery.hammer.js"></script>
+<script src="/js/detail/wechat_common.js"></script>
+
 <script type="text/javascript">
-    wx.ready(function () {
-        //分享到朋友圈
-        wx.onMenuShareTimeline({
-            title: '星客多精选发型360°旋转看发型效果',// 分享标题
-            link: 'http://e.xingkeduo.com/wechat/oauth/state/12/product_id/10/shop_number/67',
-            imgUrl: 'http://m.xingkeduo.com/static/imgs/10/1.jpg',// 分享图标
-            trigger:function(res){
-            },
-            success:function(res){
-                alert("转发成功");
-            },
-            cancel:function(res){
-
-            },
-            fail:function(res){
-                alert(JSON.stringify(res));
-            },
+    var first_load = 1;
+    var init = [];
+    init.push(function () {
+        //发型选择 取消
+       /*  $("#hair_list_cancel").click(function(){
+            $("#store_detail").show();
+            $("#hairstyle_list").hide();
         });
-
-        //分享发送给好友
-        wx.onMenuShareAppMessage({
-            title: '星客多精选发型360°旋转看发型效果',
-            desc: '星客多精选发型360°旋转看发型效果',
-            link: 'http://e.xingkeduo.com/wechat/oauth/state/12/product_id/10/shop_number/67',
-            imgUrl: 'http://cdn.xingkeduo.com/imgs/10/1.jpg',
-            trigger:function(res){
-
-            },
-            success:function(res){
-                alert("转发成功");
-            },
-            cancel:function(res){
-
-            },
-            fail:function(res){
-                alert(JSON.stringify(res));
-            },
-        });
-    });
-</script>
-<script type="text/javascript">
-    (function ($) {
-        $.extend({
-            tipsBox: function (options) {
-                options = $.extend({
-                    obj: null, //jq对象，要在那个html标签上显示
-                    str: "+1", //字符串，要显示的内容;也可以传一段html，如: "<b style='font-family:Microsoft YaHei;'>+1</b>"
-                    startSize: "12px", //动画开始的文字大小
-                    endSize: "30px",  //动画结束的文字大小
-                    interval: 600, //动画时间间隔
-                    color: "#FCDDD6",  //文字颜色
-                    callback: function () { }  //回调函数
-                }, options);
-                $("body").append("<span class='num'>" + options.str + "</span>");
-                var box = $(".num");
-                var left = options.obj.offset().left + options.obj.width() / 2;
-                var top = options.obj.offset().top - options.obj.height();
-                box.css({
-                    "position": "absolute",
-                    "left": left + "px",
-                    "top": top + "px",
-                    "z-index": 9999,
-                    "font-size": options.startSize,
-                    "line-height": options.endSize,
-                    "color": options.color
-                });
-                box.animate({
-                    "font-size": options.endSize,
-                    "opacity": "0",
-                    "top": top - parseInt(options.endSize) + "px"
-                }, options.interval, function () {
-                    box.remove();
-                    options.callback();
-                });
-            }
-        });
-    })(jQuery);
-    //     爱心点赞
-    //    var span1 = parseInt($("#like2").html());
-
-    $(".hair_list_top .like").click(function(){
-        var _this = $(this).find(".love_btn");
-        var rel = _this.attr("rel");
-        var span = parseInt(_this.parent().find(".like_num").html());
-        var hair_id = _this.parent().find(".like_num").attr("hair-id");
-        if(rel === "unlike")
-        {
-            _this.parent().find(".like_num").html(span+1);
-            _this.find("img").attr("src","http://cdn.xingkeduo.com/image/mobile/heart-shape.png");
-            _this.attr("rel","like");
-            $.tipsBox({
-                obj: _this,
-                str: "+1",
-                callback: function () {
-                }
-            });
-
-            $.ajax({
-                "url"		:	"/mobile3/like_hair",
-                "type"		:	"post",
-                "data"		:	{f_user_id:f_user_id,time:time,token:token,hair_id:hair_id,type:1},
-                "dataType"	:	"json",
-                "success"	:	function(res)
+        //发型选择 确定
+        $("#hair_list_confirm").click(function(){
+            $('.pitchon').each(function(){
+                if($(this).hasClass("option"))
                 {
+                    var hair_id = $(this).attr("hair_id");
+                    var hair_name = $(this).parent().parent().find(".hair_name").html();
+                    $("#hairstyle_div .check_hair").html(hair_name);
+                    $("#hairstyle_div .check_hair").attr("hair_id",hair_id);
+                    $("#store_detail").show();
+                    $("#hairstyle_list").hide();
+                }
+            });
+        }); 
+        $('.pitchon').click(function(){
+            $('.pitchon').each(function(){
+                $(this).find("img").fadeOut();
+                $(this).removeClass("option").addClass("option_default");
+            });
+            $(this).find("img").fadeIn();
+            $(this).removeClass("option").removeClass("option").addClass("option");
+        });
+       
+        $(".man").click(function(){
+            $(".manlist").show();
+            $(".woman").removeClass("sex_select");
+            $(".man").addClass("sex_select");
+            $(".womanlist").hide();
+            $("img").lazyload();
+            first_load = 0;
+        });
+        $(".woman").click(function(){
+            $(".womanlist").show();
+            $(".man").removeClass("sex_select");
+            $(".woman").addClass("sex_select");
+            $(".manlist").hide();
+            $("img").lazyload();
+            first_load = 0;
+        });
+        */
+        //点击发型列表的图片事件
+        $(".hair_pictures").click(function(){
 
-                }
-            });
-        }
-        else
-        {
-            _this.parent().find(".like_num").html(span-1);
-            _this.find("img").attr("src","http://cdn.xingkeduo.com/image/mobile/default-heart-shape.png");
-            _this.attr("rel","unlike");
-            $.tipsBox({
-                obj: _this,
-                str: "-1",
-                callback: function () {
-                }
-            });
-            $.ajax({
-                "url"		:	"/mobile3/like_hair",
-                "type"		:	"post",
-                "data"		:	{f_user_id:f_user_id,time:time,token:token,hair_id:hair_id,type:2},
-                "dataType"	:	"json",
-                "success"	:	function(res)
-                {
+            pop_up_loading();
 
-                }
+            var f_user_id = '317926';
+            var time = '1478750626';
+            var token = 'a8cd1d69998db3af557bfd96e6763863';
+
+            var shopId = '${order.shopId}';
+            var f_hairstyle_id = $(this).attr("hair_id");
+            var select_hair_id = '';
+
+            var ticket_num = '1';
+            var f_selected_ticket_type = '1';
+            var f_date = '';
+            var appointmentDay = '${order.appointmentDay}';
+
+            var appointmentTime = '${order.appointmentTime}';
+
+
+            location.href = "/shear/chose/hair/detail?shopId="+shopId+'&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&hairstyleId=' + f_hairstyle_id + "&select_hair_id="+ select_hair_id + "&ticket_num="+ ticket_num  + "&f_selected_ticket_type="+ f_selected_ticket_type + "&f_date="+ f_date + "&appointmentDay="+ appointmentDay + "&appointmentTime="+ appointmentTime;
+        });
+
+        //取消
+        $(".cancel_btn").click(function(){
+            $("#store_detail").hide();
+            $("#hairstyle_list").show();
+            $("#hairstyle_detail").hide();
+        });
+        //确定
+        $(".determine_btn").click(function(){
+            $('.pitchon').each(function(){
+                $(this).removeClass("option").addClass("option_default");
+                $(this).find("img").fadeOut();
             });
+            var hair_id = $("#select_hair_id").val();
+            $(".pitchon[hair_id='"+hair_id+"']").removeClass("option").removeClass("option").addClass("option");
+            $(".pitchon[hair_id='"+hair_id+"']").find("img").fadeIn();
+            $("#store_detail").hide();
+            $("#hairstyle_list").show();
+            $("#hairstyle_detail").hide();
+        });
+
+        //tab切换部分js -- start
+        var page = 'pagenavi' ;
+        var mslide = 'slider';
+//    var mtitle = 'emtitle';
+
+        var as = document.getElementById(page).getElementsByTagName('a');
+
+        var tt = new TouchSlider({id:mslide,'auto':'-1',fx:'ease-out',direction:'left',speed:300,timeout:5000,'before':function(index){
+            var as = document.getElementById(this.page).getElementsByTagName('a');
+            as[this.p].className = '';
+            as[index].className = 'active';
+            this.p = index;
+
+            //tab文字显示
+//        var txt = as[index].innerText;
+//        $("#"+this.page).parent().find('.emtitle').text(txt);
+
+            //tab链接
+//        var txturl=as[index].getAttribute('href');
+//        var turl = txturl.split('#');
+//        $("#"+this.page).parent().find('.go_btn').attr('href',turl[1]);
+        }});
+
+        tt.page = page;
+        tt.p = 0;
+        //console.dir(tt); console.dir(tt.__proto__);
+        for(var i = 0 ; i < as.length ; i++){
+            (function(){
+                var j = i;
+                as[j].tt = tt;
+                as[j].onclick = function(){
+                    this.tt.slide(j);
+                    return false;
+                }
+            })();
         }
+        //tab切换部分js -- end
+
+    })
+    window.PixelAdmin.start(init);
+    $(document).ready(function(){
+        FastClick.attach(document.body);
+
+//        $("img").lazyload({
+//            threshold:200
+//        });
     });
 </script>
 </body>
