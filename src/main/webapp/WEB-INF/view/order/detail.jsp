@@ -156,7 +156,7 @@
                 {
                     alert("支付失败！");
                     $(".pay_order").addClass("pay_order_now");
-                    $(".pay_order").css("background", "#1c436f");
+                    $(".pay_order").css("background", "#45b5da");
                 }
             }
         );
@@ -197,7 +197,7 @@
             {
                 alert("支付失败！");
                 $(".pay_order").addClass("pay_order_now");
-                $(".pay_order").css("background", "#1c436f");
+                $(".pay_order").css("background", "#45b5da");
             }
 
         })
@@ -322,7 +322,7 @@
                         {
                             alert(content.msg);
                             $(".pay_order").addClass("pay_order_now");
-                            $(".pay_order").css("background", "#1c436f");
+                            $(".pay_order").css("background", "#45b5da");
                         }
                     }
                 });

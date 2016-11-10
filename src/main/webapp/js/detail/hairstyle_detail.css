@@ -80,9 +80,9 @@ li.title{margin-right: 30px;background: #F8C4B2;color: #ffffff}
     -o-animation:left_to_right 1500ms ease-out 200ms infinite alternate;/* Opera: */
 }
 .gap{height: 6px; background: #F6F6F6;border-bottom: 1px solid rgba(0,0,0,.1); border-top: 1px solid #f0f0f0;}
-.caption{border-bottom: 1px solid rgba(0,0,0,.1);line-height: 50px; color: #1C436F;font-size: 1rem;position: relative;}
+.caption{border-bottom: 1px solid rgba(0,0,0,.1);line-height: 50px; color: #45b5da;font-size: 1rem;position: relative;}
 .pro_main { margin-top: 50px;}
-.left_label{width: 6px;height: 25px; background: #1C436F;float: left;margin-top: 12px; margin-right: 10px;}
+.left_label{width: 6px;height: 25px; background: #45b5da;float: left;margin-top: 12px; margin-right: 10px;}
 .product_list{ display: inline-block; width: 102%; white-space: nowrap; overflow: scroll; -webkit-overflow-scrolling: touch; z-index: 9;}
 .product_list li{width: 40%; text-align: center; margin-bottom:15px;margin-top: 15px; white-space: nowrap;display: inline-block;  position: relative;}
 .product_list img{ width: 80%; display: block; margin: 0 auto}

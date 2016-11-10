@@ -23,7 +23,7 @@ span.checked_info{color: #f8c4b2;}
 .product_img img{ vertical-align: middle; dispaly:block; height:75px; width: auto; padding:10px 0;margin:0 auto; }
 .product_info{width: 60%;float: left; padding-left: 10px;font-size: 1.1rem;  padding-top: 2px;}
 .product_select{width: 10%;float: right;}
-.product_info p{ font-size: 1rem; line-height: 30px; color: #1c436f; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.product_info p{ font-size: 1rem; line-height: 30px; color: #45b5da; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 p.name{color: #666; line-height: 30px;width: 100%;
     word-break:keep-all;/* 不换行 */
     white-space:nowrap;/* 不换行 */
@@ -33,7 +33,7 @@ p.hair{color: #999; line-height: 30px;}
 .product_info span{text-decoration:line-through; color: #999;}
 .option_main{text-align: center;}
 .option_default{width: 22px; height: 22px; border: 1px solid rgba(0,0,0,.1);border-radius:50%;float: right;margin-top: 12px;margin-right: 13px}
-.option{width: 22px; height: 22px; border: 2px solid #1c436f;border-radius:50%;float: right;margin-top: 12px;margin-right: 13px}
+.option{width: 22px; height: 22px; border: 2px solid #45b5da;border-radius:50%;float: right;margin-top: 12px;margin-right: 13px}
 .option img,.option_default img{float: right;margin-top: 3px;margin-right: 4px; width: 15px;}
 .option_default img{display: none}
 .pitchon_act{border: 1px solid rgba(28,67,111,.1);}
@@ -46,8 +46,8 @@ p.hair{color: #999; line-height: 30px;}
 .gap{height: 6px;background: #f1f1f1;border-top: 1px solid rgba(0,0,0,.1);border-bottom: 1px solid rgba(0,0,0,.1);}
 .bottom_height{height:50px}
 .fixed_menu{position:fixed;bottom:0px; height:50px;background-color:#fff;width: 100%;max-width: 640px;border-top: 1px solid rgba(0,0,0,.1);font-size: 15px;}
-.payment_btn{background: #1c436f;float: right;width: 40%;line-height: 50px;text-align: center;letter-spacing: 1px}
+.payment_btn{background: #45b5da;float: right;width: 40%;line-height: 50px;text-align: center;letter-spacing: 1px}
 .payment_btn a{color: #fff;}
-.amount{float:left;line-height: 50px;padding-left: 1rem;color: #1c436f;}
+.amount{float:left;line-height: 50px;padding-left: 1rem;color: #45b5da;}
 span.discount_label{color: #f8c4b2;margin-left: 0.8rem}
 
