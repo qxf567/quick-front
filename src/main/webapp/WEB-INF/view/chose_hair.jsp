@@ -6,8 +6,8 @@
    <%@ include file="common/meta.jsp"%>
     <title></title>
     <!-- Pixel Admin's stylesheets -->
-    <link type="text/css" rel="stylesheet" href="/js/detail/common.css" />
-    <link href="/js/detail/hairstyle.css" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="/css/common.css" />
+    <link href="/css/hairstyle.css" rel="stylesheet" type="text/css">
     <script src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/fastclick.js"></script>

@@ -5,8 +5,8 @@
 <head>
 	<%@ include file="../common/meta.jsp"%>
     <title>用户结算</title>
-    <link type="text/css" rel="stylesheet" href="/js/detail/common.css">
-    <link type="text/css" rel="stylesheet" href="/js/detail/new_pay_order.css" />
+    <link type="text/css" rel="stylesheet" href="/css/common.css">
+    <link type="text/css" rel="stylesheet" href="/css/new_pay_order.css" />
     <script src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/detail/common.js"></script>
     <script type="text/javascript" src="/js/detail/fastclick.js"></script>

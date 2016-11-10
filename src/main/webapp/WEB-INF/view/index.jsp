@@ -5,7 +5,7 @@
 <head>
 <%@ include file="common/meta.jsp"%>
 <title>快剪首页</title>
-<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/css/index.css"/>
 </head>
 <body>
 	<div id="loading">
