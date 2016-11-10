@@ -8,12 +8,12 @@
     <!-- Pixel Admin's stylesheets -->
     <link type="text/css" rel="stylesheet" href="/js/detail/common.css" />
     <link href="/js/detail/hairstyle.css" rel="stylesheet" type="text/css">
-    <script src="/js/detail/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/detail/common.js"></script>
-    <script type="text/javascript" src="/js/detail/fastclick.js"></script>
-    <script type="text/javascript" src="/js/detail/jquery.lazyload.js"></script>
-    <script type="text/javascript" src="/js/detail/zepto_min.js"></script>
-    <script type="text/javascript" src="/js/detail/touchslider.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/fastclick.js"></script>
+    <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="/js/zepto.min.js"></script>
+    <script type="text/javascript" src="/js/touchslider.js"></script>
     <!--[if lt IE 9]>
     <script src="/js/detail/ie.min.js"></script>
     <![endif]-->
@@ -471,10 +471,10 @@
 
 <!-- Pixel Admin's javascripts -->
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/detail/pixel-admin.min.js"></script>
-<script src="/js/detail/hammer.min.js"></script>
-<script src="/js/detail/jquery.hammer.js"></script>
-<script src="/js/detail/wechat_common.js"></script>
+<script src="/js/pixel-admin.min.js"></script>
+<script src="/js/hammer.min.js"></script>
+<script src="/js/jquery.hammer.js"></script>
+<script src="/js/wechat_common.js"></script>
 
 <script type="text/javascript">
     var first_load = 1;

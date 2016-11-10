@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-	<%@ include file="common/meta.jsp"%> 
+	<%@ include file="../common/meta.jsp"%> 
 	<title>订单列表页</title>
     <script src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/detail/common.js"></script>

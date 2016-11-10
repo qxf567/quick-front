@@ -6,9 +6,9 @@
 <head>
    	<%@ include file="common/meta.jsp"%>
     <title>时间预约</title>
-    <script src="/js/detail/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/detail/common.js"></script>
-    <script type="text/javascript" src="/js/detail/fastclick.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript">
         //移动设备快速响应点击事件
         $(document).ready(function(){

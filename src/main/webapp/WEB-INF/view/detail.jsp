@@ -6,9 +6,9 @@
 <head>
 	<%@ include file="common/meta.jsp"%>
     <title>店铺详情页</title>
-    <script src="/js/detail/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/detail/common.js"></script>
-    <script type="text/javascript" src="/js/detail/fastclick.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript">
         //移动设备快速响应点击事件
         $(document).ready(function(){
@@ -18,11 +18,11 @@
     <link type="text/css" rel="stylesheet" href="/js/detail/common.css">
     <link type="text/css" rel="stylesheet" href="/js/detail/slides.css">
     <link type="text/css" rel="stylesheet" href="/js/detail/new_store_detail.css">
-    <script type="text/javascript" src="/js/detail/slides.js"></script>
-    <script type="text/javascript" src="/js/detail/zepto_min.js"></script>
-    <script type="text/javascript" src="/js/detail/touchslider.js"></script>
-    <script type="text/javascript" src="/js/detail/jweixin-1.0.0.js"></script>
-    <script type="text/javascript" src="/js/detail/btn_active.js"></script>
+    <script type="text/javascript" src="/js/slides.js"></script>
+    <script type="text/javascript" src="/js/zepto_min.js"></script>
+    <script type="text/javascript" src="/js/touchslider.js"></script>
+    <script type="text/javascript" src="/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="/js/btn_active.js"></script>
 </head>
 
 
@@ -180,7 +180,7 @@
 <script type="text/javascript">
     //全局变量区域
     var customerId = '${userId}';
-    var time = '${}';
+    var time = '1555';
     var get_token = '7eb3fbd5383bf37489b71a318c0e3f98';
     var shopId = '${shop.id}';
 

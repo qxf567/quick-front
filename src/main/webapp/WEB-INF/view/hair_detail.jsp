@@ -6,14 +6,14 @@
     <title>精选发型360°旋转看发型效果</title>
     <link type="text/css" rel="stylesheet" href="/js/detail/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/detail/hairstyle_detail.css" />
-    <script src="/js/detail/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/detail/common.js"></script>
-    <script type="text/javascript" src="/js/detail/btn_active.js"></script>
-    <script type="text/javascript" src="/js/detail/fastclick.js"></script>
-    <script type="text/javascript" src="/js/detail/jquery.lazyload.js"></script>
-    <script type="text/javascript" src="/js/detail/new_3deye.js"></script>
-    <script src="/js/detail/jweixin-1.0.0.js"></script>
-    <script src="/js/detail/wechat_common.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/btn_active.js"></script>
+    <script type="text/javascript" src="/js/fastclick.js"></script>
+    <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="/js/new_3deye.js"></script>
+    <script src="/js/jweixin-1.0.0.js"></script>
+    <script src="/js/wechat_common.js"></script>
     <script>
         wx.config({
             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
