@@ -91,6 +91,17 @@
 					<p class="shop-text">地址：北京市通州区翠景北里1层</p>
 				
 			</div> -->
+			<div class="list_store row">
+				<a class="" href="/shear/detail/11">
+					<img src="/img/index/yingyezhong.png" class="status">
+					<img src="/img/index/dianpu.png" alt="250M" class="shop-img"/>
+					<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>
+				</a>
+				
+					<p class="shop-title">罗斯福店<span class="shop-text">250M</span></p> 
+					<p class="shop-text">营业时间：10:00-21:30</p>
+					<p class="shop-text">地址：北京市通州区翠景北里京通罗斯福地下1层</p>
+			</div>
 		</div>
 		<div class="hcustom">
 			<a href="tel:400-900-6688"><i></i><span>400-900-6688</span></a>
@@ -137,7 +148,6 @@
 	    	wx.getLocation({
 	    	    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
 	    	    success: function (res) {
-	    	    	alert(res);
 	    	        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
 	    	        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
 	    	        var speed = res.speed; // 速度，以米/每秒计
@@ -151,7 +161,10 @@
 	    	        	  success: success,
 	    	        	  dataType: 'json'
 	    	        	}).done(function(data) {
-	    	        	    alert( "second success" +data);
+
+
+	    	        		
+	    	        		
 	    	        	  })
 	    	        	  .fail(function() {
 	    	        	    alert( "error" );
@@ -195,8 +208,7 @@
 			}
 		}
 		
-		
-		alert('enter window onload');
+				
 		$.ajax({
 			type : "POST",
 	     	url: url,
@@ -226,7 +238,6 @@
 	window.onload = function() {
 		$("#loading").remove();
 		$("#warp").css("display", "block"); 
-		
 		
 		
 		 TouchSlide({
