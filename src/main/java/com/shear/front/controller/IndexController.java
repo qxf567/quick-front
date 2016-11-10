@@ -61,6 +61,12 @@ public class IndexController extends AbstractController {
 
 	return "index";
     }
+    
+    @RequestMapping("/about")
+    public String about(Model model) {
+	
+	return "about";
+    }
 
     @RequestMapping("/detail/{id}")
     public String detail(Model model,@PathVariable(value="id") Long id, @ModelAttribute OrderVo order) {

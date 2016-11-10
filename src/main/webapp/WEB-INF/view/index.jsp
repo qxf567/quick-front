@@ -60,8 +60,7 @@
 				<span>安调保养</span>
 			</a>
 		</div> -->
-		<a href="/index/serveCard"
-			onclick="_czc.push(['_trackEvent', '服务卡', '会员特权，终生服务', '','','']);"><img
+		<a href="about"><img
 			style="width: 100%;"
 			src="/img/head/life.png" /></a>
 		<section class="box hpro-title">
@@ -216,7 +215,6 @@
 	      		  	"longitude":"116.33"},
 	    	dataType: 'json',
 	    	success : function(result){
-	      	    alert( "second success" +result);
 	      	  	$.each(result,function(n,value) {
 		      		var html = '<div class="list_store row">'+
 					'<a href="/shear/detail/'+value.id+'">'+
@@ -233,14 +231,10 @@
 	    	}
 		});
 	    
-	
-
-	window.onload = function() {
 		$("#loading").remove();
 		$("#warp").css("display", "block"); 
 		
-		
-		 TouchSlide({
+		TouchSlide({
 		        slideCell: "#focus",
 		        titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
 		        mainCell: ".bd ul",
@@ -248,7 +242,8 @@
 		        autoPlay: true, //自动播放
 		        autoPage: true, //自动分页
 		        switchLoad: "_src" //切换加载，真实图片路径为"_src"
-		    })};
+		    });
+
 	});
 </script>
 </body>
