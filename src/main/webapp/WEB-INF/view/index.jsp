@@ -74,9 +74,9 @@
 		</section>
 		<div class="hpro-list">
 			<div class="list_store row">
-				<a class="" href="/detail" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
-					<img src="img/index/yingyezhong.png" class="status">
-					<img src="img/index/dianpu.png" alt="250M" class="shop-img"/>
+				<a class="" href="/shear/detail/11" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
+					<img src="/img/index/yingyezhong.png" class="status">
+					<img src="/img/index/dianpu.png" alt="250M" class="shop-img"/>
 					<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>
 				</a>
 				
@@ -86,9 +86,9 @@
 				
 			</div>
 			<div class="list_store row">
-				<a class="" href="/detail" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
-					<img src="img/index/yingyezhong.png" class="status">
-					<img src="img/index/dianpu.png" alt="" class="shop-img"/>
+				<a class="" href="/shear/detail/12" onclick="_czc.push(['_trackEvent', '首页', 'iPhone5更换电池', '','','']);">
+					<img src="/img/index/yingyezhong.png" class="status">
+					<img src="/img/index/dianpu.png" alt="" class="shop-img"/>
 				</a>
 				<button id="btn">位置</button>
 					<p class="shop-title">金源店</p> 

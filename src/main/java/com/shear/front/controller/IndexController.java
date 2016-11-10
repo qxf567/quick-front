@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,8 +57,8 @@ public class IndexController extends AbstractController {
 	return "index";
     }
 
-    @RequestMapping("/detail")
-    public String detail(Model model, Long id) {
+    @RequestMapping("/detail/{id}")
+    public String detail(Model model,@PathVariable(value="id") Long id) {
 	Shop shop = null;
 	try {
 	    shop = shopService.findbyid(id);
@@ -79,9 +80,8 @@ public class IndexController extends AbstractController {
 	todayList.add("18:00");
 	todayList.add("18:30");
 
-	//@TODO
-	shop.getBusinessHours();
-	String businessHours = "10:00-22:00";
+	String businessHours = shop.getBusinessHours();
+	//String businessHours = "10:00-22:00";
 	Date date = new Date();
 	for (int i = 1; i < 6; i++) {
 	    model.addAttribute("t" + i, date);

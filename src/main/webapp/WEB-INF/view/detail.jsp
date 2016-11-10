@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>3.0店铺详情页</title>
+    <title>店铺详情页</title>
     <script src="/js/detail/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/detail/common.js"></script>
     <script type="text/javascript" src="/js/detail/fastclick.js"></script>
@@ -33,26 +34,30 @@
     <div class="addWrap">
         <div class="swipe" id="mySwipe">
             <div class="swipe-wrap">
-                                    <div class="img_li"><a href="javascript:;"><img src="/js/detail/01.jpg"/></a></div>
+            	<c:forEach items="${shop.multiImageUrls.split(',')}" var="image">
+	            	<div class="img_li"><a href="javascript:;"><img src="${image}"/></a></div>
+	            </c:forEach>
+                                    <!-- <div class="img_li"><a href="javascript:;"><img src="/js/detail/01.jpg"/></a></div>
                                     <div class="img_li"><a href="javascript:;"><img src="/js/detail/02.jpg"/></a></div>
-                                    <div class="img_li"><a href="javascript:;"><img src="/js/detail/03.jpg"/></a></div>
-                                    <div class="img_li"><a href="javascript:;"><img src="/js/detail/04.jpg"/></a></div>
-                            </div>
+                                    <div class="img_li"><a href="javascript:;"><img src="/js/detail/03.jpg"/></a></div> -->
+             </div>
         </div>
         <ul id="position">
-                            <li class="cur"></li>
-                            <li class=""></li>
-                            <li class=""></li>
-                            <li class=""></li>
-                    </ul>
+        	<c:if test="${shop.multiImageUrls ne ''}">
+        		<li class="cur"></li>
+        	</c:if>
+        	<c:forEach items="${shop.multiImageUrls.split(',')}" begin="1">
+            	<li class=""></li>
+            </c:forEach>
+        </ul>
     </div><!--banner图End-->
     <div class="store_info">
-        <p class="store_name">望京soho店</p>
+        <p class="store_name">${shop.name}</p>
         <p class="price_main">
-            &yen;<span class="yuan">29.8</span>
+            &yen;<span class="yuan">${shop.price}</span>
 
-<!--            <span class="price_tag">特惠时刻价</span>-->
-                </p>
+           <!--  <span class="price_tag">特惠时刻价</span> -->
+         </p>
         <span class="tips rest_tips">
             <img src="/js/detail/time_icon.png"/>
             <span class="tips_text">预计等待0分钟</span>
@@ -61,7 +66,7 @@
 <!--        <p class="price_explain top10"><span class="price_label">高峰时刻价¥--><!--</span>周一至周五17:00以后及周六日全天</p>-->
 <!--        <p class="price_explain"><span class="price_label">限时特惠价¥--><!--</span>周一至周五17:00前</p>-->
 
-    </div><!--店铺信息End-->
+    </div>
 
     <div class="gap"></div>
     <div class="info_list">
@@ -108,25 +113,25 @@
                 <li class="li_list">
                     <div class="list_one list_default">
                         <span></span><img src="/js/detail/work_time_icon.png"/>
-                        <span class="text_main">10:00-21:00</span>
+                        <span class="text_main">${shop.businessHours}</span>
                     </div>
                     <hr style="background: #dadada;height: 1px;border: none;width: 94%;margin: 0 auto"/>
                     <a href="javascript:;">
                         <div class="list_one list_default go_to_map">
                             <span></span><img src="/js/detail/address_icon.png"/>
-                            <span class="text_main">北京市朝阳区望京SOHO塔3内街-F1-3110室</span>
+                            <span class="text_main">${shop.address}</span>
                             <div class="checked_info_main">
                                 <span></span><img src="/js/detail/checked_icon.png"/>
                             </div>
                         </div>
                     </a>
                     <hr style="background: #dadada;height: 1px;border: none;width: 94%;margin: 0 auto"/>
-                                        <a href="javascript:;">
+                    <a href="javascript:;">
                         <div class="list_one list_default go_to_map">
                             <span></span><img src="/js/detail/route_icon.png"/>
                             <span class="text_main">
-                                <p>地铁：乘坐地铁14号线阜通站下车C口出，沿阜安西路向东走800米到望京SOHO右转到T3</p>
-                                <p>公交：乘坐公交536,538，快速直达专线19路，快速直达专线8路，到融科橄榄城下车向西南方向走500米到望京SOHOT3.</p>                            </span>
+                                <p>@TODO地铁：乘坐地铁14号线阜通站下车C口出，沿阜安西路向东走800米到望京SOHO右转到T3</p>
+                                <p>@TODO公交：乘坐公交536,538，快速直达专线19路，快速直达专线8路，到融科橄榄城下车向西南方向走500米到望京SOHOT3.</p>                            </span>
                             <div class="checked_right"><span></span><img src="/js/detail/checked_icon.png"/></div>
                         </div>
                     </a>
@@ -135,8 +140,8 @@
                         <img src="/js/detail/location.jpg"/>
                     </div>
                     <div class="cellphone">
-                        <a href="tel:4006555200"><img src="/img/index/icon-customer.png"/></a>
-                        <p>全国客服热线:09:30－21:00</p>
+                        <a href="tel:${shop.phoneNumber}"><img src="/img/index/icon-customer.png"/></a>
+                        <p>客服热线:${shop.businessHours}</p>
                     </div>
                 </li>
                 <li class="li_list">
@@ -174,7 +179,7 @@
     var f_user_id = '317926';
     var time = '1478159349';
     var get_token = '7eb3fbd5383bf37489b71a318c0e3f98';
-    var f_store_id = 35;
+    var f_store_id = ${shop.id};
 
     var ticket_num = 1;   //小票数量
     var f_selected_ticket_type = '1';   //票据类型1全天票2限时票
@@ -229,8 +234,8 @@
             pop_up_loading();
 
             var url_params = {
-                'f_store_id'                :   f_store_id,
-                'ticket_num'                :   ticket_num,
+                'id'                :   f_store_id,
+                'businessHours'                :   '${shop.businessHours}',
                 'f_selected_ticket_type'    :   f_selected_ticket_type,
                 'f_user_id'                 :   f_user_id,
                 'time'                      :   time,
@@ -240,7 +245,7 @@
                 'f_appointment_time'        :   f_appointment_time
             };
 
-            var url_prefix = '/mobile3/time_appointment';
+            var url_prefix = '/shear/chose/time';
             var url_subfix = $.param(url_params);
             var url = url_prefix + '?' + url_subfix;
 
@@ -251,7 +256,7 @@
         $("#payment").click(function(){
 
                                             var url_params = {
-                    'f_store_id'                :   f_store_id,
+                    'shopId'                :   f_store_id,
                     'ticket_num'                :   ticket_num,
                     'f_selected_ticket_type'    :   f_selected_ticket_type,
                     'f_user_id'                 :   f_user_id,
@@ -340,12 +345,12 @@
     wx.ready(function () {
         $(".go_to_map").click(function(){
             wx.openLocation({
-                latitude: 39.99612, // 纬度，浮点数，范围为90 ~ -90
-                longitude: 116.48085, // 经度，浮点数，范围为180 ~ -180。
-                name: '望京soho店', // 位置名
-                address: '北京市朝阳区望京SOHO塔3内街-F1-3110室', // 地址详情说明
+                latitude: '${shop.latitude}', // 纬度，浮点数，范围为90 ~ -90
+                longitude: '${shop.longitude}', // 经度，浮点数，范围为180 ~ -180。
+                name: '${shop.name}', // 位置名
+                address: '${shop.address}', // 地址详情说明
                 scale: 28, // 地图缩放级别,整形值,范围从1~28。默认为最大
-                infoUrl: 'http://www.xingkeduo.com' // 在查看位置界面底部显示的超链接,可点击跳转
+                infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
             });
         })
     });
