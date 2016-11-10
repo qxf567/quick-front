@@ -72,7 +72,7 @@ public class IndexController extends AbstractController {
 	}
 	model.addAttribute("shop", shop);
 	model.addAttribute("order", order);
-	return "detail";
+	return "shop/detail";
     }
 
     @RequestMapping("/chose/time")
