@@ -8,9 +8,9 @@
     <link type="text/css" rel="stylesheet" href="/css/common.css">
     <link type="text/css" rel="stylesheet" href="/css/new_pay_order.css" />
     <script src="/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/detail/common.js"></script>
-    <script type="text/javascript" src="/js/detail/fastclick.js"></script>
-    <script src="/js/detail/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/fastclick.js"></script>
+    <script src="/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             //移动设备快速响应点击事件

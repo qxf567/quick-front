@@ -15,7 +15,6 @@
             FastClick.attach(document.body);
         })
     </script>
-    <script type="text/javascript" src="/js/btn_active.js"></script>
     <link type="text/css" rel="stylesheet" href="/css/common.css">
     <style type="text/css">
         .fixed_top{width:100%; max-width:640px;background: #fff; position:fixed;top: 0;padding: 1.5rem 0 0 0;text-align: center;font-size: 1.2rem;color: #45b5da;  border-bottom: 1px solid rgba(0,0,0,.1);}

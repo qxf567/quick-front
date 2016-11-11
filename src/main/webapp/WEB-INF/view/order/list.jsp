@@ -5,9 +5,8 @@
 	<%@ include file="../common/meta.jsp"%> 
 	<title>订单列表页</title>
     <script src="/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/js/detail/common.js"></script>
-    <script type="text/javascript" src="/js/detail/btn_active.js"></script>
-    <script type="text/javascript" src="/js/detail/fastclick.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript">
         //移动设备快速响应点击事件
         $(document).ready(function(){
@@ -226,7 +225,7 @@
 
 <!--[if !IE]> -->
 <script
-    type="text/javascript"> window.jQuery || document.write('<script src="/js/detail/jquery-1.8.3.min.js">' + "<" + "/script>"); </script>
+    type="text/javascript"> window.jQuery || document.write('<script src="/js/jquery-1.8.3.min.js">' + "<" + "/script>"); </script>
 <!-- <![endif]-->
 <!--[if lte IE 9]>
 <script
@@ -234,7 +233,7 @@
 <![endif]-->
 
 <!--  页面是否可以分享 f_can_share 0否1是  -->
-<script src="/js/detail/jweixin-1.0.0.js"></script>
+<script src="/js/jweixin-1.0.0.js"></script>
 <script>
     wx.config({
         debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。

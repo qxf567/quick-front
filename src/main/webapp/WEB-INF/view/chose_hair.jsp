@@ -462,7 +462,7 @@
     </div>
 </div><!--[if !IE]> -->
 <script
-    type="text/javascript"> window.jQuery || document.write('<script src="/js/detail/jquery-1.8.3.min.js">' + "<" + "/script>"); </script>
+    type="text/javascript"> window.jQuery || document.write('<script src="/js/jquery-1.8.3.min.js">' + "<" + "/script>"); </script>
 <!-- <![endif]-->
 <!--[if lte IE 9]>
 <script

@@ -8,7 +8,6 @@
     <link type="text/css" rel="stylesheet" href="/css/hairstyle_detail.css" />
     <script src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
-    <script type="text/javascript" src="/js/btn_active.js"></script>
     <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
     <script type="text/javascript" src="/js/new_3deye.js"></script>
