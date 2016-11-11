@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="http://cdn.xingkeduo.com/css/common.css">
     <link type="text/css" rel="stylesheet" href="http://cdn.xingkeduo.com/css/order_list.css">
     <script type="text/javascript" src="/js/detail/zepto_min.js"></script>
-    <script type="text/javascript" src="/js/detail/touchslider.js"></script>
+    <script type="text/javascript" src="/js/TouchSlide.1.1.js"></script>
     <style type="text/css">
         .max_box{max-width: 640px;padding-top: 50%;font-family: "microsoft yahei", Arial, sans-serif}
         .info_box img{width: 30%;display: block;margin: 0 auto}

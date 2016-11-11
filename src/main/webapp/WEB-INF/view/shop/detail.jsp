@@ -20,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="/css/new_store_detail.css">
     <script type="text/javascript" src="/js/slides.js"></script>
     <script type="text/javascript" src="/js/zepto.min.js"></script>
-    <script type="text/javascript" src="/js/touchslider.js"></script>
+    <script type="text/javascript" src="/js/TouchSlide.1.1.js"></script>
     <script type="text/javascript" src="/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="/js/btn_active.js"></script>
 </head>

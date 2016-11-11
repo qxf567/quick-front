@@ -13,7 +13,7 @@
     <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
     <script type="text/javascript" src="/js/zepto.min.js"></script>
-    <script type="text/javascript" src="/js/touchslider.js"></script>
+    <script type="text/javascript" src="/js/TouchSlide.1.1.js"></script>
     <!--[if lt IE 9]>
     <script src="/js/detail/ie.min.js"></script>
     <![endif]-->
