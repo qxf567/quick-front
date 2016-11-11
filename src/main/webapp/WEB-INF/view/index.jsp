@@ -216,13 +216,38 @@
 	    	dataType: 'json',
 	    	success : function(result){
 	      	  	$.each(result,function(n,value) {
+	      	  		var distance = Math.round(getDistance(value.latitude,value.longitude,"39.22","116.33"));
+	      	  		if(distance>1000){
+	      	  			distance = distance / 1000 +"KM";
+	      	  		}else{
+	      	  			distance = distance +"M";
+	      	  		}
+	      	  		
+	      	  		var startHours = value.businessHours.split('-')[0];
+	      	  		var endHours = value.businessHours.split('-')[1];
+	      	  		var cur = new Date();
+	      	  		var myHours = cur.getHours();
+	      	  		var myMinutes =cur.getMinutes();
+	      	  		var sHour = startHours.split(':')[0];
+	      	  		var sMinutes = startHours.split(':')[1];
+	      	  		var eHour = endHours.split(':')[0];
+	      	  		var eMinutes = endHours.split(':')[1];
+	      	  		var imgHtml;
+	      	  		if(myHours<sHour || myHours>eHour){
+	      	  			imgHtml='<img src="/img/index/zanting.png" alt="" class="status"/>';
+	      	  		}else if((myHours == sHour && myMinutes < sMinutes)||(myHours == eHour && myMinutes > eMinutes)){
+	      	  			imgHtml='<img src="/img/index/zanting.png" alt="" class="status"/>';
+	      	  		}else{
+	      	  			imgHtml='<img src="/img/index/yingyezhong.png" alt="" class="status"/>';
+	      	  		}
+	      	  		
 		      		var html = '<div class="list_store row">'+
 					'<a href="/shear/detail/'+value.id+'">'+
-					'<img src="/img/index/yingyezhong.png" class="status">'+
-					'<img src="/img/index/dianpu.png" alt="" class="shop-img"/>'+
+					imgHtml +
+					'<img src="/img/index/dianpu.png" class="shop-img"/>'+
 					'<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>'+
 					'</a>'+
-					'<p class="shop-title">'+value.name+'</p> '+
+					'<p class="shop-title">'+value.name+'<span class="shop-text">&nbsp;&nbsp;'+distance+'</span>'+'</p> '+
 					'<p class="shop-text">营业时间：'+value.businessHours+'</p>'+
 					'<p class="shop-text">地址：'+value.address+'</p>'+
 					'</div>';
