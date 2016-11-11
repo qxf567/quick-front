@@ -16,8 +16,7 @@
 			<a class="logo" href="http://m.quickshear.com"><span>社区快剪</span></a> <span
 				class="tips">快剪，2小时上门。</span>
 			<div class="login-warp">
-				<a class="login" href="/index/ucenter/"
-					onclick="_czc.push(['_trackEvent', '首页', '个人中心未登录', '','','']);"><i></i></a>
+				<a class="login" href="/index/ucenter/"><i></i></a>
 			</div>
 		</div>
 		<div id="focus" class="focus">
@@ -60,36 +59,13 @@
 				<span>安调保养</span>
 			</a>
 		</div> -->
-		<a href="about"><img
-			style="width: 100%;"
-			src="/img/head/life.png" /></a>
-		<section class="box hpro-title">
-			<span class="box-flex name">精品快剪</span> <a href="/repair/index"
-				class="more">更多</a>
-		</section>
+		<div style="margin-top: 0.2rem;">
+			<a href="about"><img style="width: 100%;" src="/img/head/life.png" /></a>
+			<section class="box hpro-title">
+				<span class="box-flex name">精品快剪</span> <a href="/repair/index" class="more">更多</a>
+			</section>
+		</div>
 		<div class="hpro-list">
-			<!-- <div class="list_store row">
-				<a class="" href="/shear/detail/11">
-					<img src="/img/index/yingyezhong.png" class="status">
-					<img src="/img/index/dianpu.png" alt="250M" class="shop-img"/>
-					<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>
-				</a>
-				
-					<p class="shop-title">罗斯福店<span class="shop-text">250M</span></p> 
-					<p class="shop-text">营业时间：10:00-21:30</p>
-					<p class="shop-text">地址：北京市通州区翠景北里京通罗斯福地下1层</p>
-			</div>
-			<div class="list_store row">
-				<a class="" href="/shear/detail/12">
-					<img src="/img/index/yingyezhong.png" class="status">
-					<img src="/img/index/dianpu.png" alt="" class="shop-img"/>
-				</a>
-				<button id="btn">位置</button>
-					<p class="shop-title">金源店</p> 
-					<p class="shop-text">营业时间：10:00-21:30</p>
-					<p class="shop-text">地址：北京市通州区翠景北里1层</p>
-				
-			</div> -->
 			<div class="list_store row">
 				<a class="" href="/shear/detail/11">
 					<img src="/img/index/yingyezhong.png" class="status">
@@ -160,10 +136,7 @@
 	    	        	  success: success,
 	    	        	  dataType: 'json'
 	    	        	}).done(function(data) {
-
-
-	    	        		
-	    	        		
+							//@TODO	    	        		
 	    	        	  })
 	    	        	  .fail(function() {
 	    	        	    alert( "error" );
@@ -259,7 +232,7 @@
 		$("#loading").remove();
 		$("#warp").css("display", "block"); 
 		
-		TouchSlide({
+	 	TouchSlide({
 		        slideCell: "#focus",
 		        titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
 		        mainCell: ".bd ul",
@@ -267,7 +240,7 @@
 		        autoPlay: true, //自动播放
 		        autoPage: true, //自动分页
 		        switchLoad: "_src" //切换加载，真实图片路径为"_src"
-		    });
+		    }); 
 
 	});
 </script>

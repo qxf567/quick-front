@@ -286,7 +286,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 
 #banner {
     width: 100%;
-    height: 2.32rem;
+    height: 3.0rem;
     position: relative;
     z-index: 1;
     border-bottom: 1px solid #CCC;
@@ -3907,7 +3907,7 @@ header section:first-child a:after {
 /* banner图样式 -------------------------------------- */
 .focus {
     width: 100%;
-    height: 2.32rem;
+    height: 3.0rem;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -3958,7 +3958,7 @@ header section:first-child a:after {
 
 .focus .bd li img {
     width: 100%;
-    height: 2.32rem;
+    height: 3.0rem;
 }
 
 .focus .bd li a {
