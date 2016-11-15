@@ -9,4 +9,4 @@ overlays/
 .idea/
 v-crm.iml
 /target
-.properties
+src/main/resources/conf/*.properties
