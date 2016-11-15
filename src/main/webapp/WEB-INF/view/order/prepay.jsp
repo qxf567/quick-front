@@ -109,6 +109,8 @@
     var total_price = '29.8';//票价
     var is_check_coupon = '0';
     var is_check_card = '0';
+    //@TODO
+    var orderId='{order.orderId}';
     var param = {
         "f_user_id": '317926',
         "time": '1478760519',
@@ -138,9 +140,9 @@
                 "appId"     :   jsApiParameters.appId,      //公众号名称，由商户传入
                 "timeStamp" :   jsApiParameters.timeStamp,      //时间戳，自1970年以来的秒数
                 "nonceStr"  :   jsApiParameters.nonceStr,      //随机串
-                "package"   :   jsApiParameters.package,
+                "package"   :   jsApiParameters.packageValue,
                 "signType"  :   jsApiParameters.signType,      //微信签名方式：
-                "paySign"   :   jsApiParameters.paySign       //微信签名
+                "paySign"   :   jsApiParameters.sign       //微信签名
             },
             function(res){
                 if(res.err_msg == "get_brand_wcpay_request:ok" )
@@ -149,7 +151,7 @@
                     alert("支付成功！");
 
                     setTimeout(function(){
-                        location.href = "/mobile3/order_list?out_trade_no=" + out_trade_no + '&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id;
+                        location.href = "/shear/order/list?out_trade_no=" + out_trade_no + '&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id;
                     },1500);
                 }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                 else
@@ -286,10 +288,10 @@
                 }
 
                 $.ajax({
-                    url:"/mobile3/ajax_order_add",
+                    url:"/shear/order/pay",
                     type:"POST",
                     dataType:"json",
-                    data:{"f_user_id":f_user_id,"time":time,"token":token,"f_store_id":f_store_id,"total_price":total_price,"ticket_num":ticket_num,"f_date":f_date,"f_selected_ticket_type":f_selected_ticket_type,id:f_coupon_detail_id,card_id:f_card_detail_id,f_flag:f_flag,f_product_ids:f_product_ids,hair_id:hair_id,f_appointment_time:f_appointment_time,f_appointment_day:f_appointment_day},
+                    data:{"openid":f_user_id,"orderId":orderId},
                     beforeSend: function()
                     {
                         _this.removeClass("pay_order_now");
@@ -297,14 +299,14 @@
                     },
                     success: function(content)
                     {
-                        if(content.error == 0)
+                        /* if(content.error == 0)
                         {
                             //这里需要加层判断，如果全部抵扣，则已经创建完成订单和排队号，否则再去微信支付。
                             //1
                             if(content.reason == 1)
                             {
                                 alert("支付成功！");
-                                location.href = "/mobile3/order_list?out_trade_no=" + content.out_trade_no + '&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id;
+                                location.href = "/shear/order/list?out_trade_no=" + content.out_trade_no + '&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id;
                             }
                             else if(content.reason == 2)    //todo 这里判断到底是调用微信支付还是支付宝支付
                             {
@@ -323,7 +325,19 @@
                             alert(content.msg);
                             $(".pay_order").addClass("pay_order_now");
                             $(".pay_order").css("background", "#45b5da");
+                        } */
+                        
+                        if(content.retCode == 0){
+                        	if(parseInt(content.payInfo.agent)<5){  
+                                alert("您的微信版本低于5.0无法使用微信支付");  
+                                return;  
+                            }  
+                    	callpay(content.payInfo, content.html.out_trade_no);
+                        }else{
+                        	console.log('支付有问题了...');
+                        	//@TODO
                         }
+                        
                     }
                 });
             }

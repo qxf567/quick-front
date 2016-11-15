@@ -14,6 +14,8 @@ public class OrderVo implements Serializable {
 
     /** 顾客id */
     private Long customerId;
+    
+    private String openid;
 
     /** 顾客姓名 */
     private String customerName;
@@ -218,6 +220,14 @@ public class OrderVo implements Serializable {
 
     public void setIsEvaluate(Integer isEvaluate) {
         this.isEvaluate = isEvaluate;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
 }
