@@ -267,7 +267,7 @@
                     'appointmentDay'         :   appointmentDay,
                     'appointmentTime'        :   appointmentTime
                 };
-                var url_prefix = '/shear/pay/detail';
+                var url_prefix = '/shear/order/prepay';
                 var url_subfix = $.param(url_params);
                 var url = url_prefix + '?' + url_subfix;
                 window.location.href = url;
