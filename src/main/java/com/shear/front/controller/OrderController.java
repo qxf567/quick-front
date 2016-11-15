@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -17,6 +19,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,13 +27,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lashou.common.util.DateUtil;
 import com.quickshear.common.pay.tenpay.AccessTokenUtil;
 import com.quickshear.common.pay.tenpay.RequestHandler;
 import com.quickshear.common.pay.tenpay.ResponseHandler;
 import com.quickshear.common.pay.tenpay.TenpayConfig;
 import com.quickshear.common.pay.tenpay.util.Sha1Util;
 import com.quickshear.common.pay.tenpay.util.XMLUtil;
-import com.quickshear.common.vo.PageVo;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.OrderQuery;
@@ -58,40 +61,39 @@ public class OrderController extends AbstractController {
     private AccessTokenUtil accessTokenUtil;
 
     @RequestMapping("/order/prepay")
-    public String detail(Model model, @ModelAttribute OrderVo order,HttpServletRequest request, HttpServletResponse response) {
+    public String detail(Model model, @ModelAttribute OrderVo vo) {
 
 	Shop shop = null;
 	try {
-	    shop = shopService.findbyid(Long.valueOf(order.getShopId()));
+	    shop = shopService.findbyid(Long.valueOf(vo.getShopId()));
 	} catch (NumberFormatException e) {
 	    e.printStackTrace();
 	} catch (Exception e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-
-	OrderQuery query = new OrderQuery();
-	query.setShopId(order.getShopId());
-	// 支付完成
-	query.setOrderStatus(1);
+	Order order = new Order();
+	order.setOrderId(getOrderId());
+	BeanCopier cp = BeanCopier.create(OrderVo.class, Order.class, false);
+	cp.copy(vo,order, null);
+	String time = vo.getAppointmentDay()+" " + vo.getAppointmentTime();
+	order.setAppointmentTime(DateUtil.parse(time, DateUtil.ALL));
+	order.setcTime(new Date());
+	order.setmTime(order.getcTime());
+	order.setOrderStatus(0);
 
 	try {
-	    PageVo<Order> pv = orderService.findByParam(query);
-	    model.addAttribute("count", pv.getTotalCount());
+	    int r = orderService.save(order);
+	    LOGGER.info("订单保存结果："+r);
+	    model.addAttribute("order", order);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-
-	// 保存订单
-	// @TODO
-	
 	model.addAttribute("shop", shop);
-	model.addAttribute("order", order);
 	return "order/prepay";
     }
     
     
-    @RequestMapping("/order/pay")
+    @RequestMapping(value="/order/pay", method = RequestMethod.POST)
     @ResponseBody
     public TenpayPayVo prepay(Long orderId,String openid,HttpServletRequest request, HttpServletResponse response) {
 
@@ -148,6 +150,7 @@ public class OrderController extends AbstractController {
 		    if (order != null && order.getOrderStatus().equals(0)) {
 			    order.setOrderStatus(1);
 			    order.setCancelReason(transaction_id);
+			    order.setPayType(1);
 			    int r = orderService.update(order);
 			    LOGGER.info("微信支付回调修改订单状态:" + order.getOrderId() + " result:" + r);
 			} else {
@@ -177,12 +180,11 @@ public class OrderController extends AbstractController {
     
     
     @RequestMapping("/order/list")
-    public String list(Model model, Long customerId) {
+    public String list(Model model, Long customerId,Integer status) {
 
 	OrderQuery query = new OrderQuery();
 	query.setCustomerId(customerId);
-	// 支付完成
-	// query.setOrderStatus(1);
+	query.setOrderStatus(status);
 	List<Order> orderList = null;
 	try {
 	    orderList = orderService.selectByParam(query);
@@ -276,6 +278,21 @@ public class OrderController extends AbstractController {
 	    tenpayPayVo.setRetMsg("错误：获取不到Token");
 	}
 	return tenpayPayVo;
+    }
+    
+    /**
+     * 生成订单号
+     * @return orderId
+     */
+    private Long getOrderId() {
+	// 日期开头
+	String ordKey = DateUtil.format(new Date(), "yyMMdd");
+	// 随机八位尾数
+	Random random = new Random();
+	int ordValue = random.nextInt(99999999);
+	// 组成订单号
+	String orderId = ordKey + String.format("%08d", ordValue);// 尾数不足八位补齐
+	return Long.valueOf(orderId);
     }
 
 }
