@@ -207,11 +207,11 @@ public class OrderController extends AbstractController {
      */
     private TenpayPayVo generateOrderInfoOfTenpay(Order order,String openid, HttpServletRequest request, HttpServletResponse response) {
 
-	String out_trade_no = order.getOrderId() + "";
+	String outTradeNo = order.getOrderId() + "";
 	// 获取提交的商品价格
-	String order_price = order.getTotalPrice().multiply(new BigDecimal("100")).setScale(0) + "";
+	String orderPrice = order.getTotalPrice().multiply(new BigDecimal("100")).setScale(0) + "";
 	// 获取提交的商品名称
-	String product_name = StringUtils.abbreviate(order.getHairstyleId() + "", 128);
+	String productName = StringUtils.abbreviate(order.getHairstyleId() + "", 128);
 	// String product_name = request.getParameter("product_name");
 	TenpayPayVo tenpayPayVo = new TenpayPayVo();
 	RequestHandler reqHandler = new RequestHandler(request, response);
@@ -227,9 +227,9 @@ public class OrderController extends AbstractController {
 	    prePayParams.put("appid", TenpayConfig.app_id);
 	    prePayParams.put("mch_id", TenpayConfig.mch_id);
 	    prePayParams.put("nonce_str",Sha1Util.getNonceStr());
-	    prePayParams.put("body", product_name); // 商品描述
-	    prePayParams.put("out_trade_no", out_trade_no); // 商家订单号
-	    prePayParams.put("total_fee", order_price); // 商品金额,以分为单位
+	    prePayParams.put("body", productName); // 商品描述
+	    prePayParams.put("out_trade_no", outTradeNo); // 商家订单号
+	    prePayParams.put("total_fee", orderPrice); // 商品金额,以分为单位
 	    prePayParams.put("spbill_create_ip", request.getRemoteAddr()); // 订单生成的机器IP，指用户浏览器端IP
 	    prePayParams.put("notify_url", TenpayConfig.notify_url); // 接收微信通知的URL
 	    prePayParams.put("trade_type", "JSAPI");
