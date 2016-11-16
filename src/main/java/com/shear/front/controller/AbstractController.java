@@ -37,7 +37,6 @@ public abstract class AbstractController {
         model.addAttribute("appid", config.getAppId());
         model.addAttribute("appsecret", config.getAppSecret());
         //@TODO  
-        model.addAttribute("userId", "");
     }
 
 //    /**

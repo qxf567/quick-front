@@ -49,7 +49,7 @@
             <img src="http://cdn.xingkeduo.com/image/mobile3/store_thumbnail.png"/>
         </div>
         <div class="store_text">
-            <p>预约时段：${order.appointmentDay} ${order.appointmentTime}</p>
+            <p>预约时段：${order.appointmentTime}</p>
             <p>等待人数：${count}</p>
             <p>预计等待：0分钟</p>
 

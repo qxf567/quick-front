@@ -28,12 +28,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lashou.common.util.DateUtil;
-import com.quickshear.common.pay.tenpay.AccessTokenUtil;
-import com.quickshear.common.pay.tenpay.RequestHandler;
-import com.quickshear.common.pay.tenpay.ResponseHandler;
-import com.quickshear.common.pay.tenpay.TenpayConfig;
-import com.quickshear.common.pay.tenpay.util.Sha1Util;
-import com.quickshear.common.pay.tenpay.util.XMLUtil;
+import com.quickshear.common.wechat.WechatConstat;
+import com.quickshear.common.wechat.pay.AccessTokenUtil;
+import com.quickshear.common.wechat.pay.RequestHandler;
+import com.quickshear.common.wechat.pay.ResponseHandler;
+import com.quickshear.common.wechat.pay.TenpayConfig;
+import com.quickshear.common.wechat.pay.util.Sha1Util;
+import com.quickshear.common.wechat.pay.util.XMLUtil;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.OrderQuery;
@@ -72,7 +73,7 @@ public class OrderController extends AbstractController {
 	    e.printStackTrace();
 	}
 	Order order = new Order();
-	order.setOrderId(getOrderId());
+	
 	BeanCopier cp = BeanCopier.create(OrderVo.class, Order.class, false);
 	cp.copy(vo,order, null);
 	String time = vo.getAppointmentDay()+" " + vo.getAppointmentTime();
@@ -80,7 +81,7 @@ public class OrderController extends AbstractController {
 	order.setcTime(new Date());
 	order.setmTime(order.getcTime());
 	order.setOrderStatus(0);
-
+	order.setOrderId(getOrderId());
 	try {
 	    int r = orderService.save(order);
 	    LOGGER.info("订单保存结果："+r);
@@ -215,7 +216,7 @@ public class OrderController extends AbstractController {
 	TenpayPayVo tenpayPayVo = new TenpayPayVo();
 	RequestHandler reqHandler = new RequestHandler(request, response);
 	reqHandler.setKey(TenpayConfig.partner_key);
-	reqHandler.setGateUrl(TenpayConfig.prepay_url);
+	reqHandler.setGateUrl(WechatConstat.prepay_url);
 	// 获取token值
 	String token = accessTokenUtil.getAccessToken();
 	if (StringUtils.trimToNull(token) != null) {
