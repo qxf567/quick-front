@@ -1,15 +1,21 @@
 package com.shear.front.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quickshear.common.wechat.WechatManagerNew;
+import com.quickshear.common.wechat.pay.util.HttpClientUtil;
+import com.quickshear.common.wechat.pay.util.XMLUtil;
 /**
  * <code>https://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html</code>
  * 
@@ -20,6 +26,61 @@ public class WechatController extends AbstractController{
     
     @Autowired
     private WechatManagerNew manager;
+    
+    /**
+     * 关注/取消关注事件
+     * 
+     */
+    
+    @RequestMapping("/watch")
+    public String watch(@ModelAttribute Model model,HttpServletRequest request) {
+	Map<String, String> map = new HashMap<String, String>();
+	 InputStream in;
+	 String openid= null;
+	try {
+	    in = request.getInputStream();
+	    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
+	    map = XMLUtil.doXMLParse(res);
+	    openid=map.get("FromUserName");
+	    model.addAttribute("openid", openid);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} catch (JDOMException e) {
+	    e.printStackTrace();
+	}
+	return "index";
+    }
+    /**
+     * 上报地理位置事件
+     * 
+     */
+    
+    @RequestMapping("/report")
+    public String report(@ModelAttribute Model model,HttpServletRequest request) {
+	Map<String, String> map = new HashMap<String, String>();
+	 InputStream in;
+	 String openid= null;
+	try {
+	    in = request.getInputStream();
+	    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
+	    map = XMLUtil.doXMLParse(res);
+	    openid=map.get("FromUserName");
+	    model.addAttribute("openid", openid);
+	    String latitude = map.get("Latitude");
+	    String longitude = map.get("Longitude");
+	    String precision = map.get("Precision");
+	    model.addAttribute("latitude", latitude);
+	    model.addAttribute("longitude", longitude);
+	    model.addAttribute("precision", precision);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} catch (JDOMException e) {
+	    e.printStackTrace();
+	}
+	return "index";
+    }
+    
+    
     
     /**
      * 关于网页授权回调地址
