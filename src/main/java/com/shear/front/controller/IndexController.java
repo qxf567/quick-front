@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lashou.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatManager;
@@ -68,18 +65,6 @@ public class IndexController extends AbstractController {
 	return "about";
     }
 
-    @RequestMapping("/detail/{id}")
-    public String detail(Model model,@PathVariable(value="id") Long id, @ModelAttribute OrderVo order) {
-	Shop shop = null;
-	try {
-	    shop = shopService.findbyid(id);
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-	model.addAttribute("shop", shop);
-	model.addAttribute("order", order);
-	return "shop/detail";
-    }
 
     @RequestMapping("/chose/time")
     public String chose(Model model,Shop shop, @ModelAttribute OrderVo order) {
@@ -141,20 +126,8 @@ public class IndexController extends AbstractController {
 	return "order_list";
     }
 
-    /**
-     * 当url含有参数pid时，查找banner.id=pid的banner并回显到表单
-     * 
-     * @param id
-     *            pid
-     * @param model
-     * @return 页面 banner_add.jsp
-     */
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit(@RequestParam(required = false) String pid, Model model) {
-	return "/banner/banner_add";
-    }
 
-    public static List<Date> getDateList(Date date, String businessHours) {
+    private List<Date> getDateList(Date date, String businessHours) {
 	String[] buss = businessHours.split("-");
 	String start = DateUtil.format(date, DateUtil.YYYY_MM_DD) + " " + buss[0] + ":00";
 	String end = DateUtil.format(date, DateUtil.YYYY_MM_DD) + " " + buss[1] + ":00";
@@ -176,9 +149,5 @@ public class IndexController extends AbstractController {
 
 	return list;
     }
-    
-    
- 
-    
     
 }
