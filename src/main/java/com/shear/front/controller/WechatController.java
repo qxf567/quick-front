@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ import com.quickshear.common.wechat.pay.util.XMLUtil;
  * REDIRECT_URI设置为当前地址:shear/callback
  * 
  */
+@Controller
+@RequestMapping("/open")
 public class WechatController extends AbstractController{
     
     @Autowired
