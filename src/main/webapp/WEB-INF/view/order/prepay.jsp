@@ -46,12 +46,12 @@
     <p class="store_name_id">${shop.name}</p>
     <div class="order_info">
         <div class="store_img">
-            <img src="http://cdn.xingkeduo.com/image/mobile3/store_thumbnail.png"/>
+            <img src="/img/index/dianpu.png"/>
         </div>
         <div class="store_text">
             <p>预约时段：${order.appointmentTime}</p>
             <p>等待人数：${count}</p>
-            <p>预计等待：0分钟</p>
+            <p>预计等待：${count+5}分钟</p>
 
 <!--预约的话表现形式为： <p>预约时间：11:30（选择的时间）</p>-->
         </div>

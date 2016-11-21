@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lashou.common.util.DateUtil;
+import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatConstat;
 import com.quickshear.common.wechat.pay.AccessTokenUtil;
 import com.quickshear.common.wechat.pay.RequestHandler;

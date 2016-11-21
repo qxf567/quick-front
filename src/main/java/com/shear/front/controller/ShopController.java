@@ -18,7 +18,7 @@ import com.quickshear.service.ShopService;
 import com.shear.front.vo.OrderVo;
 
 @Controller
-@RequestMapping("/shear/shop")
+@RequestMapping("/shear")
 public class ShopController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ShopController.class);
@@ -26,7 +26,7 @@ public class ShopController extends AbstractController {
     @Autowired
     private ShopService shopService;
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/shop/list")
     @ResponseBody
     public List<Shop> list(Model model, Shop sh) {
 	// 根据经纬度计算出geocode来查询

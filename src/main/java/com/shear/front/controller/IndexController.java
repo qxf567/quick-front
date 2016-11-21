@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lashou.common.util.DateUtil;
+import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatManager;
 import com.quickshear.domain.Hairstyle;
 import com.quickshear.domain.Shop;

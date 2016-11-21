@@ -6,16 +6,17 @@
 		<version>2.0</version> </parent> -->
 	<artifactId>front</artifactId>
 	<packaging>war</packaging>
-	<version>9.3</version>
+	<version>1.0</version>
 	<name>shear-Webapp</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>4.3.2.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-		<groupId>shear</groupId>
+			<groupId>shear</groupId>
 			<artifactId>quick-shear-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -27,7 +28,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.2.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -40,34 +41,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- JAWR -->
-		<dependency>
-			<groupId>net.jawr</groupId>
-			<artifactId>jawr-core</artifactId>
-			<version>3.6</version>
-		</dependency>
-		<dependency>
-			<groupId>net.jawr.extensions</groupId>
-			<artifactId>jawr-spring-extension</artifactId>
-			<version>3.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yahoo.platform.yui</groupId>
-			<artifactId>yuicompressor</artifactId>
-			<version>2.4.8</version>
-			<exclusions>
-				<exclusion>
-					<groupId>rhino</groupId>
-					<artifactId>js</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- image watermark -->
-		<dependency>
-			<groupId>net.coobird</groupId>
-			<artifactId>thumbnailator</artifactId>
-			<version>0.4.6</version>
-		</dependency>
 		<!-- HTTP client -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -79,23 +52,6 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20090211</version>
-		</dependency>
-		<!-- apache poi -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.8</version>
-		</dependency>
-		<dependency>
-			<groupId>com.lashou.common</groupId>
-			<artifactId>common-util</artifactId>
-			<version>1.11</version>
-		</dependency>
-
-		<dependency>
-			<groupId>gui.ava</groupId>
-			<artifactId>html2image</artifactId>
-			<version>0.9</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -172,36 +128,45 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>net.jawr.tools</groupId>
-				<artifactId>maven-jawr-plugin</artifactId>
-				<version>1.6</version>
+				<!-- YUI Compressor Maven压缩插件 -->
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.5.0</version>
 				<executions>
 					<execution>
-						<!-- Use this phase so that we could deal with the war folder just 
-							before the war package -->
-						<phase>package</phase>
+						<phase>process-resources</phase>
 						<goals>
-							<goal>bundle</goal>
+							<goal>compress</goal>
 						</goals>
 					</execution>
 				</executions>
 				<configuration>
-					<generateCDNFiles>true</generateCDNFiles>
-					<springConfigFiles>file:${basedir}/jawr-plugin.xml</springConfigFiles>
-					<keepUrlMapping>true</keepUrlMapping>
+					<!-- 读取js,css文件采用UTF-8编码 -->
+					<encoding>UTF-8</encoding>
+					<!-- 不显示js可能的错误 -->
+					<jswarn>false</jswarn>
+					<!-- 若存在已压缩的文件，会先对比源文件是否有改动 有改动便压缩，无改动就不压缩 -->
+					<force>false</force>
+					<!-- 在指定的列号后插入新行 -->
+					<linebreakpos>-1</linebreakpos>
+					<!-- 压缩之前先执行聚合文件操作 -->
+					<preProcessAggregates>true</preProcessAggregates>
+					<!-- 压缩后保存文件后缀 无后缀 -->
+					<nosuffix>true</nosuffix>
+					<!-- 源目录，即需压缩的根目录 -->
+					<sourceDirectory>src/main/webapp/resource</sourceDirectory>
+					<!-- 压缩js和css文件 -->
+					<includes>
+						<include>**/*.js</include>
+						<include>**/*.css</include>
+					</includes>
+					<!-- 以下目录和文件不会被压缩 -->
+					<excludes>
+						<exclude>**/*.min.js</exclude>
+						<exclude>**/*.min.css</exclude>
+					</excludes>
+
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>javax.servlet</groupId>
-						<artifactId>servlet-api</artifactId>
-						<version>2.5</version>
-					</dependency>
-					<dependency>
-						<groupId>com.yahoo.platform.yui</groupId>
-						<artifactId>yuicompressor</artifactId>
-						<version>2.4.8</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

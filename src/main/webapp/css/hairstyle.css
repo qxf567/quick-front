@@ -12,11 +12,11 @@ a:visited{
 }
 a:hover{
     text-decoration:none;
-    color: #1c436f;
+    color: #45b5da;
 }
 a:active{
     text-decoration:none;
-    color: #1c436f;
+    color: #45b5da;
 }
 @media screen and (min-width:321px) and (max-width:374px){html{font-size:14px}}
 @media screen and (min-width:375px) and (max-width:639px){html{font-size:16px}}
@@ -25,7 +25,7 @@ a:active{
 .sex{text-align: center; height: 3.5rem; font-size: 1.2rem; color: #999999;  margin-bottom: 2%;border-bottom: 1px solid rgba(0,0,0,.1)}
 .container img{width: 100%}
 .gender{width: 50%;float: left;line-height: 3.4rem;}
-.sex_select{color: #1c436f;border-bottom: 2px solid #1c436f;}
+.sex_select{color: #45b5da;border-bottom: 2px solid #45b5da;}
 .gender p{width:50%;margin:0 auto;text-align:center;}
 .womanlist{padding:0 1%}
 .onelist{width:48%;padding:0% 1% 0 1%;float: left;position: relative;position: relative;text-align: center}
