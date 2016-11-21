@@ -6,7 +6,7 @@
 <head>
 	<%@ include file="../common/meta.jsp"%>
     <title>店铺详情页</title>
-    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript">
@@ -22,7 +22,6 @@
     <script type="text/javascript" src="/js/zepto.min.js"></script>
     <script type="text/javascript" src="/js/TouchSlide.1.1.js"></script>
     <script type="text/javascript" src="/js/jweixin-1.0.0.js"></script>
-    <script type="text/javascript" src="/js/btn_active.js"></script>
 </head>
 
 
@@ -323,7 +322,7 @@
             var j = i;
             as[j].tt = tt;
             as[j].onclick = function(){
-                this.tt.slide(j);
+            	this.tt.slide(j);
                 return false;
             }
         })();

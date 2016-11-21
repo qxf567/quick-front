@@ -108,13 +108,13 @@ a.blue_btn{color: #fff}
 /*取消确定37分底部固定的css*/
 /*按钮的三种状态*/
 .click_btn_blue{
-    background: #003668;
+    background: #45b5db;
     filter:alpha(opacity=70);
     -moz-opacity:0.7;
     opacity:0.7;
 }
 .focus_btn_blue{
-    background-color: #003668;
+    background-color: #45b5db;
     filter:alpha(opacity=90);
     -moz-opacity:0.9;
     opacity:0.9;

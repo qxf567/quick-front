@@ -64,6 +64,11 @@ public class OrderController extends AbstractController {
     @RequestMapping("/order/prepay")
     public String detail(Model model, @ModelAttribute OrderVo vo) {
 
+	// @TODO
+	if (vo.getCustomerId() == null) {
+	    vo.setCustomerId(1000l);
+	}
+
 	Shop shop = null;
 	try {
 	    shop = shopService.findbyid(Long.valueOf(vo.getShopId()));
@@ -77,19 +82,26 @@ public class OrderController extends AbstractController {
 	BeanCopier cp = BeanCopier.create(OrderVo.class, Order.class, false);
 	cp.copy(vo, order, null);
 	String time = vo.getAppointmentDay() + " " + vo.getAppointmentTime();
-	order.setAppointmentTime(DateUtil.parse(time, DateUtil.ALL));
-	order.setcTime(new Date());
+	order.setAppointmentTime(DateUtil.parse(time + ":00", DateUtil.ALL));
 	order.setmTime(order.getcTime());
 	order.setOrderStatus(0);
-	order.setOrderId(getOrderId());
+	order.setTotalPrice(new BigDecimal(1.0));
 	try {
-	    int r = orderService.save(order);
-	    LOGGER.info("订单保存结果：" + r);
-	    model.addAttribute("order", order);
+	    if (order.getOrderId() == null) {
+		order.setOrderId(getOrderId());
+		order.setcTime(new Date());
+		int r = orderService.save(order);
+		LOGGER.info("订单保存结果：" + r);
+	    } else {
+		int m = orderService.update(order);
+		LOGGER.info("订单更新结果：" + m);
+	    }
+
 	    OrderQuery q = new OrderQuery();
 	    q.setOrderStatus(1);
 	    q.setAppointmentTime(order.getAppointmentTime());
 	    List<Order> list = orderService.selectByParam(q);
+	    model.addAttribute("order", order);
 	    model.addAttribute("count", list.size());
 	} catch (Exception e) {
 	    e.printStackTrace();

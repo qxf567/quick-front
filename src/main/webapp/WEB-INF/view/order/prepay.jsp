@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!doctype html>
 <html>
 <head>
@@ -49,7 +50,7 @@
             <img src="/img/index/dianpu.png"/>
         </div>
         <div class="store_text">
-            <p>预约时段：${order.appointmentTime}</p>
+            <p>预约时段：<fmt:formatDate value="${order.appointmentTime}" pattern="yyyy年MM月dd日 HH时MM分 "/></p>
             <p>等待人数：${count}</p>
             <p>预计等待：${count+5}分钟</p>
 
@@ -110,7 +111,7 @@
     var is_check_coupon = '0';
     var is_check_card = '0';
     //@TODO
-    var orderId='{order.orderId}';
+    var orderId='${order.orderId}';
     var param = {
         "f_user_id": '317926',
         "time": '1478760519',
