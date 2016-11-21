@@ -159,7 +159,7 @@
     wx.ready(function () {
         //分享到朋友圈
         wx.onMenuShareTimeline({
-            title: '星客多精选发型360°旋转看发型效果',// 分享标题
+            title: '精选发型360°旋转看发型效果',// 分享标题
             link: 'http://e.xingkeduo.com/wechat/oauth/state/12/product_id/10/shop_number/67',
             imgUrl: 'http://m.xingkeduo.com/static/imgs/10/1.jpg',// 分享图标
             trigger:function(res){
@@ -177,8 +177,8 @@
 
         //分享发送给好友
         wx.onMenuShareAppMessage({
-            title: '星客多精选发型360°旋转看发型效果',
-            desc: '星客多精选发型360°旋转看发型效果',
+            title: '精选发型360°旋转看发型效果',
+            desc: '精选发型360°旋转看发型效果',
             link: 'http://e.xingkeduo.com/wechat/oauth/state/12/product_id/10/shop_number/67',
             imgUrl: 'http://cdn.xingkeduo.com/imgs/10/1.jpg',
             trigger:function(res){
