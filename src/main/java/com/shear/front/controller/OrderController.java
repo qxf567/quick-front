@@ -73,10 +73,10 @@ public class OrderController extends AbstractController {
 	    e.printStackTrace();
 	}
 	Order order = new Order();
-	
+
 	BeanCopier cp = BeanCopier.create(OrderVo.class, Order.class, false);
-	cp.copy(vo,order, null);
-	String time = vo.getAppointmentDay()+" " + vo.getAppointmentTime();
+	cp.copy(vo, order, null);
+	String time = vo.getAppointmentDay() + " " + vo.getAppointmentTime();
 	order.setAppointmentTime(DateUtil.parse(time, DateUtil.ALL));
 	order.setcTime(new Date());
 	order.setmTime(order.getcTime());
@@ -84,24 +84,29 @@ public class OrderController extends AbstractController {
 	order.setOrderId(getOrderId());
 	try {
 	    int r = orderService.save(order);
-	    LOGGER.info("订单保存结果："+r);
+	    LOGGER.info("订单保存结果：" + r);
 	    model.addAttribute("order", order);
+	    OrderQuery q = new OrderQuery();
+	    q.setOrderStatus(1);
+	    q.setAppointmentTime(order.getAppointmentTime());
+	    List<Order> list = orderService.selectByParam(q);
+	    model.addAttribute("count", list.size());
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+
 	model.addAttribute("shop", shop);
 	return "order/prepay";
     }
-    
-    
-    @RequestMapping(value="/order/pay", method = RequestMethod.POST)
-    @ResponseBody
-    public TenpayPayVo prepay(Long orderId,String openid,HttpServletRequest request, HttpServletResponse response) {
 
-	 TenpayPayVo payVo = null;
+    @RequestMapping(value = "/order/pay", method = RequestMethod.POST)
+    @ResponseBody
+    public TenpayPayVo prepay(Long orderId, String openid, HttpServletRequest request, HttpServletResponse response) {
+
+	TenpayPayVo payVo = null;
 	try {
 	    Order order = orderService.findbyid(orderId);
-	    payVo = generateOrderInfoOfTenpay(order,openid,request,response);	
+	    payVo = generateOrderInfoOfTenpay(order, openid, request, response);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
@@ -149,19 +154,19 @@ public class OrderController extends AbstractController {
 		try {
 		    order = orderService.findbyid(orderId);
 		    if (order != null && order.getOrderStatus().equals(0)) {
-			    order.setOrderStatus(1);
-			    order.setCancelReason(transaction_id);
-			    order.setPayType(1);
-			    int r = orderService.update(order);
-			    LOGGER.info("微信支付回调修改订单状态:" + order.getOrderId() + " result:" + r);
-			} else {
-			    LOGGER.info("微信支付回调修改订单状态不正确:" + order.getOrderId());
-			}
+			order.setOrderStatus(1);
+			order.setCancelReason(transaction_id);
+			order.setPayType(1);
+			int r = orderService.update(order);
+			LOGGER.info("微信支付回调修改订单状态:" + order.getOrderId() + " result:" + r);
+		    } else {
+			LOGGER.info("微信支付回调修改订单状态不正确:" + order.getOrderId());
+		    }
 
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-		
+
 	    } else {
 		LOGGER.error(String.format("微信支付异步回调|即时到账支付失败，订单号：%s,交易号：%s", out_trade_no, transaction_id));
 		resultMap.put("return_code", "FAIL");
@@ -178,10 +183,9 @@ public class OrderController extends AbstractController {
 	    return XMLUtil.map2Xml(resultMap);
 	}
     }
-    
-    
+
     @RequestMapping("/order/list")
-    public String list(Model model, Long customerId,Integer status) {
+    public String list(Model model, Long customerId, Integer status) {
 
 	OrderQuery query = new OrderQuery();
 	query.setCustomerId(customerId);
@@ -196,16 +200,17 @@ public class OrderController extends AbstractController {
 	model.addAttribute("orderList", orderList);
 	return "order/list";
     }
-    
 
     /**
      * 生成tenpay的订单支付信息
+     * 
      * @param orderVo
      * @param request
      * @param response
      * @return
      */
-    private TenpayPayVo generateOrderInfoOfTenpay(Order order,String openid, HttpServletRequest request, HttpServletResponse response) {
+    private TenpayPayVo generateOrderInfoOfTenpay(Order order, String openid, HttpServletRequest request,
+	    HttpServletResponse response) {
 
 	String outTradeNo = order.getOrderId() + "";
 	// 获取提交的商品价格
@@ -221,21 +226,21 @@ public class OrderController extends AbstractController {
 	String token = accessTokenUtil.getAccessToken();
 	if (StringUtils.trimToNull(token) != null) {
 	    // 生成预支付单,【统一支付接口】参数
-	    //地址： 地址： https://api.mch.weixin.qq.com/pay/unifiedorder
+	    // 地址： 地址： https://api.mch.weixin.qq.com/pay/unifiedorder
 	    SortedMap<String, String> prePayParams = new TreeMap<String, String>();
-	    
+
 	    prePayParams.put("appid", TenpayConfig.app_id);
 	    prePayParams.put("mch_id", TenpayConfig.mch_id);
-	    prePayParams.put("nonce_str",Sha1Util.getNonceStr());
+	    prePayParams.put("nonce_str", Sha1Util.getNonceStr());
 	    prePayParams.put("body", productName); // 商品描述
 	    prePayParams.put("out_trade_no", outTradeNo); // 商家订单号
 	    prePayParams.put("total_fee", orderPrice); // 商品金额,以分为单位
 	    prePayParams.put("spbill_create_ip", request.getRemoteAddr()); // 订单生成的机器IP，指用户浏览器端IP
 	    prePayParams.put("notify_url", TenpayConfig.notify_url); // 接收微信通知的URL
 	    prePayParams.put("trade_type", "JSAPI");
-	    
-	    prePayParams.put("openid",openid);
-	   
+
+	    prePayParams.put("openid", openid);
+
 	    String sign = reqHandler.createSign(prePayParams);
 	    prePayParams.put("sign", sign);
 
@@ -243,46 +248,47 @@ public class OrderController extends AbstractController {
 	    String prepayid = reqHandler.sendPrepay(prePayParams);
 
 	    if (StringUtils.isNotBlank(prepayid)) {
-		  //签名参数列表
-		    SortedMap<String, String> payParams = new TreeMap<String, String>();
-		    payParams.put("appid", TenpayConfig.app_id);
-		    payParams.put("timestamp", Sha1Util.getTimeStamp());
-		    payParams.put("noncestr", Sha1Util.getNonceStr());
-		    payParams.put("package", "prepay_id=" + prepayid);
-		    payParams.put("signType", "MD5");
-		    String paySign = reqHandler.createSign(payParams);
-		    payParams.put("paySign", paySign);
+		// 签名参数列表
+		SortedMap<String, String> payParams = new TreeMap<String, String>();
+		payParams.put("appid", TenpayConfig.app_id);
+		payParams.put("timestamp", Sha1Util.getTimeStamp());
+		payParams.put("noncestr", Sha1Util.getNonceStr());
+		payParams.put("package", "prepay_id=" + prepayid);
+		payParams.put("signType", "MD5");
+		String paySign = reqHandler.createSign(payParams);
+		payParams.put("paySign", paySign);
 
-		    // 输出参数
-		    tenpayPayVo.setRetCode("0");
-		    tenpayPayVo.setRetMsg("OK");
-		    TenpayPayInfoVo payInfoVo = new TenpayPayInfoVo();
-		    payInfoVo.setAppId(payParams.get("appid"));
-		    payInfoVo.setTimeStamp(payParams.get("timestamp"));
-		    payInfoVo.setNonceStr(payParams.get("noncestr"));
-		    payInfoVo.setPackageValue(payParams.get("package"));
-		    payInfoVo.setSign(payParams.get("paySign"));
-		    payInfoVo.setSignType(payParams.get("signType"));
-		    String userAgent = request.getHeader("user-agent");
-		    char agent = userAgent.charAt(userAgent.indexOf("MicroMessenger") + 15);
-		    payInfoVo.setAgent(new String(new char[] { agent }));// 微信版本号，用于前面提到的判断用户手机微信的版本是否是5.0以上版本。
-		    tenpayPayVo.setPayInfo(payInfoVo);
-		    
-		} else {
-		    LOGGER.error(String.format("get prepayid err ,info = %s", prepayid));
-		    tenpayPayVo.setRetCode("-2");
-		    tenpayPayVo.setRetMsg("错误：获取prepayId失败");
-		}
-		
+		// 输出参数
+		tenpayPayVo.setRetCode("0");
+		tenpayPayVo.setRetMsg("OK");
+		TenpayPayInfoVo payInfoVo = new TenpayPayInfoVo();
+		payInfoVo.setAppId(payParams.get("appid"));
+		payInfoVo.setTimeStamp(payParams.get("timestamp"));
+		payInfoVo.setNonceStr(payParams.get("noncestr"));
+		payInfoVo.setPackageValue(payParams.get("package"));
+		payInfoVo.setSign(payParams.get("paySign"));
+		payInfoVo.setSignType(payParams.get("signType"));
+		String userAgent = request.getHeader("user-agent");
+		char agent = userAgent.charAt(userAgent.indexOf("MicroMessenger") + 15);
+		payInfoVo.setAgent(new String(new char[] { agent }));// 微信版本号，用于前面提到的判断用户手机微信的版本是否是5.0以上版本。
+		tenpayPayVo.setPayInfo(payInfoVo);
+
+	    } else {
+		LOGGER.error(String.format("get prepayid err ,info = %s", prepayid));
+		tenpayPayVo.setRetCode("-2");
+		tenpayPayVo.setRetMsg("错误：获取prepayId失败");
+	    }
+
 	} else {
 	    tenpayPayVo.setRetCode("-1");
 	    tenpayPayVo.setRetMsg("错误：获取不到Token");
 	}
 	return tenpayPayVo;
     }
-    
+
     /**
      * 生成订单号
+     * 
      * @return orderId
      */
     private Long getOrderId() {

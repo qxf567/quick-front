@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- 1. here is appender -->
+    <appender name="console" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.base}/logs/stdout.log"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p -%c{1} - %m%n"/>
+        </layout>
+    </appender>
+    <!-- 2. here is logger -->
+    <logger name="com.shear">
+        <level value="info"/>
+    </logger>
+    <logger name="org.springframework">
+        <level value="error"/>
+    </logger>
+    <!-- 3. here is root -->
+    <root>
+        <priority value="info"/>
+        <appender-ref ref="console"/>
+    </root>
+
+</log4j:configuration>

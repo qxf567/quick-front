@@ -43,7 +43,7 @@
 </head>
 <body>
 <div class="container">
-    <p class="store_name_id">望京soho店</p>
+    <p class="store_name_id">${shop.name}</p>
     <div class="order_info">
         <div class="store_img">
             <img src="http://cdn.xingkeduo.com/image/mobile3/store_thumbnail.png"/>
@@ -79,8 +79,8 @@
     </div>
     <div class="store_info">
         <ul>
-            <li>北京市朝阳区望京SOHO塔3内街-F1-3110室</li>
-            <li>营业时间：10:00-21:00</li>
+            <li>${shop.address}</li>
+            <li>营业时间：${shop.businessHours}</li>
         </ul>
     </div>
     <div class="bottom_height"></div>
