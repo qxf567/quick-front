@@ -77,8 +77,27 @@ public class OrderController extends AbstractController {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-	Order order = new Order();
+	String time = vo.getAppointmentDay() + " " + vo.getAppointmentTime();
+	try {
 
+	    OrderQuery q = new OrderQuery();
+	    q.setShopId(vo.getShopId());
+	    q.setOrderStatus(1);
+	    q.setAppointmentTime(DateUtil.parse(time + ":00", DateUtil.ALL));
+	    List<Order> list = orderService.selectByParam(q);
+	    model.addAttribute("count", list.size());
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	model.addAttribute("order", vo);
+	model.addAttribute("shop", shop);
+	return "order/prepay";
+    }
+
+    @RequestMapping(value = "/order/pay", method = RequestMethod.POST)
+    @ResponseBody
+    public TenpayPayVo prepay(@ModelAttribute OrderVo vo,String openid, HttpServletRequest request, HttpServletResponse response) {
+	Order order = new Order();
 	BeanCopier cp = BeanCopier.create(OrderVo.class, Order.class, false);
 	cp.copy(vo, order, null);
 	String time = vo.getAppointmentDay() + " " + vo.getAppointmentTime();
@@ -97,27 +116,11 @@ public class OrderController extends AbstractController {
 		LOGGER.info("订单更新结果：" + m);
 	    }
 
-	    OrderQuery q = new OrderQuery();
-	    q.setOrderStatus(1);
-	    q.setAppointmentTime(order.getAppointmentTime());
-	    List<Order> list = orderService.selectByParam(q);
-	    model.addAttribute("order", order);
-	    model.addAttribute("count", list.size());
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-
-	model.addAttribute("shop", shop);
-	return "order/prepay";
-    }
-
-    @RequestMapping(value = "/order/pay", method = RequestMethod.POST)
-    @ResponseBody
-    public TenpayPayVo prepay(Long orderId, String openid, HttpServletRequest request, HttpServletResponse response) {
-
 	TenpayPayVo payVo = null;
 	try {
-	    Order order = orderService.findbyid(orderId);
 	    payVo = generateOrderInfoOfTenpay(order, openid, request, response);
 	} catch (Exception e) {
 	    e.printStackTrace();

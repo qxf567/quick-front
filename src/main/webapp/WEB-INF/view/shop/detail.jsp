@@ -79,7 +79,7 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:;" id="hairstyle_div" hair_id="">
+        <a href="javascript:;" id="hairstyle_div" hairstyleId="">
             <div class="info_one">
                 <hr style="background: #dadada;height: 1px;border: none"/>
                 <span></span><img src="/js/detail/hairstyle_icon.png"/>
@@ -189,8 +189,7 @@
     var appointmentDay = '${order.appointmentDay}';     //预约时段
 
     var appointmentTime = '${order.appointmentTime}';     //预约分钟
-
-    var hair_id =  '${order.hairstyleId}';//发型ID
+    var hairstyleId =  '${order.hairstyleId}';//发型ID
 
     $(document).ready(function(){
 
@@ -219,7 +218,7 @@
                 'customerId'                 :   customerId,
                 'time'                      :   time,
                 'get_token'                 :   get_token,
-                'select_hair_id'            :   hair_id,
+                'select_hairstyleId'            :   hairstyleId,
                 'appointmentDay'         :   appointmentDay,
                 'appointmentTime'        :   appointmentTime
             };
@@ -242,7 +241,7 @@
                 'customerId'                 :   customerId,
                 'time'                      :   time,
                 'get_token'                 :   get_token,
-                'select_hair_id'            :   hair_id,
+                'hairstyleId'            :   hairstyleId,
                 'appointmentDay'         :   appointmentDay,
                 'appointmentTime'        :   appointmentTime
             };
@@ -262,7 +261,7 @@
                     'customerId'                 :   customerId,
                     'time'                      :   time,
                     'get_token'                 :   get_token,
-                    'hair_id'                   :   hair_id,
+                    'hairstyleId'               :hairstyleId,
                     'appointmentDay'         :   appointmentDay,
                     'appointmentTime'        :   appointmentTime
                 };

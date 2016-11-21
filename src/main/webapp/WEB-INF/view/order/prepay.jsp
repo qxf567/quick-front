@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!doctype html>
 <html>
 <head>
@@ -50,7 +49,7 @@
             <img src="/img/index/dianpu.png"/>
         </div>
         <div class="store_text">
-            <p>预约时段：<fmt:formatDate value="${order.appointmentTime}" pattern="yyyy年MM月dd日 HH时MM分 "/></p>
+            <p>预约时段：${order.appointmentDay}&nbsp;${order.appointmentTime} </p>
             <p>等待人数：${count}</p>
             <p>预计等待：${count+5}分钟</p>
 
@@ -93,15 +92,16 @@
     </div><!--底部固定End-->
 </div>
 <script type="text/javascript">
-    var f_user_id = '317926';//uerid
-    var time        = '1478760519';//时间
-    var token   = '7928b2e7aa8b982a3315bd6935d129f7';//token
-    var f_store_id   = '35';//店铺ID
-    var f_selected_ticket_type   = '1';//票类型,1为全天票,2为限制时段票 3预约票
-    var f_appointment_time = '';//预约时间（时：分）
-    var f_appointment_day = '';//预约日期
-    var hair_id = '';//发型ID
+    var customerId = '${order.customerId}';//uerid
+
+    var appointmentTime = '${order.appointmentTime}';//预约时间（时：分）
+    var appointmentDay = '${order.appointmentDay}';//预约日期
+    var hairstyleId = '${order.hairstyleId}';//发型ID
     var f_date      = '0';
+	var time        = '1478760519';//时间
+    var token   = '7928b2e7aa8b982a3315bd6935d129f7';//token
+    var shopId   = '${order.shopId}';//店铺ID
+    var f_selected_ticket_type   = '1';//票类型,1为全天票,2为限制时段票 3预约票
     var f_card_detail_id = '0';//会员卡ID
     var f_coupon_detail_id = '0';//优惠券ID
     var f_flag = '0';//优惠类型 1优惠券 2会员卡
@@ -111,16 +111,15 @@
     var is_check_coupon = '0';
     var is_check_card = '0';
     //@TODO
-    var orderId='${order.orderId}';
     var param = {
-        "f_user_id": '317926',
+        "customerId": '317926',
         "time": '1478760519',
         "token": '7928b2e7aa8b982a3315bd6935d129f7',
-        "f_store_id": '35',
+        "shopId": shopId,
         "f_selected_ticket_type": '1',
-        "f_appointment_time": '',
-        "f_appointment_day": '',
-        "hair_id": '',
+        "appointmentTime": '',
+        "appointmentDay": '',
+        "hairstyleId": '',
         "f_date": '0',
         "f_card_detail_id": '0',
         "f_coupon_detail_id": '0',
@@ -152,7 +151,7 @@
                     alert("支付成功！");
 
                     setTimeout(function(){
-                        location.href = "/shear/order/list?out_trade_no=" + out_trade_no + '&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id;
+                        location.href = "/shear/order/list?out_trade_no=" + out_trade_no + '&customerId=' + customerId + '&time=' + time + '&token=' + token + '&shopId=' + shopId;
                     },1500);
                 }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                 else
@@ -193,7 +192,7 @@
                 alert("支付成功！");//callbackUrl
 
                 setTimeout(function(){
-                    location.href = "/mobile3/order_list?out_trade_no=" + out_trade_no + '&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id;
+                    location.href = "/mobile3/order_list?out_trade_no=" + out_trade_no + '&customerId=' + customerId + '&time=' + time + '&token=' + token + '&shopId=' + shopId;
                 },1500);
             }
             else
@@ -292,7 +291,14 @@
                     url:"/shear/order/pay",
                     type:"POST",
                     dataType:"json",
-                    data:{"openid":f_user_id,"orderId":orderId},
+                    data:{"customerId":customerId,
+						"shopId":shopId,
+						"appointmentTime":appointmentTime,
+						"appointmentDay":appointmentDay,
+						"hairstyleId":hairstyleId,
+						
+						
+					},
                     beforeSend: function()
                     {
                         _this.removeClass("pay_order_now");
@@ -307,7 +313,7 @@
                             if(content.reason == 1)
                             {
                                 alert("支付成功！");
-                                location.href = "/shear/order/list?out_trade_no=" + content.out_trade_no + '&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&f_store_id=' + f_store_id;
+                                location.href = "/shear/order/list?out_trade_no=" + content.out_trade_no + '&customerId=' + customerId + '&time=' + time + '&token=' + token + '&shopId=' + shopId;
                             }
                             else if(content.reason == 2)    //todo 这里判断到底是调用微信支付还是支付宝支付
                             {
