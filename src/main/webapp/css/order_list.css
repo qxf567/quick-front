@@ -1,0 +1,205 @@
+.max_box {
+	max-width: 640px;
+	padding-top: 50%;
+	font-family: "microsoft yahei", Arial, sans-serif
+}
+
+.info_box img {
+	width: 30%;
+	display: block;
+	margin: 0 auto
+}
+
+.info_box {
+	color: #999;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.info_box p {
+	line-height: 26px;
+}
+
+.fix_height {
+	height: 4.4rem
+}
+
+p.store_name_id {
+	height: 3rem;
+	line-height: 3rem;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+	font-size: 1.2rem;
+	padding: 0 3%;
+}
+
+.order_info {
+	height: auto;
+	width: 94%;
+	padding: 0 15px;
+	/* border-bottom: 1px solid rgba(0, 0, 0, .1) */
+}
+
+.store_text {
+	padding: 1.3rem 0%;
+	color: #999;
+}
+
+.store_img {
+	float: left;
+	margin: 1.5rem 1rem 1.5rem 0
+}
+
+.store_img img {
+	height: 90px;
+	width: auto;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+.store_img al {
+	line-height: 25px;
+	width: auto;
+	margin: 0 auto;
+}
+.store_text p {
+	line-height: 25px;
+	color: #999;
+	font-size: 1rem;
+	padding-right: 0rem;
+}
+
+.total_main {
+	padding: 0 3%;
+	height: 3.2rem;
+	line-height: 3.2rem;
+	/*  border-bottom: 1px solid rgba(0, 0, 0, .1);*/
+	color: #999
+}
+
+span.state_label,span.discount_price,span.sum {
+	float: right;
+	color: #1c436f;
+	margin-left: 0.5rem
+}
+
+.total_main span {
+	color: #999
+}
+
+span.sum {
+	color: #333333;
+	font-size: 1.2rem
+}
+
+.btn_block {
+	height: 3.2rem;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.btn_block a {
+	color: #ffffff;
+	letter-spacing: 1px
+}
+
+.tips_btn {
+	width: 25%;
+	float: right;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	margin: 0.4rem 3%;
+	vertical-align: middle;
+	text-align: center;
+	border-radius: 5px;
+}
+
+#all_opcation {
+	width: 100%;
+	overflow: hidden;
+	height: 100%;
+	background-color: #000;
+	top: 0;
+	opacity: 0.6;
+	z-index: 2001;
+	display: none;
+	position: fixed !important; /*FF IE7*/
+	position: absolute; /*IE6*/
+}
+
+.pop_alert {
+	height: 164px;
+	width: 272px;
+	background-color: #FFFFFF;
+	border-radius: 4px;
+	z-index: 2002;
+	position: absolute;
+	margin-left: -136px;
+	margin-top: -82px;
+	top: 50%;
+	left: 50%;
+	display: none;
+	position: fixed !important; /*FF IE7*/
+	position: absolute; /*IE6*/
+	_top: expression(eval(document.compatMode &&
+            document.compatMode == 'CSS1Compat')?
+            documentElement.scrollTop+ (document.documentElement.clientHeight-this.offsetHeight)/2:
+		/*IE6*/
+            document.body.scrollTop+ (document.body.clientHeight- this.clientHeight)/2);
+	/*IE5 IE5.5*/
+}
+
+.pop_rush_time {
+	width: 278px;
+	height: 376px;
+	z-index: 2002;
+	margin-left: -139px;
+	margin-top: -232px;
+	top: 50%;
+	left: 50%;
+	display: none;
+	position: fixed !important; /*FF IE7*/
+	position: absolute; /*IE6*/
+	_top: expression(eval(document.compatMode &&
+            document.compatMode == 'CSS1Compat')?
+            documentElement.scrollTop+ (document.documentElement.clientHeight-this.offsetHeight)/2:
+		/*IE6*/
+            document.body.scrollTop+ (document.body.clientHeight- this.clientHeight)/2);
+	/*IE5 IE5.5*/
+}
+
+.rush_time_button {
+	height: 44px;
+	width: 23px;
+	float: right;
+	margin-right: 10px;
+}
+
+.rush_time_con {
+	height: 332px;
+	width: 278px;
+	padding-top: 75px;
+	background-color: #FFFFFF;
+	border-radius: 4px;
+}
+
+/* 高峰时段样式 */
+.submit {
+	display: inline-block;
+	background-color: #ff5f07;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+}
+
+.rush_time_con .defalt {
+	display: inline-block;
+	color: #ff5f08;
+	border: 1px solid #ff5f08;
+	height: 42px;
+	line-height: 42px;
+	text-align: center;
+	font-size: 18px;
+	width: 252px;
+	border-radius: 4px;
+	margin-top: 10px
+}
