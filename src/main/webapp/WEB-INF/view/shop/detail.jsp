@@ -79,16 +79,30 @@
                 </div>
             </div>
         </a>
-        <a href="javascript:;" id="hairstyle_div" hairstyleId="">
+        <a href="javascript:;" id="hairstyle_div" hairstyleId="${order.hairstyleId}">
             <div class="info_one">
                 <hr style="background: #dadada;height: 1px;border: none"/>
                 <span></span><img src="/js/detail/hairstyle_icon.png"/>
                 <span class="checked_title">发型精选</span>
                 <div class="checked_info_main">
                     <span class="checked_info">
-        				 <c:if test="${!empty order.hairstyleId}">${order.hairstyleId}</c:if>
+        				 <c:if test="${!empty order.hairstyleId}">${order.hairstyleName}</c:if>
         				 <c:if test="${empty order.hairstyleId}">未选择</c:if>         
                     </span>
+                    <span></span><img src="/js/detail/checked_icon.png"/>
+                </div>
+            </div>
+        </a>
+        <a href="javascript:;" id="hairdresser_div">
+            <div class="info_one">
+            	<hr style="background: #dadada;height: 1px;border: none"/>
+                <span></span><img src="/js/detail/hairdresser.png"/>
+                <span class="checked_title">理发师</span>
+                <div class="checked_info_main">
+                    <span class="checked_info"> 
+                    	<c:if test="${!empty order.hairdresserId}">${order.hairdresserName}</c:if>
+                   	 	<c:if test="${empty order.hairdresserId}">可选</c:if>
+                   	</span>
                     <span></span><img src="/js/detail/checked_icon.png"/>
                 </div>
             </div>
@@ -175,21 +189,19 @@
         </a>
     </div><!--底部固定End-->
 </div>
-
 <script type="text/javascript">
-    //全局变量区域
-    var customerId = '${userId}';
-    var time = '1555';
-    var get_token = '7eb3fbd5383bf37489b71a318c0e3f98';
-    var shopId = '${shop.id}';
+var customerId = '${userId}';
+var shopId = '${shop.id}';
+var appointmentDay = '${order.appointmentDay}'; // 预约时段
+var appointmentTime = '${order.appointmentTime}'; // 预约分钟
+var hairstyleId = '${order.hairstyleId}';// 发型ID
 
-    var ticket_num = 1;   //小票数量
-    var f_selected_ticket_type = '1';   //票据类型1全天票2限时票
-
-    var appointmentDay = '${order.appointmentDay}';     //预约时段
-
-    var appointmentTime = '${order.appointmentTime}';     //预约分钟
-    var hairstyleId =  '${order.hairstyleId}';//发型ID
+var time = '1555';
+var get_token = '7eb3fbd5383bf37489b71a318c0e3f98';
+var ticket_num = 1; // 小票数量
+var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
+</script>
+<script type="text/javascript">
 
     $(document).ready(function(){
 
@@ -252,10 +264,36 @@
 
             window.location.href = url;
         });
+        
+        $("#hairdresser_div").click(function(){
+            pop_up_loading();
+
+            var url_params = {
+                'shopId'                :   shopId,
+                'businessHours'                :   '${shop.businessHours}',
+                'f_selected_ticket_type'    :   f_selected_ticket_type,
+                'customerId'                 :   customerId,
+                'time'                      :   time,
+                'get_token'                 :   get_token,
+                'hairstyleId'            :   hairstyleId,
+                'appointmentDay'         :   appointmentDay,
+                'appointmentTime'        :   appointmentTime
+            };
+
+            var url_prefix = '/shear/chose/dresser';
+            var url_subfix = $.param(url_params);
+            var url = url_prefix + '?' + url_subfix;
+
+            window.location.href = url;
+        });
+        
 
         //立即下单
         $("#payment").click(function(){
 
+        	
+        	
+        	
                 var url_params = {
                     'shopId'                :   shopId,
                     'customerId'                 :   customerId,

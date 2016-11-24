@@ -88,14 +88,14 @@
     </div><!--底部固定End-->
 </div>
 <script type="text/javascript">
-    var customerId = '${order.customerId}';
-    var time        = '1478159349';
-    var get_token   = '7eb3fbd5383bf37489b71a318c0e3f98';
-    var shopId   = '${order.shopId}';
-    var hairstyleId =  '${order.hairstyleId}';
+var customerId = '${order.customerId}';
+var time        = '1478159349';
+var get_token   = '7eb3fbd5383bf37489b71a318c0e3f98';
+var shopId   = '${order.shopId}';
+var hairstyleId =  '${order.hairstyleId}';
 
-    var ticket_num =  '1';
-    var f_selected_ticket_type =  '1';
+var ticket_num =  '1';
+var f_selected_ticket_type =  '1';
 
     $(document).ready(function(){
         $(".one_time_slot span").click(function(){

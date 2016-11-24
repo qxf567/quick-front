@@ -104,7 +104,7 @@
 	<script type="text/javascript" src="/js/common.js"></script>
 	<script type="text/javascript" src="/js/touch.js"></script>
 	<script type="text/javascript" src="/js/jweixin-1.0.0.js"></script>
-	<script type="text/javascript" src="/js/TouchSlide.1.1.js"></script>
+	<script type="text/javascript" src="/js/touchSlide1.0.5.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var url ='shop/list';

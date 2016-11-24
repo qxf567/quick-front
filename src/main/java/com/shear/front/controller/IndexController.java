@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatManager;
+import com.quickshear.domain.Hairdresser;
 import com.quickshear.domain.Hairstyle;
 import com.quickshear.domain.Shop;
+import com.quickshear.domain.query.HairdresserQuery;
 import com.quickshear.domain.query.HairstyleQuery;
+import com.quickshear.service.HairdresserService;
 import com.quickshear.service.HairstyleService;
 import com.quickshear.service.ShopService;
 import com.shear.front.vo.OrderVo;
@@ -36,6 +39,8 @@ public class IndexController extends AbstractController {
     private WechatManager wechatManager;
     @Autowired
     private HairstyleService hairstyleService;
+    @Autowired
+    private HairdresserService hairdresserService;
 
     // 当前网页的URL，不包含#及其后面部分
     private String url = "http://qa-n.lashou.com/shear/shear/index";
@@ -92,7 +97,7 @@ public class IndexController extends AbstractController {
     }
 
     @RequestMapping("/chose/hair")
-    public String choseHair(Model model,Shop shop, @ModelAttribute OrderVo order) {
+    public String choseHair(Model model, @ModelAttribute OrderVo order) {
 	
 	HairstyleQuery query = new HairstyleQuery();
 	//query.setStatus(1);
@@ -105,6 +110,23 @@ public class IndexController extends AbstractController {
 	model.addAttribute("hairList", hairList);
 	model.addAttribute("order", order);
 	return "chose_hair";
+    }
+    
+    @RequestMapping("/chose/dresser")
+    public String choseHairDresser(Model model, @ModelAttribute OrderVo order) {
+	
+	HairdresserQuery query = new HairdresserQuery();
+	query.setStatus(1);
+	query.setShopId(Long.valueOf(order.getShopId()));
+	List<Hairdresser> list = null;
+	try {
+	    list = hairdresserService.selectByParam(query);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	model.addAttribute("dresserList", list);
+	model.addAttribute("order", order);
+	return "chose_dresser";
     }
     
     @RequestMapping("/chose/hair/detail")

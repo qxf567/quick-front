@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * 页面使用订单相关信息
- *
+ * 
  */
 public class OrderVo implements Serializable {
     /** 订单号 */
@@ -14,7 +14,7 @@ public class OrderVo implements Serializable {
 
     /** 顾客id */
     private Long customerId;
-    
+
     private String openid;
 
     /** 顾客姓名 */
@@ -29,9 +29,13 @@ public class OrderVo implements Serializable {
     /** 发型师id */
     private Long hairdresserId;
 
+    /** 发型师name */
+    private String hairdresserName;
+
     /** 发型id */
     private Long hairstyleId;
-    
+
+    private String hairstyleName;
     /** 预约时间 */
     private String appointmentDay;
     /** 预约时间 */
@@ -67,167 +71,182 @@ public class OrderVo implements Serializable {
     /** 是否已评价(0否1是) */
     private Integer isEvaluate;
 
-
     private static final long serialVersionUID = 1L;
 
     public Long getOrderId() {
-        return orderId;
+	return orderId;
     }
 
     public String getAppointmentDay() {
-        return appointmentDay;
+	return appointmentDay;
     }
 
     public void setAppointmentDay(String appointmentDay) {
-        this.appointmentDay = appointmentDay;
+	this.appointmentDay = appointmentDay;
     }
 
     public void setAppointmentTime(String appointmentTime) {
-        this.appointmentTime = appointmentTime;
+	this.appointmentTime = appointmentTime;
     }
 
     public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+	this.orderId = orderId;
     }
 
     public Long getCustomerId() {
-        return customerId;
+	return customerId;
     }
 
     public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+	this.customerId = customerId;
     }
 
     public String getCustomerName() {
-        return customerName;
+	return customerName;
     }
 
     public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+	this.customerName = customerName;
     }
 
     public String getCustomerNumber() {
-        return customerNumber;
+	return customerNumber;
     }
 
     public void setCustomerNumber(String customerNumber) {
-        this.customerNumber = customerNumber;
+	this.customerNumber = customerNumber;
     }
 
     public String getShopId() {
-        return shopId;
+	return shopId;
     }
 
     public void setShopId(String shopId) {
-        this.shopId = shopId;
+	this.shopId = shopId;
     }
 
     public Long getHairdresserId() {
-        return hairdresserId;
+	return hairdresserId;
     }
 
     public void setHairdresserId(Long hairdresserId) {
-        this.hairdresserId = hairdresserId;
+	this.hairdresserId = hairdresserId;
     }
 
     public Long getHairstyleId() {
-        return hairstyleId;
+	return hairstyleId;
     }
 
     public void setHairstyleId(Long hairstyleId) {
-        this.hairstyleId = hairstyleId;
+	this.hairstyleId = hairstyleId;
     }
 
     public String getAppointmentTime() {
-        return appointmentTime;
+	return appointmentTime;
     }
 
     public Integer getPayType() {
-        return payType;
+	return payType;
     }
 
     public void setPayType(Integer payType) {
-        this.payType = payType;
+	this.payType = payType;
     }
 
     public Integer getOrderStatus() {
-        return orderStatus;
+	return orderStatus;
     }
 
     public void setOrderStatus(Integer orderStatus) {
-        this.orderStatus = orderStatus;
+	this.orderStatus = orderStatus;
     }
 
     public BigDecimal getTotalPrice() {
-        return totalPrice;
+	return totalPrice;
     }
 
     public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+	this.totalPrice = totalPrice;
     }
 
     public BigDecimal getActualPrice() {
-        return actualPrice;
+	return actualPrice;
     }
 
     public void setActualPrice(BigDecimal actualPrice) {
-        this.actualPrice = actualPrice;
+	this.actualPrice = actualPrice;
     }
 
     public Date getOrderTime() {
-        return orderTime;
+	return orderTime;
     }
 
     public void setOrderTime(Date orderTime) {
-        this.orderTime = orderTime;
+	this.orderTime = orderTime;
     }
 
     public Date getServiceCompletionTime() {
-        return serviceCompletionTime;
+	return serviceCompletionTime;
     }
 
     public void setServiceCompletionTime(Date serviceCompletionTime) {
-        this.serviceCompletionTime = serviceCompletionTime;
+	this.serviceCompletionTime = serviceCompletionTime;
     }
 
     public Integer getCancelType() {
-        return cancelType;
+	return cancelType;
     }
 
     public void setCancelType(Integer cancelType) {
-        this.cancelType = cancelType;
+	this.cancelType = cancelType;
     }
 
     public String getCancelReason() {
-        return cancelReason;
+	return cancelReason;
     }
 
     public void setCancelReason(String cancelReason) {
-        this.cancelReason = cancelReason;
+	this.cancelReason = cancelReason;
     }
 
     public Date getCancelTime() {
-        return cancelTime;
+	return cancelTime;
     }
 
     public void setCancelTime(Date cancelTime) {
-        this.cancelTime = cancelTime;
+	this.cancelTime = cancelTime;
     }
 
     public Integer getIsEvaluate() {
-        return isEvaluate;
+	return isEvaluate;
     }
 
     public void setIsEvaluate(Integer isEvaluate) {
-        this.isEvaluate = isEvaluate;
+	this.isEvaluate = isEvaluate;
     }
 
     public String getOpenid() {
-        return openid;
+	return openid;
     }
 
     public void setOpenid(String openid) {
-        this.openid = openid;
+	this.openid = openid;
+    }
+
+    public String getHairdresserName() {
+	return hairdresserName;
+    }
+
+    public void setHairdresserName(String hairdresserName) {
+	this.hairdresserName = hairdresserName;
+    }
+
+    public String getHairstyleName() {
+	return hairstyleName;
+    }
+
+    public void setHairstyleName(String hairstyleName) {
+	this.hairstyleName = hairstyleName;
     }
 
 }

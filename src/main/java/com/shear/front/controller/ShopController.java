@@ -1,7 +1,10 @@
 package com.shear.front.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +54,20 @@ public class ShopController extends AbstractController {
 	    e.printStackTrace();
 	}
 	model.addAttribute("shop", shop);
+	try {
+	    if (StringUtils.isNotBlank(order.getHairstyleName())) {
+		String name = URLDecoder.decode(order.getHairstyleName(),"utf-8");
+		order.setHairstyleName(name);
+	    }
+	    if (StringUtils.isNotBlank(order.getHairdresserName())) {
+		String hairName = URLDecoder.decode(order.getHairdresserName(), "UTF-8");
+		order.setHairdresserName(hairName);
+	    }
+
+	} catch (UnsupportedEncodingException e) {
+	    e.printStackTrace();
+	}
+
 	model.addAttribute("order", order);
 	return "shop/detail";
     }

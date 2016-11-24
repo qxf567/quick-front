@@ -29,6 +29,7 @@ a:active{
 .gender p{width:50%;margin:0 auto;text-align:center;}
 .womanlist{padding:0 1%}
 .onelist{width:48%;padding:0% 1% 0 1%;float: left;position: relative;position: relative;text-align: center}
+.twolist{width:30%;padding:0% 1% 0 1%;float: left;position: relative;position: relative;text-align: center;display:table-cell}
 .hair_pictures{position: relative;}
 .hair_pictures img{width: 100%;display: block}
 .hair_list_top{width: 96%; position: absolute;z-index: 99;}
@@ -40,5 +41,6 @@ a:active{
 .love_btn img{width: 1.1rem; margin-top: .5rem}
 span.hair_label{float: left;background: #f8c4b2; padding: 2px 4px; margin-top: .5rem;color: #ffffff;font-size: 10px;}
 p.hair_name{color: #333;font-size: 1.1rem;line-height: 3rem}
+p.hair_name.selected{color: #45b5da;font-size: 1.1rem;line-height: 3rem}
 p.english_label{color:#999999;margin-bottom: 1rem}
 img.the_end{margin: 2% 0 4% 0}
