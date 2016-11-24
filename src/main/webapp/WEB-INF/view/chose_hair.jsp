@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
 <head>
    <%@ include file="common/meta.jsp"%>
-    <title></title>
+    <title>发型</title>
     <!-- Pixel Admin's stylesheets -->
     <link type="text/css" rel="stylesheet" href="/css/common.css" />
     <link href="/css/hairstyle.css" rel="stylesheet" type="text/css">
@@ -28,9 +29,11 @@
         <div id="slider" class="swipe">
             <ul class="tab_switch_list" style="margin-top:4rem">
                 <li class="li_list">
-                                            <div class="onelist">
+                
+               	 <c:forEach items="${hairList}" var="hair">
+                        <div class="onelist">
                             <div class="hair_list_top">
-                                <span class="hair_label">型男必备</span>
+                                <span class="hair_label">${hair.name}</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
                                         <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
@@ -39,43 +42,12 @@
                                 </div>
                             </div>
                             <div class="hair_pictures" folder="4" hair_id="10">
-                                <img src="http://cdn.xingkeduo.com/imgs/4/25.jpg">
+                                <img src="${hair.mainImageUrl}">
                             </div>
-                            <p class="hair_name">北方一哥</p>
+                            <p class="hair_name">${hair.detail}</p>
                             <p class="english_label">BUSINESS</p>
                         </div>
-                                            <div class="onelist">
-                            <div class="hair_list_top">
-                                <span class="hair_label">迷男必备</span>
-                                <div class="like">
-                                    <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
-                                    </div>
-                                    <span class="like_num">214</span>
-                                </div>
-                            </div>
-                            <div class="hair_pictures" folder="6" hair_id="12">
-                                <img src="http://cdn.xingkeduo.com/imgs/6/25.jpg">
-                            </div>
-                            <p class="hair_name">熟男迷妹</p>
-                            <p class="english_label">BUSINESS</p>
-                        </div>
-                                            <div class="onelist">
-                            <div class="hair_list_top">
-                                <span class="hair_label">暖男必备</span>
-                                <div class="like">
-                                    <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
-                                    </div>
-                                    <span class="like_num">208</span>
-                                </div>
-                            </div>
-                            <div class="hair_pictures" folder="8" hair_id="14">
-                                <img src="http://cdn.xingkeduo.com/imgs/8/25.jpg">
-                            </div>
-                            <p class="hair_name">又赵又挺</p>
-                            <p class="english_label">HOLIDAY</p>
-                        </div>
+                        </c:forEach>
                         <!--  <div class="onelist">
                             <div class="hair_list_top">
                                 <span class="hair_label">随性标配</span>
