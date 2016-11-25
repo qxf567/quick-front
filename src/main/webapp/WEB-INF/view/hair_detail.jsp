@@ -39,10 +39,11 @@
         var hairdresserId = '${order.hairdresserId}';
         var hairdresserName = '${order.hairdresserName}';
         $(document).ready(function(){
+        	var imgs = '${hair.multiImageUrls}'.split(",");
             FastClick.attach(document.body);
             $("#hair_style_show").vc3dEye({
-                imagePath:"http://cdn.xingkeduo.com/imgs/4/",
-                totalImages:10,
+                imagePath:"/picture/hair/${hair.id}/",
+                totalImages:imgs.length,
                 imageExtension:"jpg"
             });
 
@@ -56,11 +57,27 @@
 
             $(".cancel_button").click(function(){
                 pop_up_loading();
-                location.href = "/shear/detail/"+shopId+"?f_user_id=" + f_user_id + '&time=' + time + '&token=' + token  + '&hairstyleId=' + select_hair_id + '&ticket_num=' + ticket_num + '&f_selected_ticket_type=' + f_selected_ticket_type + '&f_date=' + f_date + '&appointmentDay=' + appointmentDay + '&appointmentTime=' + appointmentTime;
+                
+                var url_params = {
+                        'customerId':customerId,
+                        'shopId':shopId,
+                       // 'hairstyleId':hairstyleId,
+                       // 'hairstyleName':hairstyleName,
+                        'appointmentDay':appointmentDay,
+                        'appointmentTime':appointmentTime,
+                        'hairdresserId':hairdresserId,
+                        'hairdresserName':hairdresserName
+                    };
+
+                    pop_up_loading();
+                    var url_prefix = '/shear/detail/'+shopId;
+                    var url_subfix = $.param(url_params);
+                    var url = url_prefix + '?' + encodeURI(url_subfix);
+                    location.href = url;
             });
 
             $(".confirm_button").click(function(){
-                
+            	pop_up_loading();
                 var url_params = {
                         'customerId':customerId,
                         'shopId':shopId,
@@ -104,7 +121,7 @@
         </div>
     </div>
     <div class="hair_list_bottom">
-        <p class="hair_name">北方一哥</p>
+        <p class="hair_name">${hair.name}</p>
         <span>BUSINESS</span>
         <ul class="face">
             <li class="title">合适</li>
