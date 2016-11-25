@@ -22,11 +22,11 @@ function pop_up_alert(type,msg)
 {
     if( type == 'warning' )
     {
-        var img_src = '/js/detail/warning.png';
+        var img_src = '/img/detail/warning.png';
     }
     else
     {
-        var img_src = '/js/detail/loading.gif';
+        var img_src = '/img/detail/loading.gif';
     }
 
     var html =
@@ -65,7 +65,7 @@ function pop_close()
 }
 
 $(document).ready(function(){
-    $("body").append('<div class="loading_box" style="display:none; "><div class="loading_main"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr><td align="center"><img src="/js/detail/loading.gif"></td></tr></table></div></div>');
+    $("body").append('<div class="loading_box" style="display:none; "><div class="loading_main"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr><td align="center"><img src="/img/detail/loading.gif"></td></tr></table></div></div>');
 
     $("a").click(function(){
         if ( ($(this).attr("href")!='javascript:;') && ($(this).attr("href")!='#') && ($(this).attr("href")!='tel:4006555200')  )

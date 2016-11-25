@@ -16,7 +16,7 @@
     <script type="text/javascript" src="/js/zepto.min.js"></script>
     <script type="text/javascript" src="/js/TouchSlide.1.1.js"></script>
     <!--[if lt IE 9]>
-    <script src="/js/detail/ie.min.js"></script>
+    <script src="/img/detail/ie.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -36,12 +36,12 @@
                                 <span class="hair_label">${hair.name}</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">250</span>
                                 </div>
                             </div>
-                            <div class="hair_pictures" folder="4" hair_id="10">
+                            <div class="hair_pictures" folder="4" hair_id="${hair.id}">
                                 <img src="${hair.mainImageUrl}">
                             </div>
                             <p class="hair_name">${hair.detail}</p>
@@ -53,7 +53,7 @@
                                 <span class="hair_label">随性标配</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">221</span>
                                 </div>
@@ -69,7 +69,7 @@
                                 <span class="hair_label">男士必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">217</span>
                                 </div>
@@ -85,7 +85,7 @@
                                 <span class="hair_label">宅男必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">202</span>
                                 </div>
@@ -101,7 +101,7 @@
                                 <span class="hair_label">颜值担当</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">189</span>
                                 </div>
@@ -117,7 +117,7 @@
                                 <span class="hair_label">颜值担当</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">214</span>
                                 </div>
@@ -128,7 +128,7 @@
                             <p class="hair_name">IT攻城狮</p>
                             <p class="english_label">BUSINESS</p>
                         </div> -->
-                     <img src="/js/detail/the_end.png" class="the_end">
+                     <img src="/img/detail/the_end.png" class="the_end">
                 </li>
                 <li class="li_list">
                         <div class="onelist">
@@ -136,7 +136,7 @@
                                 <span class="hair_label">职场必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">241</span>
                                 </div>
@@ -152,7 +152,7 @@
                                 <span class="hair_label">居家必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">207</span>
                                 </div>
@@ -168,7 +168,7 @@
                                 <span class="hair_label">旅行必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">221</span>
                                 </div>
@@ -184,7 +184,7 @@
                                 <span class="hair_label">淑女必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">217</span>
                                 </div>
@@ -200,7 +200,7 @@
                                 <span class="hair_label">简约必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">214</span>
                                 </div>
@@ -216,7 +216,7 @@
                                 <span class="hair_label">秋冬必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">188</span>
                                 </div>
@@ -232,7 +232,7 @@
                                 <span class="hair_label">熟女必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">210</span>
                                 </div>
@@ -248,7 +248,7 @@
                                 <span class="hair_label">职场达人</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">192</span>
                                 </div>
@@ -264,7 +264,7 @@
                                 <span class="hair_label">秋冬必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">183</span>
                                 </div>
@@ -280,7 +280,7 @@
                                 <span class="hair_label">都市丽人</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">184</span>
                                 </div>
@@ -296,7 +296,7 @@
                                 <span class="hair_label">简约出行</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">217</span>
                                 </div>
@@ -312,7 +312,7 @@
                                 <span class="hair_label">秋冬必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">184</span>
                                 </div>
@@ -328,7 +328,7 @@
                                 <span class="hair_label">可爱宝贝</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">4</span>
                                 </div>
@@ -344,7 +344,7 @@
                                 <span class="hair_label">可爱宝贝</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
-                                        <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
                                     </div>
                                     <span class="like_num">3</span>
                                 </div>
@@ -355,7 +355,7 @@
                             <p class="hair_name">别人家孩儿</p>
                             <p class="english_label">SWEETHONEY</p>
                         </div> -->
-                     <img src="/js/detail/the_end.png" class="the_end">
+                     <img src="/img/detail/the_end.png" class="the_end">
                 </li>
             </ul>
         </div>
@@ -423,7 +423,7 @@
 <!--高峰时段弹窗-->
 <div class="pop_rush_time">
     <div id="close_rush_time_button" class="rush_time_button">
-        <img src="/js/detail/close_1.png"/>
+        <img src="/img/detail/close_1.png"/>
     </div>
     <div style="clear: both"></div>
     <div id="opcation" class="rush_time_con" align="center">
@@ -449,6 +449,19 @@
 <script src="/js/wechat_common.js"></script>
 
 <script type="text/javascript">
+
+var shopId   = '${order.shopId}';
+//var hairstyleId = '${order.hairstyleId}';
+var hairstyleName = '${order.hairstyleName}';
+var select_hair_id =  '';
+var customerId = '${order.customerId}';
+var ticket_num =  '1';
+var f_selected_ticket_type =  '1';
+var f_date =  '';
+var appointmentDay =  '${order.appointmentDay}';
+var appointmentTime =  '${order.appointmentTime}';
+var hairdresserId = '${order.hairdresserId}';
+var hairdresserName = '${order.hairdresserName}';
     var first_load = 1;
     var init = [];
     init.push(function () {
@@ -516,9 +529,21 @@
             var appointmentDay = '${order.appointmentDay}';
 
             var appointmentTime = '${order.appointmentTime}';
-
-
-            location.href = "/shear/chose/hair/detail?shopId="+shopId+'&f_user_id=' + f_user_id + '&time=' + time + '&token=' + token + '&hairstyleId=' + f_hairstyle_id + "&select_hair_id="+ select_hair_id + "&ticket_num="+ ticket_num  + "&f_selected_ticket_type="+ f_selected_ticket_type + "&f_date="+ f_date + "&appointmentDay="+ appointmentDay + "&appointmentTime="+ appointmentTime;
+            var url_params = {
+                    'customerId':customerId,
+                    'shopId':shopId,
+                    'hairstyleId':f_hairstyle_id,
+                    'hairstyleName':hairstyleName,
+                    'appointmentDay':appointmentDay,
+                    'appointmentTime':appointmentTime,
+                    'hairdresserId':hairdresserId,
+                    'hairdresserName':hairdresserName
+                };
+            pop_up_loading();
+            var url_prefix = '/shear/chose/hair/detail';
+            var url_subfix = $.param(url_params);
+            var url = url_prefix + '?' + encodeURI(url_subfix);
+            location.href = url;
         });
 
         //取消

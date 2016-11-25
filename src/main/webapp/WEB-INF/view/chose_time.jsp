@@ -43,9 +43,9 @@
     <div class="fixed_top">
         <p class="appointment_title">选择预约时间</p>
         <div class="checked_time">
-           <span><img src="/js/detail/appointment_title.png"><span class="current_date" style="padding:0;border: 0;">请选择时间</span><span id="checked_time" style="display: none"></span> </span>
+           <span><img src="/img/detail/appointment_title.png"><span class="current_date" style="padding:0;border: 0;">请选择时间</span><span id="checked_time" style="display: none"></span> </span>
         </div>
-        <p class="checked_time_tips"><img src="/js/detail/list_style_solid.png">选好时段在此期间到店体验</p>
+        <p class="checked_time_tips"><img src="/img/detail/list_style_solid.png">选好时段在此期间到店体验</p>
         <div class="checked_date">
             <li class="one_day">
                 <p class="date"><fmt:formatDate value="${t1}" pattern="d"/></p>
@@ -93,7 +93,9 @@ var time        = '1478159349';
 var get_token   = '7eb3fbd5383bf37489b71a318c0e3f98';
 var shopId   = '${order.shopId}';
 var hairstyleId =  '${order.hairstyleId}';
-
+var hairstyleName =  '${order.hairstyleName}';
+var hairdresserId = '${order.hairdresserId}';
+var hairdresserName = '${order.hairdresserName}';
 var ticket_num =  '1';
 var f_selected_ticket_type =  '1';
 
@@ -128,6 +130,9 @@ var f_selected_ticket_type =  '1';
                 'get_token'             :   get_token,
                 'shopId'            :   shopId,
                 'hairstyleId'             :   hairstyleId,
+                'hairstyleName'             :   hairstyleName,
+                'hairdresserId':hairdresserId,
+                'hairdresserName':hairdresserName,
                 'f_appointment_day'     :   '',
                 'f_appointment_time'    :   '',
                 'f_selected_ticket_type' :  1,
@@ -138,7 +143,7 @@ var f_selected_ticket_type =  '1';
             var url_prefix = '/mobile3/store_detail';
             var url_subfix = $.param(url_params);
 
-            var url = url_prefix + '?' + url_subfix;
+            var url = url_prefix + '?' + encodeURI(url_subfix);
             location.href = url;
         });
 
@@ -159,6 +164,9 @@ var f_selected_ticket_type =  '1';
                 'get_token'             :   get_token,
                 'shopId'            :   shopId,
                 'hairstyleId'             :   hairstyleId,
+                'hairstyleName'             :   hairstyleName,
+                'hairdresserId':hairdresserId,
+                'hairdresserName':hairdresserName,
                 'appointmentDay'     :   f_appointment_day,
                 'appointmentTime'    :   f_appointment_time,
                 'f_selected_ticket_type' :  f_selected_ticket_type,
@@ -169,7 +177,7 @@ var f_selected_ticket_type =  '1';
             var url_prefix = '/shear/detail/'+shopId;
             var url_subfix = $.param(url_params);
 
-            var url = url_prefix + '?' + url_subfix;
+            var url = url_prefix + '?' + encodeURI(url_subfix);
             location.href = url;
             
         });

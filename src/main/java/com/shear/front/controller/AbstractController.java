@@ -4,6 +4,10 @@
  */
 package com.shear.front.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.WebRequest;
 
 import com.quickshear.common.config.ShearConfig;
+import com.shear.front.vo.OrderVo;
 
 /**
  * abstract
@@ -39,6 +44,29 @@ public abstract class AbstractController {
         //@TODO  
     }
 
+    
+    public void orderVoDecode(OrderVo order){
+	try {
+	    if (StringUtils.isNotBlank(order.getHairstyleName())) {
+		String name = URLDecoder.decode(order.getHairstyleName(),"utf-8");
+		order.setHairstyleName(name);
+	    }
+	    if (StringUtils.isNotBlank(order.getHairdresserName())) {
+		String hairName = URLDecoder.decode(order.getHairdresserName(), "UTF-8");
+		order.setHairdresserName(hairName);
+	    }
+	    if (StringUtils.isNotBlank(order.getAppointmentDay())) {
+		order.setAppointmentDay(URLDecoder.decode(order.getAppointmentDay(), "UTF-8"));
+	    }
+	    if (StringUtils.isNotBlank(order.getAppointmentTime())) {
+		order.setAppointmentTime(URLDecoder.decode(order.getAppointmentTime(), "UTF-8"));
+	    }
+
+	} catch (UnsupportedEncodingException e) {
+	    e.printStackTrace();
+	}
+    }
+    
 //    /**
 //     * 获取当前用户登录ID
 //     * 

@@ -40,7 +40,7 @@ p.hair{color: #999; line-height: 30px;}
 
 .store_info{float: left;}
 .store_info ul{color: #999; padding: 15px 15px 30px 15px; font-size:1rem;border-bottom: 1px solid #dadada;margin-bottom: 50px;}
-.store_info ul li{ line-height: 1.5rem; margin-bottom: 10px; list-style-image: url("/js/detail/list_style_solid.png"); margin-left:15px;}
+.store_info ul li{ line-height: 1.5rem; margin-bottom: 10px; list-style-image: url("/img/detail/list_style_solid.png"); margin-left:15px;}
 
 /*底部固定的代码*/
 .gap{height: 6px;background: #f1f1f1;border-top: 1px solid rgba(0,0,0,.1);border-bottom: 1px solid rgba(0,0,0,.1);}

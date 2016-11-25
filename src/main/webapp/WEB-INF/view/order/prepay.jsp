@@ -28,12 +28,12 @@
             $('#list_group_right').click(function(){
                 if($(".list_group_hidden").css('display')=='none')
                 {
-                    $("#list_group_right img").attr("src","/js/detail/up.png");
+                    $("#list_group_right img").attr("src","/img/detail/up.png");
                     $("#list_group_right span").hide();
                     $(".list_group_hidden").fadeIn();
                 }else
                 {
-                    $("#list_group_right img").attr("src","/js/detail/left.png");
+                    $("#list_group_right img").attr("src","/img/detail/left.png");
                     $("#list_group_right span").show();
                     $(".list_group_hidden").fadeOut();
                 }
@@ -61,7 +61,7 @@
                 <a href="javascript:;">
             <div class="info_one">
 <!--                <hr style="background: #dadada;height: 1px;border: none"/>-->
-                <span></span><img src="/js/detail/payment_method_icon.png"/>
+                <span></span><img src="/img/detail/payment_method_icon.png"/>
                 <span class="checked_title">支付方式</span>
                 <div class="checked_info_main">
                     <span class="checked_info">微信支付</span>
@@ -74,7 +74,7 @@
     
     <div class="gap"></div>
     <div class="caption">
-        <img src="/js/detail/address_pink_icon.png"/>
+        <img src="/img/detail/address_pink_icon.png"/>
         <span>门店地址</span>
     </div>
     <div class="store_info">

@@ -72,7 +72,7 @@ public class IndexController extends AbstractController {
 
 
     @RequestMapping("/chose/time")
-    public String chose(Model model,Shop shop, @ModelAttribute OrderVo order) {
+    public String chose(Model model,Shop shop, OrderVo order) {
 
 	Map<Date, List<Date>> avaiDate = new TreeMap<Date, List<Date>>();
 
@@ -91,13 +91,14 @@ public class IndexController extends AbstractController {
 	    avaiDate.put(date, dateList);
 	    date = DateUtil.getDate(date, 1);
 	}
+	orderVoDecode(order);
 	model.addAttribute("avaiDate", avaiDate);
 	model.addAttribute("order", order);
 	return "chose_time";
     }
 
     @RequestMapping("/chose/hair")
-    public String choseHair(Model model, @ModelAttribute OrderVo order) {
+    public String choseHair(Model model, OrderVo order) {
 	
 	HairstyleQuery query = new HairstyleQuery();
 	//query.setStatus(1);
@@ -107,13 +108,14 @@ public class IndexController extends AbstractController {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	orderVoDecode(order);
 	model.addAttribute("hairList", hairList);
 	model.addAttribute("order", order);
 	return "chose_hair";
     }
     
     @RequestMapping("/chose/dresser")
-    public String choseHairDresser(Model model, @ModelAttribute OrderVo order) {
+    public String choseHairDresser(Model model, OrderVo order) {
 	
 	HairdresserQuery query = new HairdresserQuery();
 	query.setStatus(1);
@@ -124,6 +126,7 @@ public class IndexController extends AbstractController {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	orderVoDecode(order);
 	model.addAttribute("dresserList", list);
 	model.addAttribute("order", order);
 	return "chose_dresser";
@@ -134,9 +137,13 @@ public class IndexController extends AbstractController {
 	Hairstyle hair = null;
 	try {
 	    hair = hairstyleService.findbyid(hairstyleId);
+	    if(hair != null){
+		order.setHairstyleName(hair.getName());
+	    }
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	orderVoDecode(order);
 	model.addAttribute("hair", hair);
 	model.addAttribute("order", order);
 	return "hair_detail";

@@ -1,16 +1,12 @@
 package com.shear.front.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,8 +41,8 @@ public class ShopController extends AbstractController {
 	return shopList;
     }
 
-    @RequestMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable(value = "id") Long id, @ModelAttribute OrderVo order) {
+    @RequestMapping(value="/detail/{id}",produces="text/html;charset=UTF-8")
+    public String detail(Model model, @PathVariable(value = "id") Long id, OrderVo order) {
 	Shop shop = null;
 	try {
 	    shop = shopService.findbyid(id);
@@ -54,19 +50,7 @@ public class ShopController extends AbstractController {
 	    e.printStackTrace();
 	}
 	model.addAttribute("shop", shop);
-	try {
-	    if (StringUtils.isNotBlank(order.getHairstyleName())) {
-		String name = URLDecoder.decode(order.getHairstyleName(),"utf-8");
-		order.setHairstyleName(name);
-	    }
-	    if (StringUtils.isNotBlank(order.getHairdresserName())) {
-		String hairName = URLDecoder.decode(order.getHairdresserName(), "UTF-8");
-		order.setHairdresserName(hairName);
-	    }
-
-	} catch (UnsupportedEncodingException e) {
-	    e.printStackTrace();
-	}
+	orderVoDecode(order);
 
 	model.addAttribute("order", order);
 	return "shop/detail";

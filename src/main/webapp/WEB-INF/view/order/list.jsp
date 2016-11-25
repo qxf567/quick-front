@@ -123,7 +123,7 @@
 		<!--高峰时段弹窗-->
 		<div class="pop_rush_time">
 			<div id="close_rush_time_button" class="rush_time_button">
-				<img src="/js/detail/close_1.png" />
+				<img src="/img/detail/close_1.png" />
 			</div>
 			<div style="clear: both"></div>
 			<div id="opcation" class="rush_time_con" align="center">

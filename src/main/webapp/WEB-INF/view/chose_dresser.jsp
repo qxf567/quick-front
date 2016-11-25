@@ -45,7 +45,7 @@
                         </div>
               
                	 	</c:forEach>
-                        <img src="/js/detail/the_end.png" class="the_end">
+                        <img src="/img/detail/the_end.png" class="the_end">
                  </li>
             </ul>
         </div>
@@ -80,6 +80,7 @@ var time        = '1478159349';
 var get_token   = '7eb3fbd5383bf37489b71a318c0e3f98';
 var shopId   = '${order.shopId}';
 var hairstyleId =  '${order.hairstyleId}';
+var hairstyleName =  '${order.hairstyleName}';
 var appointmentDay ='${order.appointmentDay}';
 var appointmentTime = '${order.appointmentTime}';
 var ticket_num =  '1';
@@ -154,6 +155,7 @@ var f_selected_ticket_type =  '1';
                             'customerId':customerId,
                             'shopId':shopId,
                             'hairstyleId':hairstyleId,
+                            'hairstyleName':hairstyleName,
                             'appointmentDay':appointmentDay,
                             'appointmentTime':appointmentTime,
                             'hairdresserId':dresser,

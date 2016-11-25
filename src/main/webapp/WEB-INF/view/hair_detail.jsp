@@ -29,13 +29,15 @@
         var token   = '95cad45280b7b8a9287213c83ab4bad7';
         var shopId   = '${order.shopId}';
         var hairstyleId = '${order.hairstyleId}';
-        var select_hair_id =  '';
-
+        var hairstyleName = '${order.hairstyleName}';
+        var customerId = '${order.customerId}';
         var ticket_num =  '1';
         var f_selected_ticket_type =  '1';
         var f_date =  '';
         var appointmentDay =  '${order.appointmentDay}';
         var appointmentTime =  '${order.appointmentTime}';
+        var hairdresserId = '${order.hairdresserId}';
+        var hairdresserName = '${order.hairdresserName}';
         $(document).ready(function(){
             FastClick.attach(document.body);
             $("#hair_style_show").vc3dEye({
@@ -58,8 +60,23 @@
             });
 
             $(".confirm_button").click(function(){
-                pop_up_loading();
-                location.href = "/shear/detail/"+shopId+"?f_user_id=" + f_user_id + '&time=' + time + '&token=' + token  + '&hairstyleId=' + hairstyleId + '&ticket_num=' + ticket_num + '&f_selected_ticket_type=' + f_selected_ticket_type + '&f_date=' + f_date + '&appointmentDay=' + appointmentDay + '&appointmentTime=' + appointmentTime;
+                
+                var url_params = {
+                        'customerId':customerId,
+                        'shopId':shopId,
+                        'hairstyleId':hairstyleId,
+                        'hairstyleName':hairstyleName,
+                        'appointmentDay':appointmentDay,
+                        'appointmentTime':appointmentTime,
+                        'hairdresserId':hairdresserId,
+                        'hairdresserName':hairdresserName
+                    };
+
+                    pop_up_loading();
+                    var url_prefix = '/shear/detail/'+shopId;
+                    var url_subfix = $.param(url_params);
+                    var url = url_prefix + '?' + encodeURI(url_subfix);
+                    location.href = url;
 
             });
             $("img").lazyload({
@@ -74,7 +91,7 @@
         <span class="hair_label">型男必备</span>
        <!--  <div class="like">
             <div class="love_btn" rel="unlike">
-                <a href="#"><img src="/js/detail/default-heart-shape.png"></a>
+                <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
             </div>
             <span class="like_num" hair-id="10">249</span>
         </div> -->
@@ -83,7 +100,7 @@
         <div id="hair_style_show"></div>
         <div class="operation_tips">可左右滑动</div>
         <div class="prompt" id="prompt">
-            <div class="p_center" id="p_center"><img class="img_hand" src="/js/detail/hand.png"></div>
+            <div class="p_center" id="p_center"><img class="img_hand" src="/img/detail/hand.png"></div>
         </div>
     </div>
     <div class="hair_list_bottom">
@@ -97,9 +114,9 @@
                     </ul>
         <p class="hair_describe"></p>
     </div>
-    <div class="split_line"><img src="/js/detail/split_line.jpg"></div>
+    <div class="split_line"><img src="/img/detail/split_line.jpg"></div>
     <div class="hair_details">
-        <img src="/js/detail/hair_details.jpg">
+        <img src="/img/detail/hair_details.jpg">
     </div>
 
             <div class="gap"></div>
@@ -244,7 +261,7 @@
         if(rel === "unlike")
         {
             _this.parent().find(".like_num").html(span+1);
-            _this.find("img").attr("src","http://cdn.xingkeduo.com/image/mobile/heart-shape.png");
+            _this.find("img").attr("src","/img/heart-shape.png");
             _this.attr("rel","like");
             $.tipsBox({
                 obj: _this,

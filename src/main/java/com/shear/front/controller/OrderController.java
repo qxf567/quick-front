@@ -63,7 +63,7 @@ public class OrderController extends AbstractController {
 
     @RequestMapping("/order/prepay")
     public String detail(Model model, @ModelAttribute OrderVo vo) {
-
+	orderVoDecode(vo);
 	// @TODO
 	if (vo.getCustomerId() == null) {
 	    vo.setCustomerId(1000l);
