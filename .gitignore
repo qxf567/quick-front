@@ -7,6 +7,6 @@ target/
 /target
 overlays/
 .idea/
-v-crm.iml
+*.iml
 /target
 src/main/resources/conf/*.properties
