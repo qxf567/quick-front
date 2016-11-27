@@ -2,11 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- <parent> <groupId>com.quick.shear</groupId> <artifactId>maven-parent</artifactId> 
-		<version>2.0</version> </parent> -->
+	<groupId>com.qiansishun.m</groupId>
 	<artifactId>front</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<name>shear-Webapp</name>
 
 	<properties>
@@ -16,7 +15,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>shear</groupId>
+			<groupId>com.qiansishun.m</groupId>
 			<artifactId>quick-shear-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -80,53 +79,53 @@
 				<version>2.3.7</version>
 			</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.2</version>
-				<configuration>
-					<format>{0,date,yyyy-MM-dd HH:mm:ss}</format>
-					<items>
-						<item>timestamp</item>
-					</items>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<useCache>false</useCache>
-					<archive>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-						</manifest>
-						<manifestEntries>
-							<Implementation-Environment>${env}</Implementation-Environment>
-							<Implementation-Build>${buildNumber}</Implementation-Build>
-						</manifestEntries>
-					</archive>
-					<dependentWarExcludes>WEB-INF/web.xml,WEB-INF/lib/*,WEB-INF/classes/*.xml</dependentWarExcludes>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>war</goal>
-						</goals>
-						<configuration>
-							<classifier>${env}</classifier>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			<!--<plugin>-->
+				<!--<groupId>org.codehaus.mojo</groupId>-->
+				<!--<artifactId>buildnumber-maven-plugin</artifactId>-->
+				<!--<version>1.2</version>-->
+				<!--<configuration>-->
+					<!--<format>{0,date,yyyy-MM-dd HH:mm:ss}</format>-->
+					<!--<items>-->
+						<!--<item>timestamp</item>-->
+					<!--</items>-->
+				<!--</configuration>-->
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<phase>validate</phase>-->
+						<!--<goals>-->
+							<!--<goal>create</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
+			<!--<plugin>-->
+				<!--<artifactId>maven-war-plugin</artifactId>-->
+				<!--<configuration>-->
+					<!--<useCache>false</useCache>-->
+					<!--<archive>-->
+						<!--<manifest>-->
+							<!--<addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
+							<!--<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>-->
+						<!--</manifest>-->
+						<!--<manifestEntries>-->
+							<!--<Implementation-Environment>${env}</Implementation-Environment>-->
+							<!--<Implementation-Build>${buildNumber}</Implementation-Build>-->
+						<!--</manifestEntries>-->
+					<!--</archive>-->
+					<!--<dependentWarExcludes>WEB-INF/web.xml,WEB-INF/lib/*,WEB-INF/classes/*.xml</dependentWarExcludes>-->
+				<!--</configuration>-->
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<phase>package</phase>-->
+						<!--<goals>-->
+							<!--<goal>war</goal>-->
+						<!--</goals>-->
+						<!--<configuration>-->
+							<!--<classifier>${env}</classifier>-->
+						<!--</configuration>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
 			<!-- <plugin>
 				YUI Compressor Maven压缩插件
 				<groupId>net.alchim31.maven</groupId>
@@ -170,5 +169,5 @@
 			</plugin> -->
 		</plugins>
 	</build>
-	<groupId>shear</groupId>
+
 </project>
