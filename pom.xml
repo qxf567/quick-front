@@ -5,7 +5,7 @@
 	<groupId>com.qiansishun.m</groupId>
 	<artifactId>front</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.1</version>
+	<version>1.0.0</version>
 	<name>shear-Webapp</name>
 
 	<properties>
@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>com.qiansishun.m</groupId>
 			<artifactId>quick-shear-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
