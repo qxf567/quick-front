@@ -37,10 +37,13 @@ import com.quickshear.common.wechat.pay.util.Sha1Util;
 import com.quickshear.common.wechat.pay.util.XMLUtil;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.Shop;
+import com.quickshear.domain.User;
 import com.quickshear.domain.query.OrderQuery;
+import com.quickshear.domain.query.UserQuery;
 import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
+import com.quickshear.service.UserService;
 import com.shear.front.vo.OrderVo;
 import com.shear.front.vo.TenpayPayInfoVo;
 import com.shear.front.vo.TenpayPayVo;
@@ -57,6 +60,8 @@ public class OrderController extends AbstractController {
     private HairstyleService hairstyleService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private AccessTokenUtil accessTokenUtil;
@@ -70,8 +75,20 @@ public class OrderController extends AbstractController {
 	}
 
 	Shop shop = null;
+	User user = null;
 	try {
 	    shop = shopService.findbyid(Long.valueOf(vo.getShopId()));
+	    
+	    //@TODO
+	    String openId = "";
+	    UserQuery uq = new UserQuery();
+	    uq.setWechatOpenId(openId);
+	    List<User>  userList = userService.selectByParam(uq);
+	   
+	    if(userList.size()>0){
+		user = userList.get(0);
+	    }
+	    
 	} catch (NumberFormatException e) {
 	    e.printStackTrace();
 	} catch (Exception e) {
@@ -89,6 +106,7 @@ public class OrderController extends AbstractController {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	model.addAttribute("user", user);
 	model.addAttribute("order", vo);
 	model.addAttribute("shop", shop);
 	return "order/prepay";

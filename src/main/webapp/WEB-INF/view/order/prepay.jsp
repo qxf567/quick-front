@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
 <head>
@@ -7,6 +8,58 @@
     <title>用户结算</title>
     <link type="text/css" rel="stylesheet" href="/css/common.css">
     <link type="text/css" rel="stylesheet" href="/css/new_pay_order.css" />
+    <style type="text/css">
+ .login-mobile{
+	display: none;
+}
+.login-input{
+	display: -webkit-box;
+	margin-top: 0.35rem;
+	height: 50px;
+	padding: 0 0.245rem;
+	border-top: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	background-color: #FFF;
+}
+.container .login-input:first-child{
+	margin-top: 0;
+}
+.login-input input{
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 1.2rem;
+	color: #45b5da;
+	background-color: transparent;
+	border: none;
+	-webkit-box-flex: 1;
+}
+.dtm-img {
+    width: 8rem;
+    height: 100%;
+    line-height: 0.82rem;
+    margin-right: -0.245rem;
+    font-size: 1.0rem;
+}
+
+.dtm-img a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+    text-align: center;
+    background-color: #45B5DA;
+    color: #FFF;
+}
+
+.dtm-img a.disabled {
+    background-color: #DDD;
+    color: #777;
+}
+    ::-moz-placeholder{color:#FF8037;}  
+    :-ms-input-placeholder{color:#FF8037;} 
+    ::-webkit-input-placeholder{color:#FF8037;}
+    </style>
     <script src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/fastclick.js"></script>
@@ -43,6 +96,7 @@
 </head>
 <body>
 <div class="container">
+		
     <p class="store_name_id">${shop.name}</p>
     <div class="order_info">
         <div class="store_img">
@@ -70,8 +124,28 @@
         </a>
     </div><!--选择信息列表End-->
     <div class="gap"></div>
-
     
+    <c:if test="${empty user}">
+    	<div class="caption">
+        <img src="/img/detail/input-icon.png"/>
+        <span>请输入您的联系方式</span>
+    	</div>
+        <div class="login-input">
+			<input type="tel" placeholder="请输入手机号" id="mobile" maxlength="11">
+		</div>
+		<div class="login-input input-yzm">
+			<input type="text" placeholder="请输入动态码" id="dynamic_input">
+			<div class="dtm-img">
+				<a href="javascript:void(0);" id="getCode">获取动态码</a>
+			</div>
+		</div>
+    </c:if>
+    <c:if test="${user eq null}">
+    <div class="caption">
+        <img src="/img/detail/input-icon.png"/>
+        <span>您的联系方式:${user.phoneNumber}</span>
+    	</div>
+    </c:if>
     <div class="gap"></div>
     <div class="caption">
         <img src="/img/detail/address_pink_icon.png"/>
