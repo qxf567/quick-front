@@ -126,7 +126,7 @@ public class OrderController extends AbstractController {
 	if(StringUtils.isBlank(code)){
 	    String c = messageService.sendRandomCode(phone);
 	    cache.set(phone, c);
-	    return code;
+	    return c;
 	}else{
 	    return code;
 	}

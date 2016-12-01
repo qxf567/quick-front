@@ -184,6 +184,8 @@
     var total_price = '29.8';//票价
     var is_check_coupon = '0';
     var is_check_card = '0';
+    
+    var url_getcode='/shear/order/sms/';
     //@TODO
     var param = {
         "customerId": '317926',
@@ -333,16 +335,23 @@
             }
         });
 
-        //点击选取会员卡
-        $("#card_detail").click(function(){
-            if(f_card_detail_id>0)//判断是否有可用会员卡
-            {
-                var url_prefix = "/mobile3/membership_card";
-                var url_subfix = $.param(param);
-                location.href = url_prefix+"?"+url_subfix;
-            }
+        $("#getCode").click(function(){
+        	 var phone = $('#mobile').val();
+        	 if(phone == ''){
+        		 alert('请输入您的手机号');
+        	 }else{
+        			$.ajax({
+        				type : "POST",
+        		     	url: url_getcode,
+        		     	data: "phone="+phone,
+        		    	dataType: 'text',
+        		    	success : function(result){
+        		    		alert(result);
+        		    		}
+        		    });
+        		}
+        		
         });
-
 
         //支付请求
         $(".pay_order").click(function()
