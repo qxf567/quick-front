@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.lru.LRUCache;
+import com.quickshear.common.sms.MessageService;
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatConstat;
 import com.quickshear.common.wechat.pay.AccessTokenUtil;
@@ -62,10 +64,14 @@ public class OrderController extends AbstractController {
     private OrderService orderService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private MessageService messageService;
     @Autowired
     private AccessTokenUtil accessTokenUtil;
 
+    
+    //缓存多少条内容
+  	LRUCache cache = new LRUCache(300);
     @RequestMapping("/order/prepay")
     public String detail(Model model, @ModelAttribute OrderVo vo) {
 	orderVoDecode(vo);
@@ -112,6 +118,35 @@ public class OrderController extends AbstractController {
 	return "order/prepay";
     }
 
+    @RequestMapping(value = "/order/sms", method = RequestMethod.POST)
+    @ResponseBody
+    public String sendSms(String phone){
+	
+	String code = cache.get(phone);
+	if(StringUtils.isBlank(code)){
+	    String c = messageService.sendRandomCode(phone);
+	    cache.set(phone, c);
+	    return code;
+	}else{
+	    return code;
+	}
+    }
+    
+
+    @RequestMapping(value = "/order/sms/validate", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean validate(String phone,String code){
+	    String result =  (String) cache.get(phone);
+	    if( code.equals(result)){
+		cache.remove(phone);
+		return true;
+	    }else{
+		return false;
+	    }
+	
+    }
+    
+    
     @RequestMapping(value = "/order/pay", method = RequestMethod.POST)
     @ResponseBody
     public TenpayPayVo prepay(@ModelAttribute OrderVo vo,String openid, HttpServletRequest request, HttpServletResponse response) {
