@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.lru.LRUCache;
-import com.quickshear.common.sms.MessageService;
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatConstat;
 import com.quickshear.common.wechat.pay.AccessTokenUtil;
@@ -46,6 +45,7 @@ import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
 import com.quickshear.service.UserService;
+import com.quickshear.service.sms.MessageService;
 import com.shear.front.vo.OrderVo;
 import com.shear.front.vo.TenpayPayInfoVo;
 import com.shear.front.vo.TenpayPayVo;
