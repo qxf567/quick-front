@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatManager;
+import com.quickshear.common.wechat.WechatUserInfoManager;
 import com.quickshear.domain.Hairdresser;
 import com.quickshear.domain.Hairstyle;
 import com.quickshear.domain.Shop;
@@ -41,26 +42,31 @@ public class IndexController extends AbstractController {
     private HairstyleService hairstyleService;
     @Autowired
     private HairdresserService hairdresserService;
+    @Autowired
+    private WechatUserInfoManager infoManager;
 
     // 当前网页的URL，不包含#及其后面部分
     private String url = "http://qa-n.lashou.com/shear/shear/index";
 
     @RequestMapping("/index")
-    public String index(Model model) {
+    public String index(Model model,String openid) {
+	
+	//获取用户信息
+	//http://mp.weixin.qq.com/wiki/1/8a5ce6257f1d3b2afb20f83e72b72ce9.html
+	Map<String, String> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);
 
+	model.addAttribute("userInfo", userInfo);
+	
+	//通过jsapi拿到经纬度
 	String jsapi = wechatManager.getJsapiTicket();
-
 	String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
 	String nonceStr = "Wm3WZY" + timestamp;
 	String sign = wechatManager.getSign(timestamp, nonceStr, url);
-
-	LOGGER.debug("enter...shear");
 	model.addAttribute("jsapi", jsapi);
-	LOGGER.debug("enter...jsapi" + jsapi);
 	model.addAttribute("timestamp", timestamp);
 	model.addAttribute("sign", sign);
 	model.addAttribute("nonceStr", nonceStr);
-
+	model.addAttribute("openid", openid);
 	return "index";
     }
     

@@ -25,39 +25,53 @@ import com.quickshear.common.wechat.pay.util.XMLUtil;
  */
 @Controller
 @RequestMapping("/open")
-public class WechatController extends AbstractController{
+public class WechatController{
     
     @Autowired
     private WechatManagerNew manager;
     
     /**
-     * 关注/取消关注事件
-     * 
+     * 关注事件
      */
-    
     @RequestMapping("/watch")
-    public String watch(@ModelAttribute Model model,HttpServletRequest request) {
+    public String watch(HttpServletRequest request) {
 	Map<String, String> map = new HashMap<String, String>();
-	 InputStream in;
-	 String openid= null;
+	InputStream in;
+	String openid= null;
 	try {
 	    in = request.getInputStream();
 	    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
 	    map = XMLUtil.doXMLParse(res);
 	    openid=map.get("FromUserName");
-	    model.addAttribute("openid", openid);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	} catch (JDOMException e) {
 	    e.printStackTrace();
 	}
-	return "index";
+	return "redirect:/shear/index?openid="+openid;
     }
+    
+    @RequestMapping("/testwatch")
+    public String testWatch(Model model,HttpServletRequest request) {
+	String openid= null;
+//	try {
+//	    in = request.getInputStream();
+//	    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
+//	    map = XMLUtil.doXMLParse(res);
+	    openid="xxdde88555";
+	    model.addAttribute("openid", openid);
+//	} catch (IOException e) {
+//	    e.printStackTrace();
+//	} catch (JDOMException e) {
+//	    e.printStackTrace();
+//	}
+	return "redirect:/shear/index?openid="+openid;
+    }
+    
     /**
      * 上报地理位置事件
      * 
      */
-    
     @RequestMapping("/report")
     public String report(@ModelAttribute Model model,HttpServletRequest request) {
 	Map<String, String> map = new HashMap<String, String>();
