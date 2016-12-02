@@ -140,7 +140,7 @@
 			</div>
 		</div>
     </c:if>
-    <c:if test="${user eq null}">
+    <c:if test="${user ne null}">
     <div class="caption">
         <img src="/img/detail/input-icon.png"/>
         <span>您的联系方式:${user.phoneNumber}</span>
@@ -186,6 +186,8 @@
     var is_check_card = '0';
     
     var url_getcode='/shear/order/sms/';
+    var valide_code = '';
+    
     //@TODO
     var param = {
         "customerId": '317926',
@@ -336,6 +338,7 @@
         });
 
         $("#getCode").click(function(){
+        	var _this = $(this);
         	 var phone = $('#mobile').val();
         	 if(phone == ''){
         		 alert('请输入您的手机号');
@@ -345,14 +348,39 @@
         		     	url: url_getcode,
         		     	data: "phone="+phone,
         		    	dataType: 'text',
+        		    	beforeSend: function()
+                        {
+        		    		_this.addClass("disabled");
+                        },
         		    	success : function(result){
-        		    		alert(result);
-        		    		}
+        		    		pop_close();
+        		    		valide_code=result;
+        		    		time(_this);
+        		    	}
         		    });
         		}
         		
         });
 
+        var wait=60;
+		function time(o) {
+	        if (wait == 1) {
+	        	o.removeAttr("disabled");
+	        	o.removeClass("disabled");
+	        	o.html("获取动态码");
+	            wait = 60;
+	        } else {
+	        	o.addClass("disabled");
+	    		o.attr("disabled", "true");
+	        	o.html("重新发送短信(" + wait + ")");
+	            wait--;
+	            setTimeout(function() {
+	                time(o)
+	            },1000)
+	        }
+		}
+        
+        
         //支付请求
         $(".pay_order").click(function()
         {

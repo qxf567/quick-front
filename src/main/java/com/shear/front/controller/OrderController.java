@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.quickshear.common.lru.LRUCache;
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatConstat;
@@ -124,10 +125,17 @@ public class OrderController extends AbstractController {
 	
 	String code = cache.get(phone);
 	if(StringUtils.isBlank(code)){
-	    String c = messageService.sendRandomCode(phone);
+	    String c= null;
+	    try {
+		c = messageService.sendRandomCode(phone);
+	    } catch (ClientException e) {
+		e.printStackTrace();
+		LOGGER.error("sms"+e);
+	    }
 	    cache.set(phone, c);
 	    return c;
 	}else{
+	    cache.remove(phone);
 	    return code;
 	}
     }
