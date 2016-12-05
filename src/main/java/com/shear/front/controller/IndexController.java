@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,7 +47,7 @@ public class IndexController extends AbstractController {
     private WechatUserInfoManager infoManager;
 
     // 当前网页的URL，不包含#及其后面部分
-    private String url = "http://qa-n.lashou.com/shear/shear/index";
+    private String url = "http://m.qiansishun.com/shear/index";
 
     @RequestMapping("/index")
     public String index(Model model,String openid) {
@@ -54,7 +55,16 @@ public class IndexController extends AbstractController {
 	//获取用户信息
 	//http://mp.weixin.qq.com/wiki/1/8a5ce6257f1d3b2afb20f83e72b72ce9.html
 	Map<String, String> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);
-
+	String nickname = null,sex = null,headimgurl =null;
+	if(userInfo != null){
+	    nickname = userInfo.get("nickname");
+	    sex = userInfo.get("sex");
+	    headimgurl = userInfo.get("headimgurl");
+	}
+	model.addAttribute("nickname", nickname);
+	//1时是男性，值为2时是女性，值为0时是未知
+	model.addAttribute("sex", sex);
+	model.addAttribute("headimgurl", headimgurl);
 	model.addAttribute("userInfo", userInfo);
 	
 	//通过jsapi拿到经纬度
