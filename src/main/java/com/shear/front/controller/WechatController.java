@@ -211,6 +211,14 @@ public class WechatController {
 			    openid = map.get("FromUserName");
 			    storage.set("openid", openid); 
 			    LOGGER.info("watch()  cookie :{}", openid);
+			    String event = map.get("Event");
+				if("subscribe".equals(event)){
+					String content="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>";
+					String my = map.get("ToUserName");
+					String r = String.format(content,openid,my,timestamp,"text","为生活做剪发，让你成为最好的你。现在点击\“我要剪发\”，查看离您最近的纤丝顺门店。");
+					return r;
+				}
+			   
 			}
 		    }
 		}
