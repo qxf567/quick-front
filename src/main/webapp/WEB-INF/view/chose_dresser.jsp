@@ -20,6 +20,11 @@
 	.bottom_left img{width: 3rem;padding-top: 0.2rem;display:block; margin:0 auto;}
 	.cancel_button,.confirm_button{float: left;line-height: 50px;text-align: center;color: #ffffff;font-size: 1.2rem;letter-spacing: 3px;display:inline-block;color:#fff;}
 	.cancel_button,.cancel_button:hover,.cancel_button:link,.cancel_button:visited,.confirm_button,.confirm_button:hover,.confirm_button:link,.confirm_button:visited{color:#fff;}
+    .box-shadow-3{  
+  -webkit-box-shadow:0 0 10px rgba(0, 204, 204, .5);  
+  -moz-box-shadow:0 0 10px rgba(0, 204, 204, .5);  
+  box-shadow:0 0 10px rgba(0, 204, 204, .5);  
+} 
     </style>
 </head>
 <body>

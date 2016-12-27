@@ -95,11 +95,6 @@
 				<prop key="java.sql.SQLException">error/error</prop>
 			</props>
 		</property>
-		<property name="statusCodes">
-			<props>
-				<prop key="error/error">500</prop>
-			</props>
-		</property>
 		<property name="warnLogCategory" value="WARN" />
 		<property name="defaultErrorView" value="error/error" />
 		<property name="defaultStatusCode" value="500" />
