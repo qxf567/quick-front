@@ -2,21 +2,29 @@ package com.shear.front.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.JDOMException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quickshear.common.wechat.WechatManagerNew;
 import com.quickshear.common.wechat.pay.util.HttpClientUtil;
+import com.quickshear.common.wechat.pay.util.Sha1Util;
 import com.quickshear.common.wechat.pay.util.XMLUtil;
+import com.quickshear.service.sms.StorageService;
+
 /**
  * <code>https://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html</code>
  * 
@@ -25,63 +33,29 @@ import com.quickshear.common.wechat.pay.util.XMLUtil;
  */
 @Controller
 @RequestMapping("/open")
-public class WechatController{
-    
+public class WechatController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
+
     @Autowired
     private WechatManagerNew manager;
-    
-    /**
-     * 关注事件
-     */
-    @RequestMapping("/watch")
-    public String watch(HttpServletRequest request) {
-	Map<String, String> map = new HashMap<String, String>();
-	InputStream in;
-	String openid= null;
-	try {
-	    in = request.getInputStream();
-	    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
-	    map = XMLUtil.doXMLParse(res);
-	    openid=map.get("FromUserName");
-	} catch (IOException e) {
-	    e.printStackTrace();
-	} catch (JDOMException e) {
-	    e.printStackTrace();
-	}
-	return "redirect:/shear/index?openid="+openid;
-    }
-    
-    @RequestMapping("/testwatch")
-    public String testWatch(Model model,HttpServletRequest request) {
-	String openid= null;
-//	try {
-//	    in = request.getInputStream();
-//	    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
-//	    map = XMLUtil.doXMLParse(res);
-	    openid="xxdde88555";
-	    model.addAttribute("openid", openid);
-//	} catch (IOException e) {
-//	    e.printStackTrace();
-//	} catch (JDOMException e) {
-//	    e.printStackTrace();
-//	}
-	return "redirect:/shear/index?openid="+openid;
-    }
-    
+
+    @Autowired
+    private StorageService storage;
     /**
      * 上报地理位置事件
      * 
      */
     @RequestMapping("/report")
-    public String report(@ModelAttribute Model model,HttpServletRequest request) {
+    public String report(@ModelAttribute Model model, HttpServletRequest request) {
 	Map<String, String> map = new HashMap<String, String>();
-	 InputStream in;
-	 String openid= null;
+	InputStream in;
+	String openid = null;
 	try {
 	    in = request.getInputStream();
 	    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
 	    map = XMLUtil.doXMLParse(res);
-	    openid=map.get("FromUserName");
+	    openid = map.get("FromUserName");
 	    model.addAttribute("openid", openid);
 	    String latitude = map.get("Latitude");
 	    String longitude = map.get("Longitude");
@@ -96,9 +70,7 @@ public class WechatController{
 	}
 	return "index";
     }
-    
-    
-    
+
     /**
      * 关于网页授权回调地址
      * 
@@ -201,13 +173,85 @@ public class WechatController{
      * 
      */
     @RequestMapping("/callback")
-    public String callbak(@ModelAttribute Model model,String code,HttpServletRequest request) {
-	
-	Map<String,String> userMap = manager.getUser(request, code);
+    public String callbak(@ModelAttribute Model model, String code, HttpServletRequest request) {
+
+	LOGGER.info("enter callback:"+code);
+	Map<String, String> userMap = manager.getUser(request, code);
+	LOGGER.info("enter callback result:"+userMap);
 	model.addAttribute("openid", userMap.get("openid"));
 	model.addAttribute("nickname", userMap.get("nickname"));
 	model.addAttribute("city", userMap.get("city"));
-	
+
 	return "index";
+    }
+
+    @RequestMapping("/token")
+    @ResponseBody
+    public String token(Model model, HttpServletRequest request) {
+	LOGGER.info("enter token...");
+	String signature = request.getParameter("signature");
+	String timestamp = request.getParameter("timestamp");
+	String nonce = request.getParameter("nonce");
+	String echostr = request.getParameter("echostr");
+	String openid = null;
+	if (checkSignature("qsstoken", signature, timestamp, nonce)) {
+	    LOGGER.info("check ok");
+	    Map<String, String> map = new HashMap<String, String>();
+	    InputStream in;
+	   
+	    try {
+		in = request.getInputStream();
+		if (in != null) {
+		    String res = HttpClientUtil.InputStreamTOString(in, "utf-8");
+		    LOGGER.info("res:" + res);
+		    if (StringUtils.isNotBlank(res)) {
+			map = XMLUtil.doXMLParse(res);
+			LOGGER.info("map:" + map);
+			if (null != map) {
+			    openid = map.get("FromUserName");
+			    storage.set("openid", openid); 
+			    LOGGER.info("watch()  cookie :{}", openid);
+			}
+		    }
+		}
+	    } catch (IOException e) {
+		e.printStackTrace();
+		LOGGER.error("watch()", e);
+	    } catch (JDOMException e) {
+		LOGGER.error("watch()", e);
+		e.printStackTrace();
+	    }
+	}
+	return echostr;
+    }
+    
+    //创建菜单
+    @RequestMapping("/create")
+    @ResponseBody
+    public String create() {
+	String content = "{\"button\":[{\"type\":\"view\",\"name\":\"我要剪发\",\"url\":\"http://60.205.150.77/shear/index\"},{\"type\":\"view\",\"name\":\"我的订单\",\"url\":\"http://60.205.150.77/shear/my\"},{\"type\":\"view\",\"name\":\"帮助中心\",\"url\":\"http://60.205.150.77/shear/abount\"}]}";
+	int r =  manager.createMenu(content);
+	return r+"";
+    }
+    
+    //创建客服
+    @RequestMapping("/create/kefu")
+    @ResponseBody
+    public String createKeFu() {
+	String content = "{\"kf_account\" : \"qsskefu\",\"nickname\" : \"客服1\",\"password\" : \"qsskefu\"}";
+	int r =  manager.createKeFu(content);
+	return r+"1";
+    }
+    
+    public static boolean checkSignature(String token, String signature, String timestamp, String nonce) {
+	String[] arr = new String[] { token, timestamp, nonce };
+	// sort
+	Arrays.sort(arr);
+
+	// generate String
+	String content = arr[0] + arr[1] + arr[2];
+
+	String temp = Sha1Util.getSha1(content);
+	return temp.equalsIgnoreCase(signature);
     }
 }

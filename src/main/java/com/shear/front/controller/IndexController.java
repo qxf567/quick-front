@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,20 +48,26 @@ public class IndexController extends AbstractController {
     private WechatUserInfoManager infoManager;
 
     // 当前网页的URL，不包含#及其后面部分
-    private String url = "http://m.qiansishun.com/shear/index";
+    private String url = "http://60.205.150.77/shear/index";
 
     @RequestMapping("/index")
-    public String index(Model model,String openid) {
+    public String index(Model model,HttpServletRequest request) {
+	String openid = (String) model.asMap().get("openid");
+        LOGGER.info("openid:"+openid);
 	
 	//获取用户信息
 	//http://mp.weixin.qq.com/wiki/1/8a5ce6257f1d3b2afb20f83e72b72ce9.html
-	Map<String, String> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);
-	String nickname = null,sex = null,headimgurl =null;
+	Map<String, Object> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);
+	String nickname = null,headimgurl =null;
+	Integer	sex = null;
+	LOGGER.info("index() userInfo:"+userInfo);
 	if(userInfo != null){
-	    nickname = userInfo.get("nickname");
-	    sex = userInfo.get("sex");
-	    headimgurl = userInfo.get("headimgurl");
+	   // Integer errcode =(Integer) userInfo.get("errcode");
+	    nickname = (String) userInfo.get("nickname");
+	    sex = (Integer)userInfo.get("sex");
+	    headimgurl = (String)userInfo.get("headimgurl");
 	}
+	
 	model.addAttribute("nickname", nickname);
 	//1时是男性，值为2时是女性，值为0时是未知
 	model.addAttribute("sex", sex);
@@ -77,6 +84,7 @@ public class IndexController extends AbstractController {
 	model.addAttribute("sign", sign);
 	model.addAttribute("nonceStr", nonceStr);
 	model.addAttribute("openid", openid);
+	LOGGER.info("index() model:"+model.asMap());
 	return "index";
     }
     
@@ -194,5 +202,4 @@ public class IndexController extends AbstractController {
 
 	return list;
     }
-    
 }
