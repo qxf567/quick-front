@@ -185,7 +185,7 @@ public class WechatController {
 	return "index";
     }
 
-    @RequestMapping("/token")
+    @RequestMapping(value="/token", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String token(Model model, HttpServletRequest request) {
 	LOGGER.info("enter token...");
