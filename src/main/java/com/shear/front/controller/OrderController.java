@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -31,17 +32,22 @@ import com.aliyuncs.exceptions.ClientException;
 import com.quickshear.common.lru.LRUCache;
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatConstat;
+import com.quickshear.common.wechat.WechatTemplateMsgSender;
+import com.quickshear.common.wechat.domain.WechatTemplateMsg;
+import com.quickshear.common.wechat.domain.WechatTemplateOrderStatusMsg;
 import com.quickshear.common.wechat.pay.AccessTokenUtil;
 import com.quickshear.common.wechat.pay.RequestHandler;
 import com.quickshear.common.wechat.pay.ResponseHandler;
 import com.quickshear.common.wechat.pay.TenpayConfig;
 import com.quickshear.common.wechat.pay.util.Sha1Util;
 import com.quickshear.common.wechat.pay.util.XMLUtil;
+import com.quickshear.domain.Customer;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.User;
 import com.quickshear.domain.query.OrderQuery;
 import com.quickshear.domain.query.UserQuery;
+import com.quickshear.service.CustomerService;
 import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
@@ -69,7 +75,10 @@ public class OrderController extends AbstractController {
     private MessageService messageService;
     @Autowired
     private AccessTokenUtil accessTokenUtil;
-
+    @Autowired
+    private WechatTemplateMsgSender wms;
+    @Autowired
+    private CustomerService customerService;
     
     //缓存多少条内容
   	LRUCache cache = new LRUCache(300);
@@ -235,6 +244,22 @@ public class OrderController extends AbstractController {
 			order.setPayType(1);
 			int r = orderService.update(order);
 			LOGGER.info("微信支付回调修改订单状态:" + order.getOrderId() + " result:" + r);
+			WechatTemplateOrderStatusMsg msg = new WechatTemplateOrderStatusMsg();
+			//发送微信模板消息
+			msg.setFirstValue("预约成功通知");
+			msg.setKeyword1Value(DateUtil.format(order.getAppointmentTime(), DateUtil.ALL));
+			msg.setKeyword2Value("999999");
+			msg.setKeyword3Value(order.getOrderId()+"");
+			msg.setKeyword4Value(order.getTotalPrice()+"");
+			msg.setRemarkValue("点击查看二维码详情");
+			msg.setUrl("http://url");
+			msg.setTemplate_id("C96smq2eb2iHCoxeaLBy_3EOMiTy1Pg5zLm0P3kIkbY");
+			Customer cus = customerService.findbyid(order.getCustomerId());
+			if(cus != null){
+			    msg.setTouser(cus.getWechatOpenId());
+			    wms.sendTemplateMsg(msg);
+			}
+			
 		    } else {
 			LOGGER.info("微信支付回调修改订单状态不正确:" + order.getOrderId());
 		    }
