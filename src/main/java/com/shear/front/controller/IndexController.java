@@ -48,7 +48,7 @@ public class IndexController extends AbstractController {
     private WechatUserInfoManager infoManager;
 
     // 当前网页的URL，不包含#及其后面部分
-    private String url = "http://60.205.150.77/shear/index";
+    private String url = "http://m.qiansishun.com/shear/index";
 
     @RequestMapping("/index")
     public String index(Model model,HttpServletRequest request) {
