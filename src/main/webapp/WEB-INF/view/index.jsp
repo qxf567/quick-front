@@ -87,15 +87,9 @@
 				<span class="name">社区快剪品质保证</span>
 			</section>
 			<ul class="box">
-				<li class="box-flex"><img
-					src="http://d1.lashouimg.com/xiuhaole/x_wap/common/images/index/icon-serve1_9a0c17e.png" />
-					<span>优质服务</span></li>
-				<li class="box-flex"><img
-					src="http://d1.lashouimg.com/xiuhaole/x_wap/common/images/index/icon-serve2_e597dc3.png" />
-					<span>快捷服务</span></li>
-				<li class="box-flex"><img
-					src="http://d4.lashouimg.com/xiuhaole/x_wap/common/images/index/icon-serve4_28c9b73.png" />
-					<span>高效服务</span></li>
+				<li class="box-flex"></li>
+				<li class="box-flex"></li>
+				<li class="box-flex"></li>
 			</ul>
 		</div>
 	</div>

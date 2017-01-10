@@ -6,6 +6,7 @@ package com.shear.front.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,7 +52,11 @@ public abstract class AbstractController {
             String []vv = v.split(":");
             model.addAttribute("openid", vv[1]);
             LOGGER.info("openid:"+vv[1]);
+        }else{
+            //@TODO
+            model.addAttribute("openid", "openidtttttt");
         }
+        
     }
 
     
@@ -75,6 +80,23 @@ public abstract class AbstractController {
 	} catch (UnsupportedEncodingException e) {
 	    e.printStackTrace();
 	}
+    }
+    
+    /**
+     * 随机产生密码
+     * 
+     * @param length
+     *            生产的长度
+     */
+    protected String getRandomCode(int length) {
+	String str = "0123456789";
+	Random random = new Random();
+	StringBuffer sb = new StringBuffer();
+	for (int i = 0; i < length; i++) {
+	    int number = random.nextInt(10);
+	    sb.append(str.charAt(number));
+	}
+	return sb.toString();
     }
     
 }

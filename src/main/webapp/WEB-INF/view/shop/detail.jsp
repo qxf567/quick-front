@@ -142,7 +142,7 @@
                         </div>
                     </a>
                     <hr style="background: #dadada;height: 1px;border: none;width: 94%;margin: 0 auto"/>
-                    <a href="javascript:;">
+                   <!--  <a href="javascript:;">
                         <div class="list_one list_default go_to_map">
                             <span></span><img src="/img/detail/route_icon.png"/>
                             <span class="text_main">
@@ -150,7 +150,7 @@
                                 <p>@TODO公交：乘坐公交536,538，快速直达专线19路，快速直达专线8路，到融科橄榄城下车向西南方向走500米到望京SOHOT3.</p>                            </span>
                             <div class="checked_right"><span></span><img src="/img/detail/checked_icon.png"/></div>
                         </div>
-                    </a>
+                    </a> -->
                                         <div class="gap"></div>
                     <div class="mall_real_map">
                         <img src="/img/detail/location.jpg"/>
@@ -168,11 +168,11 @@
                 <li class="li_list">
                     <div class="user_know">
                         <p class="title">微信下单：</p>
-                        <p><img src="/img/detail/list_style.png"/>关注“社区快剪”公众号，点击 我要剪发，在线下单</p>
+                        <p><img src="/img/detail/list_style.png"/>关注“纤丝顺”公众号，点击 我要剪发，在线下单</p>
                         <p class="title">到店扫码下单：</p>
-                        <p><img src="/img/detail/list_style.png"/>在社区快剪——订单——订单详情，可查看最新排队信息</p>
+                        <p><img src="/img/detail/list_style.png"/>在纤丝顺——订单——订单详情，可查看最新排队信息</p>
                         <p><img src="/img/detail/list_style.png"/>过号不作废，点击——订单详情——刷新，进行重新排号享受服务</p>
-                        <p><img src="/img/detail/list_style.png"/>此页面下单仅限社区快剪望京soho店内消费使用，其他店不可使用</p>
+                        <p><img src="/img/detail/list_style.png"/>此页面下单仅限"纤丝顺"${shop.name}内消费使用，其他店不可使用</p>
                         <p><img src="/img/detail/list_style.png"/>建议选择特惠时段，避开高峰期以免等待时间过长。</p>
                         <p><img src="/img/detail/list_style.png"/>特惠时段仅限特惠时段使用，过号重排。</p>
                     </div>
@@ -192,6 +192,7 @@
 <script type="text/javascript">
 var customerId = '${userId}';
 var shopId = '${shop.id}';
+var openid = '${order.openid}';
 var appointmentDay = '${order.appointmentDay}'; // 预约时段
 var appointmentTime = '${order.appointmentTime}'; // 预约分钟
 var hairstyleId = '${order.hairstyleId}';// 发型ID
@@ -199,7 +200,7 @@ var hairstyleName= '${order.hairstyleName}';
 var hairdresserId='${order.hairdresserId}';
 var hairdresserName='${order.hairdresserName}';
 var time = '1555';
-var get_token = '7eb3fbd5383bf37489b71a318c0e3f98';
+
 var ticket_num = 1; // 小票数量
 var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
 </script>
@@ -231,7 +232,7 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
                 'f_selected_ticket_type'    :   f_selected_ticket_type,
                 'customerId'                 :   customerId,
                 'time'                      :   time,
-                'get_token'                 :   get_token,
+                'openid'                 :   openid,
                 'hairdresserId':hairdresserId,
                 'hairdresserName':hairdresserName,
                 'appointmentDay'         :   appointmentDay,
@@ -254,7 +255,7 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
                 'f_selected_ticket_type'    :   f_selected_ticket_type,
                 'customerId'                 :   customerId,
                 'time'                      :   time,
-                'get_token'                 :   get_token,
+                'openid'                 :   openid,
                 'hairstyleId'            :   hairstyleId,
                 'hairstyleName'            :   hairstyleName,
                 'hairdresserId':hairdresserId,
@@ -279,7 +280,7 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
                 'f_selected_ticket_type'    :   f_selected_ticket_type,
                 'customerId'                 :   customerId,
                 'time'                      :   time,
-                'get_token'                 :   get_token,
+                'openid'                 :   openid,
                 'hairstyleId'            :   hairstyleId,
                 'hairstyleName'            :   hairstyleName,
                 'appointmentDay'         :   appointmentDay,
@@ -304,7 +305,7 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
                     'shopId'                :   shopId,
                     'customerId'                 :   customerId,
                     'time'                      :   time,
-                    'get_token'                 :   get_token,
+                    'openid'                 :   openid,
                     'hairstyleId'               :hairstyleId,
                     'appointmentDay'         :   appointmentDay,
                     'appointmentTime'        :   appointmentTime
