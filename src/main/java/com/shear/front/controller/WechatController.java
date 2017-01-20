@@ -244,7 +244,7 @@ public class WechatController {
     @RequestMapping("/create")
     @ResponseBody
     public String create() {
-	String content = "{\"button\":[{\"type\":\"view\",\"name\":\"我要剪发\",\"url\":\"http://60.205.150.77/shear/index\"},{\"type\":\"view\",\"name\":\"我的订单\",\"url\":\"http://60.205.150.77/shear/my\"},{\"type\":\"view\",\"name\":\"帮助中心\",\"url\":\"http://60.205.150.77/shear/abount\"}]}";
+	String content = "{\"button\":[{\"type\":\"view\",\"name\":\"我要剪发\",\"url\":\"http://m.qiansishun.com/shear/index\"},{\"type\":\"view\",\"name\":\"我的订单\",\"url\":\"http://m.qiansishun.com/shear/my\"},{\"type\":\"view\",\"name\":\"帮助中心\",\"url\":\"http://m.qiansishun.com/shear/abount\"}]}";
 	int r =  manager.createMenu(content);
 	return r+"";
     }
