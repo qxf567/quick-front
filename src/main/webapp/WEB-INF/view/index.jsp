@@ -84,7 +84,7 @@
 		</div>
 		<div class="hservice">
 			<section class="title">
-				<span class="name">社区快剪品质保证</span>
+				<span class="name">社区快剪品质保证Copyright © 2017 qiansishun.com </span>
 			</section>
 			<ul class="box">
 				<li class="box-flex"></li>
