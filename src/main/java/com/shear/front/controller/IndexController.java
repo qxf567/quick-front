@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +51,10 @@ public class IndexController extends AbstractController {
     private String url = "http://m.qiansishun.com/shear/index";
 
     @RequestMapping("/index")
-    public String index(Model model,HttpServletRequest request) {
+    public String index(Model model,HttpSession session) {
 	String openid = (String) model.asMap().get("openid");
         LOGGER.info("openid:"+openid);
-	
+        session.setAttribute("openid", openid);
 	//获取用户信息
 	//http://mp.weixin.qq.com/wiki/1/8a5ce6257f1d3b2afb20f83e72b72ce9.html
 	Map<String, Object> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);

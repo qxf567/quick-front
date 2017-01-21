@@ -14,6 +14,7 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -77,32 +78,29 @@ public class OrderController extends AbstractController {
     private WechatTemplateMsgSender wms;
     @Autowired
     private CustomerService customerService;
-    
-    //缓存多少条内容
-  	LRUCache cache = new LRUCache(300);
-    @RequestMapping("/order/prepay")
-    public String detail(Model model, @ModelAttribute OrderVo vo) {
-	orderVoDecode(vo);
-	// @TODO
-	if (vo.getCustomerId() == null) {
-	    vo.setCustomerId(1000l);
-	}
 
+    // 缓存多少条内容
+    LRUCache cache = new LRUCache(300);
+
+    @RequestMapping("/order/prepay")
+    public String detail(Model model, @ModelAttribute OrderVo vo, HttpSession session) {
+	String openid = (String) session.getAttribute("openid");
+	orderVoDecode(vo);
 	Shop shop = null;
 	User user = null;
 	try {
 	    shop = shopService.findbyid(Long.valueOf(vo.getShopId()));
-	    
-	    //@TODO
-	    String openId = "";
 	    UserQuery uq = new UserQuery();
-	    uq.setWechatOpenId(openId);
-	    List<User>  userList = userService.selectByParam(uq);
-	   
-	    if(userList.size()>0){
+	    uq.setWechatOpenId(openid);
+	    List<User> userList = userService.selectByParam(uq);
+
+	    if (userList.size() > 0) {
 		user = userList.get(0);
+		if (user != null) {
+		    vo.setCustomerId(user.getId());
+		}
 	    }
-	    
+
 	} catch (NumberFormatException e) {
 	    e.printStackTrace();
 	} catch (Exception e) {
@@ -128,43 +126,64 @@ public class OrderController extends AbstractController {
 
     @RequestMapping(value = "/order/sms", method = RequestMethod.POST)
     @ResponseBody
-    public String sendSms(String phone){
-	
+    public String sendSms(String phone) {
+
 	String code = cache.get(phone);
-	if(StringUtils.isBlank(code)){
-	    String c= null;
+	if (StringUtils.isBlank(code)) {
+	    String c = null;
 	    try {
 		c = messageService.sendRandomCode(phone);
 	    } catch (ClientException e) {
 		e.printStackTrace();
-		LOGGER.error("sms"+e);
+		LOGGER.error("sms" + e);
 	    }
 	    cache.set(phone, c);
 	    return c;
-	}else{
+	} else {
 	    cache.remove(phone);
 	    return code;
 	}
     }
-    
 
     @RequestMapping(value = "/order/sms/validate", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean validate(String phone,String code){
-	    String result =  (String) cache.get(phone);
-	    if( code.equals(result)){
-		cache.remove(phone);
-		return true;
-	    }else{
-		return false;
-	    }
-	
+    public Boolean validate(String phone, String code) {
+	String result = (String) cache.get(phone);
+	if (code.equals(result)) {
+	    cache.remove(phone);
+	    return true;
+	} else {
+	    return false;
+	}
+
     }
-    
-    
+
     @RequestMapping(value = "/order/pay", method = RequestMethod.POST)
     @ResponseBody
-    public TenpayPayVo prepay(@ModelAttribute OrderVo vo,String openid, HttpServletRequest request, HttpServletResponse response) {
+    public TenpayPayVo prepay(@ModelAttribute OrderVo vo, Model model, HttpSession session, HttpServletRequest request,
+	    HttpServletResponse response) {
+
+	String openid = (String) session.getAttribute("openid");
+	Long customerId = vo.getCustomerId();
+
+	if (customerId == null) {
+	    try {
+		User user = new User();
+		user.setcTime(new Date());
+		user.setmTime(user.getcTime());
+		user.setPhoneNumber(vo.getCustomerNumber());
+		user.setWechatOpenId(openid);
+		user.setRoles("3");
+		int m = userService.save(user);
+		customerId = user.getId();
+		LOGGER.info("用户保存结果：" + m);
+
+	    } catch (NumberFormatException e) {
+		e.printStackTrace();
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+	}
 	Order order = new Order();
 	BeanCopier cp = BeanCopier.create(OrderVo.class, Order.class, false);
 	cp.copy(vo, order, null);
@@ -173,6 +192,7 @@ public class OrderController extends AbstractController {
 	order.setmTime(order.getcTime());
 	order.setOrderStatus(0);
 	order.setTotalPrice(new BigDecimal(1.0));
+	order.setCustomerId(customerId);
 	try {
 	    if (order.getOrderId() == null) {
 		order.setOrderId(getOrderId());
@@ -240,24 +260,25 @@ public class OrderController extends AbstractController {
 			order.setOrderStatus(1);
 			order.setCancelReason(transaction_id);
 			order.setPayType(1);
+			order.setServiceCode(getRandomCode(4));
 			int r = orderService.update(order);
 			LOGGER.info("微信支付回调修改订单状态:" + order.getOrderId() + " result:" + r);
 			WechatTemplateOrderStatusMsg msg = new WechatTemplateOrderStatusMsg();
-			//发送微信模板消息
+			// 发送微信模板消息
 			msg.setFirstValue("预约成功通知");
 			msg.setKeyword1Value(DateUtil.format(order.getAppointmentTime(), DateUtil.ALL));
 			msg.setKeyword2Value("999999");
-			msg.setKeyword3Value(order.getOrderId()+"");
-			msg.setKeyword4Value(order.getTotalPrice()+"元");
+			msg.setKeyword3Value(order.getOrderId() + "");
+			msg.setKeyword4Value(order.getTotalPrice() + "元");
 			msg.setRemarkValue("点击查看二维码详情");
 			msg.setUrl("http://url");
 			msg.setTemplate_id("C96smq2eb2iHCoxeaLBy_3EOMiTy1Pg5zLm0P3kIkbY");
 			Customer cus = customerService.findbyid(order.getCustomerId());
-			if(cus != null){
+			if (cus != null) {
 			    msg.setTouser(cus.getWechatOpenId());
 			    wms.sendTemplateMsg(msg);
 			}
-			
+
 		    } else {
 			LOGGER.info("微信支付回调修改订单状态不正确:" + order.getOrderId());
 		    }

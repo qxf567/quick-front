@@ -167,12 +167,15 @@
 </div>
 <script type="text/javascript">
     var customerId = '${order.customerId}';//uerid
-
     var appointmentTime = '${order.appointmentTime}';//预约时间（时：分）
     var appointmentDay = '${order.appointmentDay}';//预约日期
     var hairstyleId = '${order.hairstyleId}';//发型ID
+	var hairdresserId='${order.hairdresserId}';
+    var openid='${order.openid}';
+	var customerNumber='${order.customerNumber}';
     var f_date      = '0';
 	var time        = '1478760519';//时间
+	
     var token   = '7928b2e7aa8b982a3315bd6935d129f7';//token
     var shopId   = '${order.shopId}';//店铺ID
     var f_selected_ticket_type   = '1';//票类型,1为全天票,2为限制时段票 3预约票
@@ -190,7 +193,7 @@
     
     //@TODO
     var param = {
-        "customerId": '317926',
+        "customerId": customerId,
         "time": '1478760519',
         "token": '7928b2e7aa8b982a3315bd6935d129f7',
         "shopId": shopId,
@@ -384,6 +387,25 @@
         //支付请求
         $(".pay_order").click(function()
         {
+			var $mobile = $('#mobile').val();
+			if($mobile == ''){
+        		alert("请输入手机号");
+        		return;
+        	}
+        	var $val = $('#dynamic_input').val();
+        	if($val == ''){
+        		alert("请输入动态码");
+        		return;
+        	}
+        	if(valide_code != $val){
+        		alert("动态码不正确");
+        		$('#dynamic_input').blur();
+        		return;
+        	}
+			if(customerNumber==''){
+				customerNumber=$('#mobile').val();
+			}
+        	
             var _this = $(this);
             if(_this.hasClass("pay_order_now"))
             {
@@ -407,7 +429,8 @@
 						"appointmentTime":appointmentTime,
 						"appointmentDay":appointmentDay,
 						"hairstyleId":hairstyleId,
-						
+						"customerNumber":customerNumber,
+						"hairdresserId":hairdresserId
 						
 					},
                     beforeSend: function()
