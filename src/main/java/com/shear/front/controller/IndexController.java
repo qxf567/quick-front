@@ -56,7 +56,6 @@ public class IndexController extends AbstractController {
         LOGGER.info("openid:"+openid);
         session.setAttribute("openid", openid);
 	//获取用户信息
-	//http://mp.weixin.qq.com/wiki/1/8a5ce6257f1d3b2afb20f83e72b72ce9.html
 	Map<String, Object> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);
 	String nickname = null,headimgurl =null;
 	Integer	sex = null;
