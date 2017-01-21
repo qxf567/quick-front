@@ -52,11 +52,7 @@ public abstract class AbstractController {
             String []vv = v.split(":");
             model.addAttribute("openid", vv[1]);
             LOGGER.info("openid:"+vv[1]);
-        }else{
-            //@TODO
-            model.addAttribute("openid", "openidtttttt");
         }
-        
     }
 
     

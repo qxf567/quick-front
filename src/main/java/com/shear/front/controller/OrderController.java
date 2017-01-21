@@ -163,7 +163,7 @@ public class OrderController extends AbstractController {
     public TenpayPayVo prepay(@ModelAttribute OrderVo vo, Model model, HttpSession session, HttpServletRequest request,
 	    HttpServletResponse response) {
 
-	String openid = (String) session.getAttribute("openid");
+    String openid = (String) model.asMap().get("openid");
 	Long customerId = vo.getCustomerId();
 
 	if (customerId == null) {
@@ -210,6 +210,7 @@ public class OrderController extends AbstractController {
 	TenpayPayVo payVo = null;
 	try {
 	    payVo = generateOrderInfoOfTenpay(order, openid, request, response);
+	    LOGGER.info("generateOrderInfoOfTenpay结果：" + payVo);
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
@@ -341,7 +342,7 @@ public class OrderController extends AbstractController {
 	TenpayPayVo tenpayPayVo = new TenpayPayVo();
 	RequestHandler reqHandler = new RequestHandler(request, response);
 	reqHandler.setKey(TenpayConfig.partner_key);
-	reqHandler.setGateUrl(WechatConstat.prepay_url);
+//	reqHandler.setGateUrl(WechatConstat.prepay_url);
 	// 获取token值
 	String token = accessTokenUtil.getAccessToken();
 	if (StringUtils.trimToNull(token) != null) {
@@ -363,7 +364,7 @@ public class OrderController extends AbstractController {
 
 	    String sign = reqHandler.createSign(prePayParams);
 	    prePayParams.put("sign", sign);
-
+	    LOGGER.info("debug:  prePayParams: "+prePayParams);
 	    // 获取prepayId
 	    String prepayid = reqHandler.sendPrepay(prePayParams);
 

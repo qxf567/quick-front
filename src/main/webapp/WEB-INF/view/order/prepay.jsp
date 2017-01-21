@@ -397,10 +397,12 @@
         		alert("请输入动态码");
         		return;
         	}
+        	if($("#id").length>0){
         	if(valide_code != $val){
         		alert("动态码不正确");
         		$('#dynamic_input').blur();
         		return;
+        	}
         	}
 			if(customerNumber==''){
 				customerNumber=$('#mobile').val();

@@ -1,6 +1,8 @@
 package com.shear.front.vo;
 
-public class TenpayPayInfoVo {
+import com.quickshear.common.base.BasePo;
+
+public class TenpayPayInfoVo  extends BasePo{
 
     private String appId;
     private String agent;
