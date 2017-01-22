@@ -49,16 +49,17 @@
 									<c:if test="${not empty orderList}">
 									<div class="total_main">
 										<c:forEach items="${orderList}" var="order">
-											<p class="order_info">订单号:${order.orderId}</p>
-											<p class="order_info">订单号55555</p>
-											<p class="order_info">预约时间:<fmt:formatDate value="${order.appointmentTime}" pattern="yyyy年MM月dd日 HH:mm"/></p>
-											<div class="gap"></div>
+											<c:if test="${order.orderStatus == 1}">
+												<p class="order_info">订单号:${order.orderId}</p>
+												<p class="order_info">手机号:${order.customerNumber}</p>
+												<p class="order_info">服务码:${order.serviceCode}</p>
+												<p class="order_info">门店编码:${order.shopId}</p>
+												<p class="order_info">预约时间:<fmt:formatDate value="${order.appointmentTime}" pattern="yyyy年MM月dd日 HH:mm"/></p>
+												<div class="gap"></div>
+										 	</c:if>
 										</c:forEach>
 										</div>
 									</c:if>
-									
-								
-						
 						</div>
 					</li>
 

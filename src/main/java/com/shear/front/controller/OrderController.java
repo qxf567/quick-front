@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.aliyuncs.exceptions.ClientException;
 import com.quickshear.common.lru.LRUCache;
 import com.quickshear.common.util.DateUtil;
-import com.quickshear.common.wechat.WechatConstat;
 import com.quickshear.common.wechat.WechatTemplateMsgSender;
 import com.quickshear.common.wechat.domain.WechatTemplateOrderStatusMsg;
 import com.quickshear.common.wechat.pay.AccessTokenUtil;
@@ -43,14 +42,12 @@ import com.quickshear.common.wechat.pay.util.XMLUtil;
 import com.quickshear.domain.Customer;
 import com.quickshear.domain.Order;
 import com.quickshear.domain.Shop;
-import com.quickshear.domain.User;
+import com.quickshear.domain.query.CustomerQuery;
 import com.quickshear.domain.query.OrderQuery;
-import com.quickshear.domain.query.UserQuery;
 import com.quickshear.service.CustomerService;
 import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
-import com.quickshear.service.UserService;
 import com.quickshear.service.sms.MessageService;
 import com.shear.front.vo.OrderVo;
 import com.shear.front.vo.TenpayPayInfoVo;
@@ -69,8 +66,6 @@ public class OrderController extends AbstractController {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private UserService userService;
-    @Autowired
     private MessageService messageService;
     @Autowired
     private AccessTokenUtil accessTokenUtil;
@@ -87,13 +82,12 @@ public class OrderController extends AbstractController {
 	String openid = (String) session.getAttribute("openid");
 	orderVoDecode(vo);
 	Shop shop = null;
-	User user = null;
+	Customer user = null;
 	try {
 	    shop = shopService.findbyid(Long.valueOf(vo.getShopId()));
-	    UserQuery uq = new UserQuery();
+	    CustomerQuery uq = new CustomerQuery();
 	    uq.setWechatOpenId(openid);
-	    List<User> userList = userService.selectByParam(uq);
-
+	    List<Customer>  userList = customerService.selectByParam(uq);
 	    if (userList.size() > 0) {
 		user = userList.get(0);
 		if (user != null) {
@@ -160,29 +154,33 @@ public class OrderController extends AbstractController {
 
     @RequestMapping(value = "/order/pay", method = RequestMethod.POST)
     @ResponseBody
-    public TenpayPayVo prepay(@ModelAttribute OrderVo vo, Model model, HttpSession session, HttpServletRequest request,
+    public TenpayPayVo prepay(@ModelAttribute OrderVo vo, Model model, HttpServletRequest request,
 	    HttpServletResponse response) {
-
-    String openid = (String) model.asMap().get("openid");
-	Long customerId = vo.getCustomerId();
-
-	if (customerId == null) {
+	String openid = (String) model.asMap().get("openid");
+	Long customerId = null;
+	Customer cus = null;
+	try {
+	    cus = customerService.findbyOpenId(openid);
+	} catch (Exception e1) {
+	    e1.printStackTrace();
+	}
+	if (cus == null) {
 	    try {
-		User user = new User();
+		Customer user = new Customer();
 		user.setcTime(new Date());
 		user.setmTime(user.getcTime());
 		user.setPhoneNumber(vo.getCustomerNumber());
 		user.setWechatOpenId(openid);
-		user.setRoles("3");
-		int m = userService.save(user);
+		int m = customerService.save(user);
 		customerId = user.getId();
 		LOGGER.info("用户保存结果：" + m);
-
 	    } catch (NumberFormatException e) {
 		e.printStackTrace();
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
+	}else {
+	    customerId = cus.getId(); 
 	}
 	Order order = new Order();
 	BeanCopier cp = BeanCopier.create(OrderVo.class, Order.class, false);
@@ -306,10 +304,29 @@ public class OrderController extends AbstractController {
     }
 
     @RequestMapping("/order/list")
-    public String list(Model model, Long customerId, Integer status) {
+    public String list(Model model,Integer status) {
 
+	 String openid = (String) model.asMap().get("openid");
+	 Long customerId = null;
+	 if(StringUtils.isNotBlank(openid)){
+	    try {
+		Customer cus = customerService.findbyOpenId(openid);
+		if (cus != null) {
+		    customerId = cus.getId();
+		}
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+		
+	 }
+	 
+	 customerId= 1l;
 	OrderQuery query = new OrderQuery();
 	query.setCustomerId(customerId);
+	if(status == null){
+	    //待服务
+	    status = 1;
+	}
 	query.setOrderStatus(status);
 	List<Order> orderList = null;
 	try {
