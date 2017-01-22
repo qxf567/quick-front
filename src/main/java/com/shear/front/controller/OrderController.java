@@ -354,7 +354,7 @@ public class OrderController extends AbstractController {
 	// 获取提交的商品价格
 	String orderPrice = order.getTotalPrice().multiply(new BigDecimal("100")).setScale(0) + "";
 	// 获取提交的商品名称
-	String productName = StringUtils.abbreviate(order.getHairstyleId() + "", 128);
+	String productName = StringUtils.abbreviate(order.getShopId()+"_"+order.getHairstyleId() + "[门店编码+发型编码]", 128);
 	// String product_name = request.getParameter("product_name");
 	TenpayPayVo tenpayPayVo = new TenpayPayVo();
 	RequestHandler reqHandler = new RequestHandler(request, response);
