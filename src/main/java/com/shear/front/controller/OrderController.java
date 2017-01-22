@@ -319,8 +319,8 @@ public class OrderController extends AbstractController {
 	    }
 		
 	 }
-	 
-	 customerId= 1l;
+	 //本地调试专用
+	// customerId= 1l;
 	OrderQuery query = new OrderQuery();
 	query.setCustomerId(customerId);
 	if(status == null){
