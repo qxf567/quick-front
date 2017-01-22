@@ -10,10 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 @Controller
 public class ConfigController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConfigController.class);
@@ -26,13 +24,22 @@ public class ConfigController {
     }
     
     @RequestMapping("/")
-    @ResponseBody
+    public String index0(HttpServletRequest request) {
+    	LOGGER.info("enter index00");
+    	if(check(request)){
+    		return "index/mobile";
+    	}else{
+    		return "index/pc";
+    	}
+    }
+    
+    @RequestMapping("/index")
     public String index(HttpServletRequest request) {
     	LOGGER.info("enter index");
     	if(check(request)){
     		return "index/mobile";
     	}else{
-    		return "about";
+    		return "index/pc";
     	}
     }
     
@@ -41,7 +48,6 @@ public class ConfigController {
      * 检查访问方式是否为移动端 
      *  
      * @Title: check 
-     * @Date : 2014-7-7 下午03:55:19 
      * @param request 
      * @throws IOException  
      */  
@@ -60,10 +66,8 @@ public class ConfigController {
                 isFromMobile=check(userAgent);  
                 //判断是否为移动端访问  
                 if(isFromMobile){  
-                    System.out.println("移动端访问");  
                     session.setAttribute("ua","mobile");  
                 } else {  
-                    System.out.println("pc端访问");  
                     session.setAttribute("ua","pc");  
                 }  
             }catch(Exception e){}  
@@ -79,27 +83,26 @@ public class ConfigController {
    // \b 是单词边界(连着的两个(字母字符 与 非字母字符) 之间的逻辑上的间隔),    
    // 字符串在编译时会被转码一次,所以是 "\\b"    
    // \B 是单词内部逻辑间隔(连着的两个字母字符之间的逻辑上的间隔)    
-   static String phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"    
+   String phoneReg = "\\b(ip(hone|od)|android|opera m(ob|in)i"    
            +"|windows (phone|ce)|blackberry"    
            +"|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"    
            +"|laystation portable)|nokia|fennec|htc[-_]"    
            +"|mobile|up.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";    
-   static String tableReg = "\\b(ipad|tablet|(Nexus 7)|up.browser"    
+   String tableReg = "\\b(ipad|tablet|(Nexus 7)|up.browser"    
            +"|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";    
      
    //移动设备正则匹配：手机端、平板  
-   static Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);    
-   static Pattern tablePat = Pattern.compile(tableReg, Pattern.CASE_INSENSITIVE);    
+   Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);    
+   Pattern tablePat = Pattern.compile(tableReg, Pattern.CASE_INSENSITIVE);    
        
    /** 
     * 检测是否是移动设备访问 
     *  
     * @Title: check 
-    * @Date : 2014-7-7 下午01:29:07 
     * @param userAgent 浏览器标识 
     * @return true:移动设备接入，false:pc端接入 
     */  
-   public static boolean check(String userAgent){    
+   private boolean check(String userAgent){    
        if(null == userAgent){    
            userAgent = "";    
        }    
