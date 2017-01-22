@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="仟丝顺 - 是一家互联网+美发连锁品牌，不办卡，不推销，以最专业的造型指导为用户提供便捷的剪发，造型服务，帮用户找到最适合自己的风格。">
 <meta name="keywords" content="仟丝顺, 美发, 造型, 预约美发">
-
+<link rel="shortcut icon" href="/img/favicon.ico" >
 <title>
     仟丝顺官网
 </title>
