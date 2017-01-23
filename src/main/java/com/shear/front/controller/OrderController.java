@@ -191,6 +191,7 @@ public class OrderController extends AbstractController {
 	order.setOrderStatus(0);
 	order.setTotalPrice(new BigDecimal(1.0));
 	order.setCustomerId(customerId);
+	order.setCustomerNumber(vo.getCustomerNumber());
 	try {
 	    if (order.getOrderId() == null) {
 		order.setOrderId(getOrderId());
