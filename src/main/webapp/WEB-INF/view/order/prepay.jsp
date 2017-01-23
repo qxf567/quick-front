@@ -423,7 +423,6 @@
                                 alert("您的微信版本低于5.0无法使用微信支付");  
                                 return;  
                             }  
-                        	callpay(content.payInfo, content.orderId);
                         }else{
                         	console.log('支付有问题了...');
                         	//@TODO
