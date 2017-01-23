@@ -270,7 +270,7 @@ public class OrderController extends AbstractController {
 			msg.setKeyword2Value(order.getServiceCode());
 			msg.setKeyword3Value(order.getOrderId() + "");
 			msg.setKeyword4Value(order.getTotalPrice() + "元");
-			msg.setRemarkValue("点击查看二维码详情");
+			msg.setRemarkValue("点击查看详情");
 			msg.setUrl("http://m.qiansishun.com/shear/order/list");
 			msg.setTemplate_id("C96smq2eb2iHCoxeaLBy_3EOMiTy1Pg5zLm0P3kIkbY");
 			Customer cus = customerService.findbyid(order.getCustomerId());
