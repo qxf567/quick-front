@@ -211,12 +211,10 @@
         "is_check_card": '0',
     };
 
-
-
     //微信支付
     function onBridgeReady(jsApiParameters, out_trade_no)
     {
-        WeixinJSBridge.invoke(
+    	WeixinJSBridge.invoke(
             'getBrandWCPayRequest',{
                 "appId"     :   jsApiParameters.appId,      //公众号名称，由商户传入
                 "timeStamp" :   jsApiParameters.timeStamp,      //时间戳，自1970年以来的秒数
@@ -226,11 +224,14 @@
                 "paySign"   :   jsApiParameters.sign       //微信签名
             },
             function(res){
+			//for(i in res ){
+			//	alert(i);           //获得属性 
+			//	alert(res[i]);  //获得属性值
+			//}
                 if(res.err_msg == "get_brand_wcpay_request:ok" )
                 {
                     //微信支付成功，这边要主动查询订单
                     alert("支付成功！");
-
                     setTimeout(function(){
                         location.href = "/shear/order/list?out_trade_no=" + out_trade_no + '&customerId=' + customerId + '&time=' + time + '&token=' + token + '&shopId=' + shopId;
                     },1500);
@@ -245,46 +246,7 @@
         );
     }
 
-    function callpay(jsApiParameters, out_trade_no)
-    {
-        if (typeof(WeixinJSBridge) == "undefined"){
-            if( document.addEventListener ){
-                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-            }else if (document.attachEvent){
-                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-            }
-        }
-        else
-        {
-            onBridgeReady(jsApiParameters, out_trade_no);
-        }
-    }
 
-    //支付宝支付
-    function zfb_click(trade_no, out_trade_no)
-    {
-        AlipayJSBridge.call("tradePay",{
-            tradeNO: trade_no
-        }, function(result){
-            //'9000':订单支付成功; '8000':正在处理中; '4000':订单支付失败; '6001':用户中途取消; '6002':网络连接出错 '99':用户点击忘记密码快捷界面退出(only  iOS since 9.5)
-            if(result.resultCode == 9000)
-            {
-                alert("支付成功！");//callbackUrl
-
-                setTimeout(function(){
-                    location.href = "/mobile3/order_list?out_trade_no=" + out_trade_no + '&customerId=' + customerId + '&time=' + time + '&token=' + token + '&shopId=' + shopId;
-                },1500);
-            }
-            else
-            {
-                alert("支付失败！");
-                $(".pay_order").addClass("pay_order_now");
-                $(".pay_order").css("background", "#45b5da");
-            }
-
-        })
-    }
 
     $(document).ready(function(){
         $(".info_one").mouseover(function(){
@@ -424,6 +386,7 @@
 
                 $.ajax({
                     url:"/shear/order/pay",
+                    async: false,
                     type:"POST",
                     dataType:"json",
                     data:{"customerId":customerId,
@@ -442,43 +405,29 @@
                     },
                     success: function(content)
                     {
-                        /* if(content.error == 0)
-                        {
-                            //这里需要加层判断，如果全部抵扣，则已经创建完成订单和排队号，否则再去微信支付。
-                            //1
-                            if(content.reason == 1)
-                            {
-                                alert("支付成功！");
-                                location.href = "/shear/order/list?out_trade_no=" + content.out_trade_no + '&customerId=' + customerId + '&time=' + time + '&token=' + token + '&shopId=' + shopId;
-                            }
-                            else if(content.reason == 2)    //todo 这里判断到底是调用微信支付还是支付宝支付
-                            {
-                                if(content.html.mobile_type == 1)
-                                {
-                                    callpay(content.html.jsApiParameters, content.html.out_trade_no);
-                                }
-                                else
-                                {
-                                    zfb_click(content.html.trade_no, content.html.out_trade_no);
-                                }
+                        if (typeof(WeixinJSBridge) == "undefined"){
+                            if( document.addEventListener ){
+                                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                            }else if (document.attachEvent){
+                                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
                             }
                         }
                         else
                         {
-                            alert(content.msg);
-                            $(".pay_order").addClass("pay_order_now");
-                            $(".pay_order").css("background", "#45b5da");
-                        } */
+                            onBridgeReady(content.payInfo, content.orderId);
+                        }
                         
-                        if(content.retCode == 0){
+                        if(content.retCode == "0"){
                         	if(parseInt(content.payInfo.agent)<5){  
                                 alert("您的微信版本低于5.0无法使用微信支付");  
                                 return;  
                             }  
-                    	callpay(content.payInfo, content.html.out_trade_no);
+                        	callpay(content.payInfo, content.orderId);
                         }else{
                         	console.log('支付有问题了...');
                         	//@TODO
+                        	alert('支付有问题了...');
                         }
                         
                     }

@@ -264,27 +264,31 @@ public class OrderController extends AbstractController {
 			LOGGER.info("微信支付回调修改订单状态:" + order.getOrderId() + " result:" + r);
 			WechatTemplateOrderStatusMsg msg = new WechatTemplateOrderStatusMsg();
 			// 发送微信模板消息
-			msg.setFirstValue("预约成功通知");
+			msg.setFirstValue("预约成功");
 			msg.setKeyword1Value(DateUtil.format(order.getAppointmentTime(), DateUtil.ALL));
-			msg.setKeyword2Value("999999");
+			msg.setKeyword2Value(order.getServiceCode());
 			msg.setKeyword3Value(order.getOrderId() + "");
 			msg.setKeyword4Value(order.getTotalPrice() + "元");
 			msg.setRemarkValue("点击查看二维码详情");
-			msg.setUrl("http://url");
+			msg.setUrl("http://m.qiansishun.com/shear/order/list");
 			msg.setTemplate_id("C96smq2eb2iHCoxeaLBy_3EOMiTy1Pg5zLm0P3kIkbY");
 			Customer cus = customerService.findbyid(order.getCustomerId());
 			if (cus != null) {
 			    msg.setTouser(cus.getWechatOpenId());
 			    wms.sendTemplateMsg(msg);
 			}
-
 		    } else {
 			LOGGER.info("微信支付回调修改订单状态不正确:" + order.getOrderId());
 		    }
 
 		} catch (Exception e) {
 		    e.printStackTrace();
+		    LOGGER.error("error",e);
 		}
+		
+		 resultMap.put("return_code", "SUCCESS");
+		 resultMap.put("return_msg", "OK");
+		 return XMLUtil.map2Xml(resultMap);
 
 	    } else {
 		LOGGER.error(String.format("微信支付异步回调|即时到账支付失败，订单号：%s,交易号：%s", out_trade_no, transaction_id));
@@ -292,9 +296,7 @@ public class OrderController extends AbstractController {
 		resultMap.put("return_msg", "回调失败,return_code=" + return_code);
 		return XMLUtil.map2Xml(resultMap);
 	    }
-	    resultMap.put("return_code", "SUCCESS");
-	    resultMap.put("return_msg", "OK");
-	    return XMLUtil.map2Xml(resultMap);
+	   
 	} else {
 	    LOGGER.error("微信支付异步回调|通知签名验证失败:" + resHandler.getParameter("return_msg"));
 	    resultMap.put("return_code", "FAIL");
@@ -352,7 +354,7 @@ public class OrderController extends AbstractController {
 
 	String outTradeNo = order.getOrderId() + "";
 	// 获取提交的商品价格
-	String orderPrice = order.getTotalPrice().multiply(new BigDecimal("100")).setScale(0) + "";
+	String orderPrice = order.getTotalPrice().multiply(new BigDecimal("1")).setScale(0) + "";
 	// 获取提交的商品名称
 	String productName = StringUtils.abbreviate(order.getShopId()+"_"+order.getHairstyleId() + "[门店编码+发型编码]", 128);
 	// String product_name = request.getParameter("product_name");
@@ -388,9 +390,9 @@ public class OrderController extends AbstractController {
 	    if (StringUtils.isNotBlank(prepayid)) {
 		// 签名参数列表
 		SortedMap<String, String> payParams = new TreeMap<String, String>();
-		payParams.put("appid", TenpayConfig.app_id);
-		payParams.put("timestamp", Sha1Util.getTimeStamp());
-		payParams.put("noncestr", Sha1Util.getNonceStr());
+		payParams.put("appId", TenpayConfig.app_id);
+		payParams.put("timeStamp", Sha1Util.getTimeStamp());
+		payParams.put("nonceStr", Sha1Util.getNonceStr());
 		payParams.put("package", "prepay_id=" + prepayid);
 		payParams.put("signType", "MD5");
 		String paySign = reqHandler.createSign(payParams);
@@ -400,9 +402,9 @@ public class OrderController extends AbstractController {
 		tenpayPayVo.setRetCode("0");
 		tenpayPayVo.setRetMsg("OK");
 		TenpayPayInfoVo payInfoVo = new TenpayPayInfoVo();
-		payInfoVo.setAppId(payParams.get("appid"));
-		payInfoVo.setTimeStamp(payParams.get("timestamp"));
-		payInfoVo.setNonceStr(payParams.get("noncestr"));
+		payInfoVo.setAppId(payParams.get("appId"));
+		payInfoVo.setTimeStamp(payParams.get("timeStamp"));
+		payInfoVo.setNonceStr(payParams.get("nonceStr"));
 		payInfoVo.setPackageValue(payParams.get("package"));
 		payInfoVo.setSign(payParams.get("paySign"));
 		payInfoVo.setSignType(payParams.get("signType"));
@@ -421,6 +423,7 @@ public class OrderController extends AbstractController {
 	    tenpayPayVo.setRetCode("-1");
 	    tenpayPayVo.setRetMsg("错误：获取不到Token");
 	}
+	tenpayPayVo.setOrderId(outTradeNo);
 	return tenpayPayVo;
     }
 
@@ -439,5 +442,4 @@ public class OrderController extends AbstractController {
 	String orderId = ordKey + String.format("%08d", ordValue);// 尾数不足八位补齐
 	return Long.valueOf(orderId);
     }
-
 }
