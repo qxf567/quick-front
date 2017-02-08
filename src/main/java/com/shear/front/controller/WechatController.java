@@ -100,7 +100,7 @@ public class WechatController {
     @RequestMapping("/create")
     @ResponseBody
     public String create() {
-	String content = "{\"button\":[{\"type\":\"view\",\"name\":\"我要剪发\",\"url\":\"http://m.qiansishun.com/shear/index\"},{\"type\":\"view\",\"name\":\"我的订单\",\"url\":\"http://m.qiansishun.com/shear/order/list\"},{\"type\":\"view\",\"name\":\"帮助中心\",\"url\":\"http://m.qiansishun.com/shear/about\"}]}";
+	String content = "{\"button\":[{\"type\":\"view\",\"name\":\"我要剪发\",\"url\":\"http://m.qiansishun.com/shear/index\"},{\"type\":\"view\",\"name\":\"我的订单\",\"url\":\"http://m.qiansishun.com/shear/order/list\"},{\"name\": \"更多\", \"sub_button\": [{\"type\":\"view\",\"name\":\"帮助中心\",\"url\":\"http://m.qiansishun.com/shear/about\"},{\"type\":\"view\",\"name\":\"员工通道\",\"url\":\"http://m.qiansishun.com:8280/admin/login\"}]}]}";
 	int r =  manager.createMenu(content);
 	return r+"";
     }
