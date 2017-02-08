@@ -54,7 +54,7 @@ public class MenuController {
 			"http://m.qiansishun.com/shear/admin");
 		return "redirect:" + codeUrl;
 	}else{
-	    return "redirect:http://m.qiansishun.com:8280/admin/login/"+openid;
+	    return "redirect:http://m.qiansishun.com:8280/admin/login";
 	}
 	
     }
@@ -63,7 +63,7 @@ public class MenuController {
     public String login(HttpServletResponse response,HttpServletRequest request,String code,String state,Model model) {
 	String openid = manager.getWechatOpenIdByPageAccess(code);
 	storage.set("openid",openid, response);
-	return "redirect:http://m.qiansishun.com:8280/admin/login/"+openid;
+	return "redirect:http://m.qiansishun.com:8280/admin/login";
     } 
     
     
