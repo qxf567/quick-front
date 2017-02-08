@@ -47,11 +47,10 @@ public abstract class AbstractController {
         model.addAttribute("debug", config.getEnv().equals("live")?false:true);
         model.addAttribute("appid", config.getAppId());
         model.addAttribute("appsecret", config.getAppSecret());
-        String v = storage.get();
-        if(StringUtils.isNotBlank(v)){
-            String []vv = v.split(":");
-            model.addAttribute("openid", vv[1]);
-            LOGGER.info("openid:"+vv[1]);
+        String openiod = storage.get(request,"openid");
+        if(StringUtils.isNotBlank(openiod)){
+            model.addAttribute("openid", openiod);
+            LOGGER.info("openid:"+openiod);
         }
     }
 

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.aliyuncs.exceptions.ClientException;
 import com.quickshear.common.lru.LRUCache;
 import com.quickshear.common.util.DateUtil;
+import com.quickshear.common.wechat.WechatManagerNew;
 import com.quickshear.common.wechat.WechatTemplateMsgSender;
 import com.quickshear.common.wechat.domain.WechatTemplateOrderStatusMsg;
 import com.quickshear.common.wechat.pay.AccessTokenUtil;
@@ -49,6 +50,7 @@ import com.quickshear.service.HairstyleService;
 import com.quickshear.service.OrderService;
 import com.quickshear.service.ShopService;
 import com.quickshear.service.sms.MessageService;
+import com.quickshear.service.sms.StorageService;
 import com.shear.front.vo.OrderVo;
 import com.shear.front.vo.TenpayPayInfoVo;
 import com.shear.front.vo.TenpayPayVo;
@@ -73,13 +75,17 @@ public class OrderController extends AbstractController {
     private WechatTemplateMsgSender wms;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private StorageService storage;
+    @Autowired
+    private WechatManagerNew manager;
 
     // 缓存多少条内容
     LRUCache cache = new LRUCache(300);
 
     @RequestMapping("/order/prepay")
-    public String detail(Model model, @ModelAttribute OrderVo vo, HttpSession session) {
-	String openid = (String) session.getAttribute("openid");
+    public String detail(Model model, @ModelAttribute OrderVo vo, HttpSession session,HttpServletRequest request) {
+	String openid = storage.get(request, "openid");
 	orderVoDecode(vo);
 	Shop shop = null;
 	Customer user = null;
@@ -307,9 +313,14 @@ public class OrderController extends AbstractController {
     }
 
     @RequestMapping("/order/list")
-    public String list(Model model,Integer status) {
-
-	 String openid = (String) model.asMap().get("openid");
+    public String list(Model model,Integer status,String code,String state,HttpServletResponse response) {
+	String openid = null;
+	if (StringUtils.isNotBlank(code)) {
+	    openid = manager.getWechatOpenIdByPageAccess(code);
+	    storage.set("openid",openid, response);
+	}else {
+	    openid=(String) model.asMap().get("openid");
+	}
 	 Long customerId = null;
 	 if(StringUtils.isNotBlank(openid)){
 	    try {
@@ -322,8 +333,6 @@ public class OrderController extends AbstractController {
 	    }
 		
 	 }
-	 //本地调试专用
-	// customerId= 1l;
 	OrderQuery query = new OrderQuery();
 	query.setCustomerId(customerId);
 	if(status == null){

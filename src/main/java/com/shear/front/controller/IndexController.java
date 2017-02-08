@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.quickshear.common.util.DateUtil;
 import com.quickshear.common.wechat.WechatManager;
+import com.quickshear.common.wechat.WechatManagerNew;
 import com.quickshear.common.wechat.WechatUserInfoManager;
 import com.quickshear.domain.Hairdresser;
 import com.quickshear.domain.Hairstyle;
@@ -28,6 +30,7 @@ import com.quickshear.domain.query.HairstyleQuery;
 import com.quickshear.service.HairdresserService;
 import com.quickshear.service.HairstyleService;
 import com.quickshear.service.ShopService;
+import com.quickshear.service.sms.StorageService;
 import com.shear.front.vo.OrderVo;
 
 @Controller
@@ -46,15 +49,25 @@ public class IndexController extends AbstractController {
     private HairdresserService hairdresserService;
     @Autowired
     private WechatUserInfoManager infoManager;
+    @Autowired
+    private StorageService storage;
+    @Autowired
+    private WechatManagerNew manager;
 
     // 当前网页的URL，不包含#及其后面部分
     private String url = "http://m.qiansishun.com/shear/index";
 
     @RequestMapping("/index")
-    public String index(Model model,HttpSession session) {
-	String openid = (String) model.asMap().get("openid");
+    public String index(Model model,HttpServletResponse response,String code,String state) {
+	String openid = null;
+	if (StringUtils.isNotBlank(code)) {
+	    openid = manager.getWechatOpenIdByPageAccess(code);
+	    storage.set("openid",openid, response);
+	}else {
+	    openid=(String) model.asMap().get("openid");
+	}
+	
         LOGGER.info("openid:"+openid);
-        session.setAttribute("openid", openid);
 	//获取用户信息
 	Map<String, Object> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);
 	String nickname = null,headimgurl =null;

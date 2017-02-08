@@ -12,17 +12,14 @@ import org.apache.commons.lang.StringUtils;
 import org.jdom.JDOMException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.quickshear.common.wechat.WechatManagerNew;
 import com.quickshear.common.wechat.pay.util.HttpClientUtil;
 import com.quickshear.common.wechat.pay.util.Sha1Util;
 import com.quickshear.common.wechat.pay.util.XMLUtil;
-import com.quickshear.service.sms.StorageService;
 
 /**
  * <code>https://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html</code>
@@ -35,13 +32,7 @@ import com.quickshear.service.sms.StorageService;
 public class WechatController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
-
-    @Autowired
-    private WechatManagerNew manager;
-
-    @Autowired
-    private StorageService storage;
-   
+    
     @RequestMapping(value="/token", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String token(Model model, HttpServletRequest request) {
@@ -65,7 +56,7 @@ public class WechatController {
 			LOGGER.info("map:" + map);
 			if (null != map) {
 			    openid = map.get("FromUserName");
-			    storage.set("openid", openid); 
+			    
 			    LOGGER.info("watch()  cookie :{}", openid);
 			    String event = map.get("Event");
 				if("subscribe".equals(event)){
@@ -96,24 +87,6 @@ public class WechatController {
 	return echostr;
     }
     
-    //创建菜单
-    @RequestMapping("/create")
-    @ResponseBody
-    public String create() {
-	String content = "{\"button\":[{\"type\":\"view\",\"name\":\"我要剪发\",\"url\":\"http://m.qiansishun.com/shear/index\"},{\"type\":\"view\",\"name\":\"我的订单\",\"url\":\"http://m.qiansishun.com/shear/order/list\"},{\"name\": \"更多\", \"sub_button\": [{\"type\":\"view\",\"name\":\"帮助中心\",\"url\":\"http://m.qiansishun.com/shear/about\"},{\"type\":\"view\",\"name\":\"员工通道\",\"url\":\"http://m.qiansishun.com:8280/admin/login\"}]}]}";
-	int r =  manager.createMenu(content);
-	return r+"";
-    }
-    
-    //创建客服
-    @RequestMapping("/create/kefu")
-    @ResponseBody
-    public String createKeFu() {
-	String content = "{\"kf_account\" : \"qsskefu\",\"nickname\" : \"客服1\",\"password\" : \"qsskefu\"}";
-	int r =  manager.createKeFu(content);
-	return r+"1";
-    }
-    
     public static boolean checkSignature(String token, String signature, String timestamp, String nonce) {
 	String[] arr = new String[] { token, timestamp, nonce };
 	// sort
@@ -125,4 +98,5 @@ public class WechatController {
 	String temp = Sha1Util.getSha1(content);
 	return temp.equalsIgnoreCase(signature);
     }
+    
 }
