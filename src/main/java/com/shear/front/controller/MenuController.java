@@ -16,6 +16,10 @@ import com.quickshear.common.wechat.WechatUserInfoManager;
 import com.quickshear.common.wechat.pay.TenpayConfig;
 import com.quickshear.service.sms.StorageService;
 
+/**
+ * 公众号菜单管理
+ * 
+ * */
 @Controller
 public class MenuController {
 
