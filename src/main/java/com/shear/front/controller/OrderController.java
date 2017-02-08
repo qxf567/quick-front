@@ -322,31 +322,34 @@ public class OrderController extends AbstractController {
 	    openid=(String) model.asMap().get("openid");
 	}
 	 Long customerId = null;
+	 List<Order> orderList = null;
 	 if(StringUtils.isNotBlank(openid)){
 	    try {
 		Customer cus = customerService.findbyOpenId(openid);
+		LOGGER.info("cus:"+cus);
 		if (cus != null) {
 		    customerId = cus.getId();
+		    OrderQuery query = new OrderQuery();
+			query.setCustomerId(customerId);
+			if(status == null){
+			    //待服务
+			    status = 1;
+			}
+			query.setOrderStatus(status);
+			try {
+			    orderList = orderService.selectByParam(query);
+			} catch (Exception e) {
+			    e.printStackTrace();
+			}
+
 		}
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
 		
 	 }
-	OrderQuery query = new OrderQuery();
-	query.setCustomerId(customerId);
-	if(status == null){
-	    //待服务
-	    status = 1;
-	}
-	query.setOrderStatus(status);
-	List<Order> orderList = null;
-	try {
-	    orderList = orderService.selectByParam(query);
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-
+	 LOGGER.info("customerId:"+customerId);
+	
 	model.addAttribute("orderList", orderList);
 	return "order/list";
     }
