@@ -7,15 +7,11 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ConfigController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConfigController.class);
-
 
     @RequestMapping("/MP_verify_IQbZCraCt328SjeF.txt")
     @ResponseBody
@@ -25,7 +21,6 @@ public class ConfigController {
     
     @RequestMapping("/")
     public String index0(HttpServletRequest request) {
-    	LOGGER.info("enter index00");
     	if(check(request)){
     		return "index/mobile";
     	}else{
@@ -35,7 +30,6 @@ public class ConfigController {
     
     @RequestMapping("/index")
     public String index(HttpServletRequest request) {
-    	LOGGER.info("enter index");
     	if(check(request)){
     		return "index/mobile";
     	}else{
