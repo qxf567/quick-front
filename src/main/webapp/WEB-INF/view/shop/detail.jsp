@@ -372,17 +372,17 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
         })();
     }
     //tab切换部分js -- end
-
-    //微信jssdk调取地理位置的方法
+	var debug = ${debug};
+  //微信jssdk调取地理位置的方法
     wx.config({
-        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-        appId: 'wx8d0ca17fea670939', // 必填，公众号的唯一标识
-        timestamp: 1478229349, // 必填，生成签名的时间戳
-        nonceStr: 'wechat_code', // 必填，生成签名的随机串
-        signature: '56e309ad4501cfe5c31ef0ed2e68193b54a365ae',// 必填，签名，见附录1
-        jsApiList: ['openLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-    });
-
+       debug: debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+       appId:'${appid}', // 必填，公众号的唯一标识
+       timestamp:'${timestamp}' , // 必填，生成签名的时间戳
+       nonceStr:'${nonceStr}', // 必填，生成签名的随机串
+       signature:'${sign}',// 必填，签名，见附录1
+       jsApiList: ['openLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+   });
+    
     wx.ready(function () {
         $(".go_to_map").click(function(){
             wx.openLocation({

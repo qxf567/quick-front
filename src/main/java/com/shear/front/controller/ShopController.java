@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quickshear.common.wechat.WechatManager;
 import com.quickshear.domain.Shop;
 import com.quickshear.domain.query.ShopQuery;
 import com.quickshear.service.ShopService;
@@ -24,7 +25,12 @@ public class ShopController extends AbstractController {
 
     @Autowired
     private ShopService shopService;
-
+    @Autowired
+    private WechatManager wechatManager;
+    
+    // 当前网页的URL，不包含#及其后面部分
+    private String url = "http://m.qiansishun.com/shear/detail/";
+    
     @RequestMapping(value = "/shop/list")
     @ResponseBody
     public List<Shop> list(Model model, Shop sh) {
@@ -41,7 +47,7 @@ public class ShopController extends AbstractController {
 	return shopList;
     }
 
-    @RequestMapping(value="/detail/{id}",produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/detail/{id}", produces = "text/html;charset=UTF-8")
     public String detail(Model model, @PathVariable(value = "id") Long id, OrderVo order) {
 	Shop shop = null;
 	try {
@@ -53,6 +59,16 @@ public class ShopController extends AbstractController {
 	orderVoDecode(order);
 
 	model.addAttribute("order", order);
+
+	// 通过jsapi拿到经纬度
+	String jsapi = wechatManager.getJsapiTicket();
+	String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
+	String nonceStr = "Wm3WZY" + timestamp;
+	String sign = wechatManager.getSign(timestamp, nonceStr, url+id);
+	model.addAttribute("jsapi", jsapi);
+	model.addAttribute("timestamp", timestamp);
+	model.addAttribute("sign", sign);
+	model.addAttribute("nonceStr", nonceStr);
 	return "shop/detail";
     }
 
