@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.aliyuncs.exceptions.ClientException;
 import com.quickshear.common.lru.LRUCache;
 import com.quickshear.common.util.DateUtil;
+import com.quickshear.common.wechat.WechatManager;
 import com.quickshear.common.wechat.WechatManagerNew;
 import com.quickshear.common.wechat.WechatTemplateMsgSender;
 import com.quickshear.common.wechat.domain.WechatTemplateOrderStatusMsg;
@@ -79,7 +80,8 @@ public class OrderController extends AbstractController {
     private StorageService storage;
     @Autowired
     private WechatManagerNew manager;
-
+    @Autowired
+    private WechatManager wechatManager;
     // 缓存多少条内容
     LRUCache cache = new LRUCache(300);
 
@@ -351,6 +353,18 @@ public class OrderController extends AbstractController {
 	 LOGGER.info("customerId:"+customerId);
 	
 	model.addAttribute("orderList", orderList);
+	
+	// 通过jsapi拿到经纬度
+	String jsapi = wechatManager.getJsapiTicket();
+	String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
+	String nonceStr = "Wm3WZY" + timestamp;
+	// 当前网页的URL，不包含#及其后面部分
+	String url = "http://m.qiansishun.com/shear/order/list";
+	String sign = wechatManager.getSign(timestamp, nonceStr, url);
+	model.addAttribute("jsapi", jsapi);
+	model.addAttribute("timestamp", timestamp);
+	model.addAttribute("sign", sign);
+	model.addAttribute("nonceStr", nonceStr);
 	return "order/list";
     }
 
