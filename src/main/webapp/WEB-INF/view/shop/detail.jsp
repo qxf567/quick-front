@@ -205,8 +205,30 @@ var ticket_num = 1; // 小票数量
 var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
 </script>
 <script type="text/javascript">
-
+//微信jssdk调取地理位置的方法
+var debug = ${debug};
+	wx.config({
+	   debug: debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	   appId:'${appid}', // 必填，公众号的唯一标识
+	   timestamp:'${timestamp}' , // 必填，生成签名的时间戳
+	   nonceStr:'${nonceStr}', // 必填，生成签名的随机串
+	   signature:'${sign}',// 必填，签名，见附录1
+	   jsApiList: ['openLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	});
     $(document).ready(function(){
+    	
+    	    wx.ready(function () {
+    	        $(".go_to_map").click(function(){
+    	        	wx.openLocation({
+    	                latitude: '${shop.latitude}', // 纬度，浮点数，范围为90 ~ -90
+    	                longitude: '${shop.longitude}', // 经度，浮点数，范围为180 ~ -180。
+    	                name: '${shop.name}', // 位置名
+    	                address: '${shop.address}', // 地址详情说明
+    	                scale: 28, // 地图缩放级别,整形值,范围从1~28。默认为最大
+    	                infoUrl: 'm.qiansishun.com' // 在查看位置界面底部显示的超链接,可点击跳转
+    	            });
+    	        })
+    	    });
 
         //给列添加伪类背景
         $(".info_one,.list_default")
@@ -318,7 +340,7 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
 
 
 
-    });
+  
 
     //banner滑动效果处理
     var bullets = document.getElementById('position').getElementsByTagName('li');
@@ -372,30 +394,7 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
         })();
     }
     //tab切换部分js -- end
-	var debug = ${debug};
-  //微信jssdk调取地理位置的方法
-    wx.config({
-       debug: debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-       appId:'${appid}', // 必填，公众号的唯一标识
-       timestamp:'${timestamp}' , // 必填，生成签名的时间戳
-       nonceStr:'${nonceStr}', // 必填，生成签名的随机串
-       signature:'${sign}',// 必填，签名，见附录1
-       jsApiList: ['openLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-   });
-    
-    wx.ready(function () {
-        $(".go_to_map").click(function(){
-            wx.openLocation({
-                latitude: '${shop.latitude}', // 纬度，浮点数，范围为90 ~ -90
-                longitude: '${shop.longitude}', // 经度，浮点数，范围为180 ~ -180。
-                name: '${shop.name}', // 位置名
-                address: '${shop.address}', // 地址详情说明
-                scale: 28, // 地图缩放级别,整形值,范围从1~28。默认为最大
-                infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
-            });
-        })
-    });
-
+	
     //服务流程滑动到顶部时让它固定顶部
     $("body").scroll(function(){
         var title_height = $(".addWrap").height();
@@ -419,6 +418,8 @@ var f_selected_ticket_type = '1'; // 票据类型1全天票2限时票
             })
         }
     })
+    
+    });
 </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="common/meta.jsp"%>
-<title>快剪首页</title>
+<title>仟丝顺美容美发</title>
 <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 </head>
 <body>
