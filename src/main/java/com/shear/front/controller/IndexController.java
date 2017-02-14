@@ -55,7 +55,7 @@ public class IndexController extends AbstractController {
     private WechatManagerNew manager;
 
     // 当前网页的URL，不包含#及其后面部分
-    private String url = "http://m.qiansishun.com/shear/index";
+    private String url = "http://m.qiansishun.com/shear/index?code=";
 
     @RequestMapping("/index")
     public String index(Model model,HttpServletResponse response,String code,String state) {
@@ -86,11 +86,11 @@ public class IndexController extends AbstractController {
 	model.addAttribute("headimgurl", headimgurl);
 	model.addAttribute("userInfo", userInfo);
 	
-	//通过jsapi拿到经纬度
+	// 通过jsapi拿到经纬度
 	String jsapi = wechatManager.getJsapiTicket();
 	String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
 	String nonceStr = "Wm3WZY" + timestamp;
-	String sign = wechatManager.getSign(timestamp, nonceStr, url);
+	String sign = wechatManager.getSign(timestamp, nonceStr, url+code+"&state=STATE");
 	model.addAttribute("jsapi", jsapi);
 	model.addAttribute("timestamp", timestamp);
 	model.addAttribute("sign", sign);
