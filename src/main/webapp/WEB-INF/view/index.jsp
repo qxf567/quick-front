@@ -113,66 +113,70 @@
 		    	        var speed = res.speed; // 速度，以米/每秒计
 		    	        var accuracy = res.accuracy; // 位置精度
 		    	        //调用 接口获取相关的店铺数据;
-		    	        $.ajax({
-		    				type : "POST",
-		    		     	url: url,
-		    		     	data: {"latitude":latitude,
-		    		      		  	"longitude":longitude},
-		    		    	dataType: 'json',
-		    		    	success : function(result){
-		    		      	  	$.each(result,function(n,value) {
-		    		      	  		var distance = Math.round(getDistance(value.latitude,value.longitude,"39.22","116.33"));
-		    		      	  		if(distance>1000){
-		    		      	  			distance = distance / 1000 +"KM";
-		    		      	  		}else{
-		    		      	  			distance = distance +"M";
-		    		      	  		}
-		    		      	  		
-		    		      	  		var startHours = value.businessHours.split('-')[0];
-		    		      	  		var endHours = value.businessHours.split('-')[1];
-		    		      	  		var cur = new Date();
-		    		      	  		var myHours = cur.getHours();
-		    		      	  		var myMinutes =cur.getMinutes();
-		    		      	  		var sHour = startHours.split(':')[0];
-		    		      	  		var sMinutes = startHours.split(':')[1];
-		    		      	  		var eHour = endHours.split(':')[0];
-		    		      	  		var eMinutes = endHours.split(':')[1];
-		    		      	  		var imgHtml;
-		    		      	  		if(myHours<sHour || myHours>eHour){
-		    		      	  			imgHtml='<img src="/img/index/zanting.png" alt="" class="status"/>';
-		    		      	  		}else if((myHours == sHour && myMinutes < sMinutes)||(myHours == eHour && myMinutes > eMinutes)){
-		    		      	  			imgHtml='<img src="/img/index/zanting.png" alt="" class="status"/>';
-		    		      	  		}else{
-		    		      	  			imgHtml='<img src="/img/index/yingyezhong.png" alt="" class="status"/>';
-		    		      	  		}
-		    		      	  		
-		    			      		var html = '<div class="list_store row">'+
-		    						'<a href="/shear/detail/'+value.id+'">'+
-		    						imgHtml +
-		    						'<img src="http://m.qiansishun.com:8180/shop.img/'+value.mainImageUrl+'" class="shop-img"/>'+
-		    						'<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>'+
-		    						'</a>'+
-		    						'<p class="shop-title">'+value.name+'<span class="shop-text">&nbsp;&nbsp;'+distance+'</span>'+'</p> '+
-		    						'<p class="shop-text">营业时间：'+value.businessHours+'</p>'+
-		    						'<p class="shop-text">地址：'+value.address+'</p>'+
-		    						'</div>';
-		    			      		$('.hpro-list').append(html);
-		    		      	  	});
-		    		    	}
-		    			});
-		    	        
+		    	       
+		    	        callShop(latitude,longitude);
 		    	    },
 		            cancel: function (res) {
 		                alert('用户拒绝授权获取地理位置');
+		                callShop("","");
 		            },
 		            error: function (res) {
 		            	alert("定位失败！"); 
+		            	callShop("","");
 		            }
 		    	});
 		    	
 		    }); 
 		   
-	    
+	    function callShop(latitude,longitude){
+	    	 $.ajax({
+ 				type : "POST",
+ 		     	url: url,
+ 		     	data: {"latitude":latitude,
+ 		      		  	"longitude":longitude},
+ 		    	dataType: 'json',
+ 		    	success : function(result){
+ 		      	  	$.each(result,function(n,value) {
+ 		      	  		var distance = Math.round(getDistance(value.latitude,value.longitude,"39.22","116.33"));
+ 		      	  		if(distance>1000){
+ 		      	  			distance = distance / 1000 +"KM";
+ 		      	  		}else{
+ 		      	  			distance = distance +"M";
+ 		      	  		}
+ 		      	  		
+ 		      	  		var startHours = value.businessHours.split('-')[0];
+ 		      	  		var endHours = value.businessHours.split('-')[1];
+ 		      	  		var cur = new Date();
+ 		      	  		var myHours = cur.getHours();
+ 		      	  		var myMinutes =cur.getMinutes();
+ 		      	  		var sHour = startHours.split(':')[0];
+ 		      	  		var sMinutes = startHours.split(':')[1];
+ 		      	  		var eHour = endHours.split(':')[0];
+ 		      	  		var eMinutes = endHours.split(':')[1];
+ 		      	  		var imgHtml;
+ 		      	  		if(myHours<sHour || myHours>eHour){
+ 		      	  			imgHtml='<img src="/img/index/zanting.png" alt="" class="status"/>';
+ 		      	  		}else if((myHours == sHour && myMinutes < sMinutes)||(myHours == eHour && myMinutes > eMinutes)){
+ 		      	  			imgHtml='<img src="/img/index/zanting.png" alt="" class="status"/>';
+ 		      	  		}else{
+ 		      	  			imgHtml='<img src="/img/index/yingyezhong.png" alt="" class="status"/>';
+ 		      	  		}
+ 		      	  		
+ 			      		var html = '<div class="list_store row">'+
+ 						'<a href="/shear/detail/'+value.id+'">'+
+ 						imgHtml +
+ 						'<img src="http://m.qiansishun.com:8180/shop.img/'+value.mainImageUrl+'" class="shop-img"/>'+
+ 						'<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>'+
+ 						'</a>'+
+ 						'<p class="shop-title">'+value.name+'<span class="shop-text">&nbsp;&nbsp;'+distance+'</span>'+'</p> '+
+ 						'<p class="shop-text">营业时间：'+value.businessHours+'</p>'+
+ 						'<p class="shop-text">地址：'+value.address+'</p>'+
+ 						'</div>';
+ 			      		$('.hpro-list').append(html);
+ 		      	  	});
+ 		    	}
+ 			});
+	    }
 	    
 		if (isWeiXin() || isIndex()) {
 			var backArea = document.getElementsByClassName('backArea')[0];
