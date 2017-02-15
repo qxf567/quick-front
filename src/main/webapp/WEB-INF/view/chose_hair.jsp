@@ -34,7 +34,7 @@
                	  <c:if test="${hair.sex eq 0}">
                         <div class="onelist">
                             <div class="hair_list_top">
-                                <span class="hair_label">${hair.name}</span>
+                                <span class="hair_label">${hair.name}必备</span>
                                 <div class="like">
                                     <div class="love_btn" rel="unlike">
                                         <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
