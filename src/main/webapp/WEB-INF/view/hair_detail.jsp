@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
 	<%@ include file="common/meta.jsp"%>
@@ -129,12 +129,10 @@
      <div class="hair_details">
      
      <c:if test="${not empty hair.multiImageUrls}">
-     	<%-- <c:set value="${fn:split(hair.multiImageUrls,',')}" var="imgs" />
+     	 <c:set value="${fn:split(hair.multiImageUrls,',')}" var="imgs" />
 	       <c:forEach items="${imgs}" var="img" >
-				${img}-- ddddssssssssssssssssssssss
-		  </c:forEach>
-		  
-		 ${imgs}---aaa --%>
+		<img src="http://m.qiansishun.com:8180/hairstyle.img/${img}">
+		</c:forEach>
      </c:if>
     </div>
 
