@@ -14,8 +14,9 @@
 	<div id="warp" class="warp">
 		<div class="city-login cl">
 			<a class="logo" href="http://m.quickshear.com"><span>社区快剪</span></a> <span
-				class="tips">快剪，2小时上门。</span>
+				class="tips">${nickname}，仟丝顺欢迎您。</span>
 			<div class="login-warp">
+				
 				<a class="login" href="/index/ucenter/"><i></i></a>
 			</div>
 		</div>

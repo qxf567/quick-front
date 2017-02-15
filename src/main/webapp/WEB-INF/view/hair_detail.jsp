@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <html>
 <head>
 	<%@ include file="common/meta.jsp"%>
@@ -13,16 +15,6 @@
     <script type="text/javascript" src="/js/new_3deye.js"></script>
     <script type="text/javascript" src="/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="/js/wechat_common.js"></script>
-    <script>
-        wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: 'wx8d0ca17fea670939', // 必填，公众号的唯一标识
-            timestamp: 1478501326, // 必填，生成签名的时间戳
-            nonceStr: 'wechat_code', // 必填，生成签名的随机串
-            signature: 'da85af1adeeff6f56716ebb0eea2c4fc9333058a',// 必填，签名，见附录1
-            jsApiList: ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-    </script>
     <script type="text/javascript">
         var f_user_id = '317926';
         var time        = '1478501251';
@@ -41,11 +33,11 @@
         $(document).ready(function(){
         	var imgs = '${hair.multiImageUrls}'.split(",");
             FastClick.attach(document.body);
-            $("#hair_style_show").vc3dEye({
-                imagePath:"/picture/hair/${hair.id}/",
-                totalImages:imgs.length,
-                imageExtension:"jpg"
-            });
+           /*  $("#hair_style_show").vc3dEye({
+                imagePath:"http://m.qiansishun.com:8180/hairstyle.img/${hair.mainImageUrl}",
+                totalImages:1,
+                imageExtension:""
+            }); */
 
             $(".p_left").click(function(){
                 $("#hair_style_show").vc3dEye.d();
@@ -105,7 +97,7 @@
 <body>
 <div class="container">
     <div class="hair_list_top">
-        <span class="hair_label">型男必备</span>
+        <span class="hair_label">${hair.name}必备</span>
        <!--  <div class="like">
             <div class="love_btn" rel="unlike">
                 <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
@@ -114,10 +106,12 @@
         </div> -->
     </div>
     <div class="hair_main">
-        <div id="hair_style_show"></div>
-        <div class="operation_tips">可左右滑动</div>
+        <div id="hair_style_show">
+        <!-- <div class="operation_tips">可左右滑动</div>
         <div class="prompt" id="prompt">
             <div class="p_center" id="p_center"><img class="img_hand" src="/img/detail/hand.png"></div>
+        </div> -->
+        <img src="http://m.qiansishun.com:8180/hairstyle.img/${hair.mainImageUrl}">
         </div>
     </div>
     <div class="hair_list_bottom">
@@ -132,55 +126,19 @@
         <p class="hair_describe"></p>
     </div>
     <div class="split_line"><img src="/img/detail/split_line.jpg"></div>
-    <div class="hair_details">
-        <img src="/img/detail/hair_details.jpg">
+     <div class="hair_details">
+     
+     <c:if test="${not empty hair.multiImageUrls}">
+     	<%-- <c:set value="${fn:split(hair.multiImageUrls,',')}" var="imgs" />
+	       <c:forEach items="${imgs}" var="img" >
+				${img}-- ddddssssssssssssssssssssss
+		  </c:forEach>
+		  
+		 ${imgs}---aaa --%>
+     </c:if>
     </div>
 
-            <div class="gap"></div>
-        <div class="caption">
-            <div class="left_label"></div>
-            <span>发型精选</span>
-            <div class="read_more"><a href="/mobile3/hairstyle_list/?f_store_id=67&select_hair_id=&ticket_num=1&f_selected_ticket_type=1&f_date=&appointmentDay=&appointmentTime=&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/image/mobile/read_more.png"></a></div>
-        </div>
-        <div class="product_list">
-            <ul class= "nav_ul">
-                                    <li class="nav_li">
-                        <span class="hair_label">职场必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=7&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/1/25.jpg" />
-                        </a>
-                        <p>高媛媛</p>
-                        <span>BUSINESS</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">居家必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=8&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/2/25.jpg" />
-                        </a>
-                        <p>清爽迷你菇</p>
-                        <span>AUTUMN</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">旅行必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=9&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/3/25.jpg" />
-                        </a>
-                        <p>可爱邻家</p>
-                        <span>BUSINESS</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">淑女必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=11&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/5/25.jpg" />
-                        </a>
-                        <p>恋秋</p>
-                        <span>AUTUMN</span>
-                    </li>
-                                    <li class="nav_li">
-                        <span class="hair_label">迷男必备</span>
-                        <a href="/mobile3/hairstyle_details/?f_store_id=67&f_hairstyle_id=12&f_user_id=317926&time=1478501251&token=95cad45280b7b8a9287213c83ab4bad7"><img src="http://cdn.xingkeduo.com/imgs/6/25.jpg" />
-                        </a>
-                        <p>熟男迷妹</p>
-                        <span>BUSINESS</span>
-                    </li>
-                            </ul>
-        </div>
+           
     
         
     <div style="height: 3.4rem;width: 100%"></div>

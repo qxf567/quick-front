@@ -31,6 +31,7 @@
                 <li class="li_list">
                 
                	 <c:forEach items="${hairList}" var="hair">
+               	  <c:if test="${hair.sex eq 0}">
                         <div class="onelist">
                             <div class="hair_list_top">
                                 <span class="hair_label">${hair.name}</span>
@@ -42,11 +43,12 @@
                                 </div>
                             </div>
                             <div class="hair_pictures" folder="4" hair_id="${hair.id}">
-                                <img src="${hair.mainImageUrl}">
+                                <img src="http://m.qiansishun.com:8180/hairstyle.img/${hair.mainImageUrl}">
                             </div>
                             <p class="hair_name">${hair.detail}</p>
                             <p class="english_label">BUSINESS</p>
                         </div>
+                        </c:if>
                         </c:forEach>
                         <!--  <div class="onelist">
                             <div class="hair_list_top">
@@ -131,7 +133,29 @@
                      <img src="/img/detail/the_end.png" class="the_end">
                 </li>
                 <li class="li_list">
+                       
+                       <c:forEach items="${hairList}" var="hair">
+                       <c:if test="${hair.sex eq 1}">
                         <div class="onelist">
+                            <div class="hair_list_top">
+                                <span class="hair_label">${hair.name}</span>
+                                <div class="like">
+                                    <div class="love_btn" rel="unlike">
+                                        <a href="#"><img src="/img/detail/default-heart-shape.png"></a>
+                                    </div>
+                                    <span class="like_num">241</span>
+                                </div>
+                            </div>
+                            <div class="hair_pictures" folder="4" hair_id="${hair.id}">
+                                <img src="http://m.qiansishun.com:8180/hairstyle.img/${hair.mainImageUrl}">
+                            </div>
+                            <p class="hair_name">${hair.detail}</p>
+                            <p class="english_label">BUSINESS</p>
+                        </div>
+                        </c:if>
+                        </c:forEach>
+                       
+                       <!-- <div class="onelist">
                             <div class="hair_list_top">
                                 <span class="hair_label">职场必备</span>
                                 <div class="like">
@@ -195,7 +219,7 @@
                             <p class="hair_name">恋秋</p>
                             <p class="english_label">AUTUMN</p>
                         </div>
-                           <!--                  <div class="onelist">
+                                             <div class="onelist">
                             <div class="hair_list_top">
                                 <span class="hair_label">简约必备</span>
                                 <div class="like">

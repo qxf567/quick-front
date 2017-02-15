@@ -44,7 +44,7 @@
                                 <span class="hair_label">${dress.shopName}</span>
                             </div>
                             <div class="hair_pictures">
-                              	<img src="${dress.photo}">
+                              	<img src="http://m.qiansishun.com:8180/user.img/${dress.photo}">
                             </div>
                             <p class="hair_name">${dress.name}</p>
                         </div>
