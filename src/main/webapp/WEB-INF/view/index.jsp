@@ -55,21 +55,6 @@
 		<div class="fault-list">
 			 <!-- 百度地图容器 -->
 		</div>
-		<!-- <div class="fault-list fault-list-line">
-			<a href="/repair/malfunctions/productTypeId/8"
-				onclick="_czc.push(['_trackEvent', '首页', '台式机', '','','']);"> <img
-				src="http://d1.lashouimg.com/xiuhaole/x_wap/common/images/index/icon-nav-pc_8dad938.png" />
-				<span>台式机</span>
-			</a> <a href="/repair/index" data-brand='5'
-				onclick="_czc.push(['_trackEvent', '首页', '智能设备', '','','']);"> <img
-				src="http://d4.lashouimg.com/xiuhaole/x_wap/common/images/index/icon-nav-device_a82184e.png" />
-				<span>智能设备</span>
-			</a> <a href="/clean"
-				onclick="_czc.push(['_trackEvent', '首页', '安调保养', '','','']);"> <img
-				src="http://d3.lashouimg.com/xiuhaole/x_wap/common/images/index/icon-nav-protect_aa0f94c.png" />
-				<span>安调保养</span>
-			</a>
-		</div> -->
 		<div style="margin-top: 0.2rem;">
 			<a href="about"><img style="width: 100%;" src="/img/head/life.png" /></a>
 			<section class="box hpro-title">
@@ -80,7 +65,7 @@
 			<!-- 店铺 -->
 		</div>
 		<div class="hcustom">
-			<a href="tel:400-900-6688"><i></i><span>400-900-6688</span></a>
+			<a href="tel:400-900-6688"><i></i><span>400-900-6</span></a>
 			<span style="font-size:12px">全国客服热线:09:30－21:00</span>
 		</div>
 		<div class="hservice">
@@ -146,7 +131,12 @@
  		     	data: {"latitude":latitude,
  		      		  	"longitude":longitude},
  		    	dataType: 'json',
+ 		    	beforeSend:function(XMLHttpRequest){
+ 		              //alert('远程调用开始...');
+ 		              $(".hpro-list").html("<img src='/img/loading.gif' />");
+ 		         },
  		    	success : function(result){
+ 		    		$('.hpro-list').html('');
  		      	  	$.each(result,function(n,value) {
  		      	  		var distance = Math.round(getDistance(value.latitude,value.longitude,"39.22","116.33"));
  		      	  		if(distance>1000){
