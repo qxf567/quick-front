@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
 <%@ include file="../common/meta.jsp"%>
@@ -50,11 +50,13 @@
 									<div class="total_main">
 										<c:forEach items="${orderList}" var="order">
 											<c:if test="${order.orderStatus == 1}">
-												<p class="order_info">订单号:${order.orderId}</p>
-												<p class="order_info">手机号:${order.customerNumber}</p>
-												<p class="order_info">服务码:${order.serviceCode}</p>
-												<p class="order_info">门店编码:${order.shopId}</p>
-												<p class="order_info">预约时间:<fmt:formatDate value="${order.appointmentTime}" pattern="yyyy年MM月dd日 HH:mm"/></p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">订单号:${order.orderId}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">手机号:${order.customerNumber}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">验票码:${order.serviceCode}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">预约时间:${order.appointmentTime}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">门店地址:${order.shopAddress}</p>
+												<img src="http://m.qiansishun.com/open/getcode?data_url=5555" style="margin-top:12px;width: 220px;height:220px;"/>
+												<p style="font-size: 18px;color: #45b5da;line-height: 30px;">服务时请向发型设计师出示此二维码</p>
 												<div class="gap"></div>
 										 	</c:if>
 										</c:forEach>
@@ -67,12 +69,29 @@
 					<li class="li_list">
 						<div class="gap"></div>
 						<div class="one_order hide_order_li">
-							<div class="max_box">
-								<div class="info_box">
-									<img src="/img/my-icon08.png">
-									<p>您还没有相关的订单～</p>
-								</div>
-							</div>
+						
+						<c:if test="${empty orderList}">
+									<div class="max_box">
+										<div class="info_box">
+											<img src="/img/my-icon08.png">
+											<p>您还没有相关的订单～</p>
+										</div>
+											</div>
+									</c:if>
+									<c:if test="${not empty orderList}">
+									<div class="total_main">
+										<c:forEach items="${orderList}" var="order">
+											<c:if test="${order.orderStatus == 100}">
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">订单号:${order.orderId}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">手机号:${order.customerNumber}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">验票码:${order.serviceCode}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">预约时间:${order.appointmentTime}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">门店:${order.shopName}</p>
+												<div class="gap"></div>
+										 	</c:if>
+										</c:forEach>
+										</div>
+									</c:if>
 						</div>
 					</li>
 
@@ -93,12 +112,28 @@
 					<li class="li_list">
 						<div class="gap"></div>
 						<div class="one_order hide_order_li">
-							<div class="max_box">
-								<div class="info_box">
-									<img src="/img/my-icon08.png">
-									<p>您还没有相关的订单～</p>
-								</div>
-							</div>
+							<c:if test="${empty orderList}">
+									<div class="max_box">
+										<div class="info_box">
+											<img src="/img/my-icon08.png">
+											<p>您还没有相关的订单～</p>
+										</div>
+											</div>
+									</c:if>
+									<c:if test="${not empty orderList}">
+									<div class="total_main">
+										<c:forEach items="${orderList}" var="order">
+											<c:if test="${order.orderStatus == 100}">
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">订单号:${order.orderId}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">手机号:${order.customerNumber}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">验票码:${order.serviceCode}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">预约时间:${order.appointmentTime}</p>
+												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">门店:${order.shopName}</p>
+												<div class="gap"></div>
+										 	</c:if>
+										</c:forEach>
+										</div>
+									</c:if>
 						</div>
 					</li>
 				</ul>
@@ -358,7 +393,9 @@
 	</script>
 
 	<script type="text/javascript">
-		var screen_height = $(window).height() - 50
+		var len = '${fn:length(orderList)}';
+		
+		var screen_height = $(window).height() + (len-1) *300
 				- $("#pagenavi li").height();
 		$(".li_list").css({
 			"min-height" : screen_height + "px",
@@ -379,82 +416,6 @@
 			$("#all_opcation,.pop_alert").hide();
 		}
 
-		//退款
-		$(".refund_query")
-				.click(
-						function() {
-							var f_user_id = '317926';
-							var time = '1478251614';
-							var get_token = '1bca76b56765be0e41c0fb9bd0624490';
-
-							var _this = $(this);
-							var f_order_no = _this.attr("order_no");
-							var mobile_type = _this.attr("mobile_type"); //1微信 2支付宝
-
-							var msg = confirm("您确定要立即退款吗？交易时间超过一年的订单无法提交退款。退款有一定延时，零钱支付退款20分钟内到账，银行卡支付退款3个工作日内到账。");
-							if (msg == true) {
-								//ajax请求
-								$
-										.ajax({
-											//"async"     :   false,
-											"url" : "/mobile3/refund",
-											"type" : "post",
-											"data" : {
-												f_user_id : f_user_id,
-												time : time,
-												get_token : get_token,
-												f_order_no : f_order_no
-											},
-											"dataType" : "json",//html json
-											"beforeSend" : function() {
-												pop_alert("剪退款",
-														"系统正在退款中，请勿关闭页面。");
-												$("#pop_alert_close").css(
-														"border-top",
-														"0px solid #dadada");
-												if (mobile_type == 2) {
-													$("#pop_alert_close")
-															.html(
-																	"<iframe width='0' height='0' frameborder='0' id='mobile_refund_iframe' src=''></iframe>");
-												} else {
-													$("#pop_alert_close").html(
-															'');
-												}
-											},
-											"success" : function(res) {
-												//退款成功
-												if (res.error == 0) {
-													_this.remove();
-
-													if (res.html.mobile_type == 2) //如果是支付宝退款
-													{
-														$(
-																"#mobile_refund_iframe")
-																.attr(
-																		"src",
-																		"https://mapi.alipay.com/gateway.do?"
-																				+ res.html.alipay_refund_url);
-
-														//关闭弹出层 todo 先注释掉，明天修改
-														setTimeout(function() {
-															close_pop_alert();
-															alert(res.msg);
-															location.reload(); //页面刷新
-														}, 3000);
-													} else //微信退款
-													{
-														close_pop_alert();
-														alert(res.msg);
-														location.reload(); //页面刷新
-													}
-												} else {
-													close_pop_alert();
-													alert(res.msg);
-												}
-											}
-										});
-							}
-						});
 	</script>
 </body>
 </html>

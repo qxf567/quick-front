@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.quickshear.common.base.BasePo;
+
 /**
  * 页面使用订单相关信息
  * 
  */
-public class OrderVo implements Serializable {
+public class OrderVo extends BasePo implements Serializable {
     /** 订单号 */
     private Long orderId;
 
@@ -25,6 +27,10 @@ public class OrderVo implements Serializable {
 
     /** 门店 */
     private String shopId;
+
+    private String shopName;
+
+    private String shopAddress;
 
     /** 发型师id */
     private Long hairdresserId;
@@ -70,11 +76,22 @@ public class OrderVo implements Serializable {
 
     /** 是否已评价(0否1是) */
     private Integer isEvaluate;
+    
+    /** 服务号 */
+    private String serviceCode;
 
     private static final long serialVersionUID = 1L;
 
     public Long getOrderId() {
 	return orderId;
+    }
+
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     public String getAppointmentDay() {
@@ -87,6 +104,22 @@ public class OrderVo implements Serializable {
 
     public void setAppointmentTime(String appointmentTime) {
 	this.appointmentTime = appointmentTime;
+    }
+
+    public String getShopName() {
+	return shopName;
+    }
+
+    public void setShopName(String shopName) {
+	this.shopName = shopName;
+    }
+
+    public String getShopAddress() {
+	return shopAddress;
+    }
+
+    public void setShopAddress(String shopAddress) {
+	this.shopAddress = shopAddress;
     }
 
     public void setOrderId(Long orderId) {

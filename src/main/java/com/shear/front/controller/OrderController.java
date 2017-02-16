@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -325,6 +326,7 @@ public class OrderController extends AbstractController {
 	}
 	 Long customerId = null;
 	 List<Order> orderList = null;
+	 List<OrderVo> orderVoList = null;
 	 if(StringUtils.isNotBlank(openid)){
 	    try {
 		Customer cus = customerService.findbyOpenId(openid);
@@ -340,19 +342,34 @@ public class OrderController extends AbstractController {
 			query.setOrderStatus(status);
 			try {
 			    orderList = orderService.selectByParam(query);
+			    orderVoList = new ArrayList<OrderVo>();
+			    for(Order order:orderList){
+				OrderVo vo = new OrderVo();
+				BeanCopier cp = BeanCopier.create(Order.class, OrderVo.class, false);
+				cp.copy(order,vo,null);
+				Shop shop = shopService.findbyid(Long.valueOf(order.getShopId()));
+				if(shop !=null){
+				    vo.setShopName(shop.getName());
+				    vo.setShopAddress(shop.getAddress());
+				}
+				vo.setAppointmentTime(DateUtil.format(order.getAppointmentTime(), DateUtil.ALL));
+				orderVoList.add(vo);
+			    }
 			} catch (Exception e) {
 			    e.printStackTrace();
+			    LOGGER.error("error"+e);
 			}
 
 		}
 	    } catch (Exception e) {
 		e.printStackTrace();
+		 LOGGER.error("error"+e);
 	    }
 		
 	 }
-	 LOGGER.info("customerId:"+customerId);
+	 LOGGER.info("orderVoList:"+orderVoList);
 	
-	model.addAttribute("orderList", orderList);
+	model.addAttribute("orderList", orderVoList);
 	
 	// 通过jsapi拿到经纬度
 	String jsapi = wechatManager.getJsapiTicket();
@@ -381,9 +398,23 @@ public class OrderController extends AbstractController {
 
 	String outTradeNo = order.getOrderId() + "";
 	// 获取提交的商品价格
-	String orderPrice = order.getTotalPrice().multiply(new BigDecimal("1")).setScale(0) + "";
+	//String orderPrice = order.getTotalPrice().multiply(new BigDecimal("1")).setScale(0) + "";
+	String orderPrice = order.getTotalPrice() + "";
 	// 获取提交的商品名称
-	String productName = StringUtils.abbreviate(order.getShopId()+"_"+order.getHairstyleId() + "[门店编码+发型编码]", 128);
+	String sName = "";
+	if(StringUtils.isNotBlank(order.getShopId())){
+	    Shop shop = null;
+	    try {
+		shop = shopService.findbyid(Long.valueOf(order.getShopId()));
+	    } catch (NumberFormatException e) {
+		e.printStackTrace();
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+	    sName = shop.getName();
+	}
+	
+	String productName = StringUtils.abbreviate("仟丝顺+"+sName, 128);
 	// String product_name = request.getParameter("product_name");
 	TenpayPayVo tenpayPayVo = new TenpayPayVo();
 	RequestHandler reqHandler = new RequestHandler(request, response);
