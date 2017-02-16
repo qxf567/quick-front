@@ -31,7 +31,7 @@
         <div class="swipe" id="mySwipe">
             <div class="swipe-wrap">
             	<c:forEach items="${shop.multiImageUrls.split(',')}" var="image">
-	            	<div class="img_li"><a href="javascript:;"><img src="${image}"/></a></div>
+	            	<div class="img_li"><a href="javascript:;"><img src="http://m.qiansishun.com:8180/shop.img/${image}"/></a></div>
 	            </c:forEach>
                                     <!-- <div class="img_li"><a href="javascript:;"><img src="/img/detail/01.jpg"/></a></div>
                                     <div class="img_li"><a href="javascript:;"><img src="/img/detail/02.jpg"/></a></div>

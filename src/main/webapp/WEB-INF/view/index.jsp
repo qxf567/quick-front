@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,16 @@
 				class="tips">${nickname}，仟丝顺欢迎您。</span>
 			<div class="login-warp">
 				
-				<a class="login" href="/index/ucenter/"><i></i></a>
+				<a class="login" href="">
+				<c:if test="${not empty headimgurl }">
+					<i style="display: block;width: 0.3rem;height: 0.3rem;background: url(${headimgurl}) no-repeat center;background-size: .28rem auto;"></i>
+				</c:if>
+				<c:if test="${empty headimgurl}">
+					<i style="display: block;width: 0.3rem;height: 0.3rem;background: url('/img/icon-login.png') no-repeat center;background-size: .28rem auto;"></i>
+				</c:if>
+				
+				
+				</a>
 			</div>
 		</div>
 		<div id="focus" class="focus">
@@ -75,7 +85,7 @@
 		</div>
 		<div class="hservice">
 			<section class="title">
-				<span class="name">社区快剪品质保证Copyright © 2017 qiansishun.com </span>
+				<span class="name">仟丝顺品质保证Copyright © 2017 qiansishun.com </span>
 			</section>
 			<ul class="box">
 				<li class="box-flex"></li>
