@@ -185,9 +185,6 @@
 			</a> <a href="javascript:;" class="order_checked"> <span
 				class="menu_bg menu_order">订单</span>
 			</a> <a
-				href="/shear/user"
-				class="personal"> <span class="menu_bg menu_user">个人</span>
-			</a> <a
 				href="/shear/about"
 				class="more"> <span class="menu_bg menu_more">更多</span>
 			</a>
