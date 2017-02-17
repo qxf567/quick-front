@@ -199,7 +199,8 @@ public class OrderController extends AbstractController {
 	order.setmTime(order.getcTime());
 	order.setOrderStatus(0);
 	order.setCustomerId(customerId);
-	order.setCustomerNumber(vo.getCustomerNumber());
+	if(StringUtils.isBlank(vo.getCustomerNumber()))
+	    order.setCustomerNumber(cus.getPhoneNumber());
 	try {
 	    if (order.getOrderId() == null) {
 		order.setOrderId(getOrderId());
@@ -231,7 +232,8 @@ public class OrderController extends AbstractController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "/order/notify", method = RequestMethod.POST)
+    @RequestMapping(value = "/order/notify", method = RequestMethod.POST,produces = "application/xml")
+    @ResponseBody
     public String tenpay(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 	ResponseHandler resHandler = new ResponseHandler(request, response);
@@ -295,8 +297,8 @@ public class OrderController extends AbstractController {
 		    LOGGER.error("error",e);
 		}
 		
-		 resultMap.put("return_code", "SUCCESS");
-		 resultMap.put("return_msg", "OK");
+		 resultMap.put("return_code", "<![CDATA[SUCCESS]]>");
+		 resultMap.put("return_msg", "<![CDATA[OK]]>");
 		 return XMLUtil.map2Xml(resultMap);
 
 	    } else {
