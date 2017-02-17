@@ -55,7 +55,7 @@
 												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">验票码:${order.serviceCode}</p>
 												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">预约时间:${order.appointmentTime}</p>
 												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">门店地址:${order.shopAddress}</p>
-												<img src="http://m.qiansishun.com/open/getcode?data_url=5555" style="margin-top:12px;width: 220px;height:220px;"/>
+												<img src="http://m.qiansishun.com/open/getcode?data_url=http://m.qiansishun.com/v1/stylist/order/receive/${order.orderId}" style="margin-top:12px;width: 220px;height:220px;"/>
 												<p style="font-size: 18px;color: #45b5da;line-height: 30px;">服务时请向发型设计师出示此二维码</p>
 												<div class="gap"></div>
 										 	</c:if>
