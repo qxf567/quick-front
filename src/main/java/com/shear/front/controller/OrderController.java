@@ -198,7 +198,6 @@ public class OrderController extends AbstractController {
 	order.setAppointmentTime(DateUtil.parse(time + ":00", DateUtil.ALL));
 	order.setmTime(order.getcTime());
 	order.setOrderStatus(0);
-	order.setTotalPrice(new BigDecimal(1.0));
 	order.setCustomerId(customerId);
 	order.setCustomerNumber(vo.getCustomerNumber());
 	try {
@@ -397,15 +396,12 @@ public class OrderController extends AbstractController {
 	    HttpServletResponse response) {
 
 	String outTradeNo = order.getOrderId() + "";
-	// 获取提交的商品价格
-	//String orderPrice = order.getTotalPrice().multiply(new BigDecimal("1")).setScale(0) + "";
-	String orderPrice = order.getTotalPrice() + "";
 	// 获取提交的商品名称
 	String sName = "";
-	if(StringUtils.isNotBlank(order.getShopId())){
+	if(order.getShopId()>0){
 	    Shop shop = null;
 	    try {
-		shop = shopService.findbyid(Long.valueOf(order.getShopId()));
+		shop = shopService.findbyid(order.getShopId());
 	    } catch (NumberFormatException e) {
 		e.printStackTrace();
 	    } catch (Exception e) {
@@ -432,7 +428,7 @@ public class OrderController extends AbstractController {
 	    prePayParams.put("nonce_str", Sha1Util.getNonceStr());
 	    prePayParams.put("body", productName); // 商品描述
 	    prePayParams.put("out_trade_no", outTradeNo); // 商家订单号
-	    prePayParams.put("total_fee", orderPrice); // 商品金额,以分为单位
+	    prePayParams.put("total_fee", order.getActualPrice().multiply(new BigDecimal(100)).setScale(0)+""); // 商品金额,以分为单位
 	    prePayParams.put("spbill_create_ip", request.getRemoteAddr()); // 订单生成的机器IP，指用户浏览器端IP
 	    prePayParams.put("notify_url", TenpayConfig.notify_url); // 接收微信通知的URL
 	    prePayParams.put("trade_type", "JSAPI");

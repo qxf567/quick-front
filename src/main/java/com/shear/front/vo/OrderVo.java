@@ -26,7 +26,7 @@ public class OrderVo extends BasePo implements Serializable {
     private String customerNumber;
 
     /** 门店 */
-    private String shopId;
+    private Long shopId;
 
     private String shopName;
 
@@ -150,11 +150,11 @@ public class OrderVo extends BasePo implements Serializable {
 	this.customerNumber = customerNumber;
     }
 
-    public String getShopId() {
+    public Long getShopId() {
 	return shopId;
     }
 
-    public void setShopId(String shopId) {
+    public void setShopId(Long shopId) {
 	this.shopId = shopId;
     }
 

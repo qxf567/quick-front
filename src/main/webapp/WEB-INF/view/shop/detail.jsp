@@ -183,7 +183,7 @@
 
     <div class="bottom_height"></div>
     <div class="fixed_menu">
-        <div class="amount">合计29.8元</div>
+        <div class="amount">合计${shop.price}元</div>
         <a href="javascript:;" id="payment">
         <div class="payment_btn">立即下单</div>
         </a>

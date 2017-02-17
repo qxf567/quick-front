@@ -159,7 +159,7 @@
     </div>
     <div class="bottom_height"></div>
     <div class="fixed_menu">
-        <div class="amount"><span class="all_price">合计 29.8元</span><span class="discount_label">已优惠0元</span></div>
+        <div class="amount"><span class="all_price">合计 ${shop.price}元</span><span class="discount_label">已优惠0元</span></div>
         <div class="payment_btn pay_order pay_order_now">
             <a href="javascript:;">立即支付</a>
         </div>
@@ -184,7 +184,7 @@
     var f_flag = '0';//优惠类型 1优惠券 2会员卡
     var f_coupon_price = '0';//优惠金额
     var ticket_num = '1';//票数
-    var total_price = '29.8';//票价
+    var total_price = '${shop.price}';//票价
     var is_check_coupon = '0';
     var is_check_card = '0';
     
@@ -205,7 +205,7 @@
         "f_card_detail_id": '0',
         "f_coupon_detail_id": '0',
         "f_flag": '0',
-        "total_price": '29.8',
+        "total_price": total_price,
         "ticket_num": '1',
         "is_check_coupon": '0',
         "is_check_card": '0',
@@ -395,8 +395,9 @@
 						"appointmentDay":appointmentDay,
 						"hairstyleId":hairstyleId,
 						"customerNumber":customerNumber,
-						"hairdresserId":hairdresserId
-						
+						"hairdresserId":hairdresserId,
+						"totalPrice":total_price,
+						"actualPrice":total_price
 					},
                     beforeSend: function()
                     {
