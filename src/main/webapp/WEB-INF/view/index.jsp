@@ -62,6 +62,7 @@
 			</section>
 		</div>
 		<div class="hpro-list">
+			<img src='/img/loading.gif' />
 			<!-- 店铺 -->
 		</div>
 		<div class="hcustom">
@@ -133,7 +134,6 @@
  		    	dataType: 'json',
  		    	beforeSend:function(XMLHttpRequest){
  		              //alert('远程调用开始...');
- 		              $(".hpro-list").html("<img src='/img/loading.gif' />");
  		         },
  		    	success : function(result){
  		    		$('.hpro-list').html('');
