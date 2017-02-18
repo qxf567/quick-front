@@ -159,7 +159,7 @@
     </div>
     <div class="bottom_height"></div>
     <div class="fixed_menu">
-        <div class="amount"><span class="all_price">合计 ${shop.price}元</span><span class="discount_label">已优惠0元</span></div>
+        <div class="amount"><span class="all_price">合计 ${shop.price}元</span><span class="discount_label">已优惠10元</span></div>
         <div class="payment_btn pay_order pay_order_now">
             <a href="javascript:;">立即支付</a>
         </div>
