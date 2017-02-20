@@ -5,7 +5,7 @@
 <html>
 <head>
 <%@ include file="common/meta.jsp"%>
-<title>仟丝顺美容美发</title>
+<title>仟丝顺快剪</title>
 <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 </head>
 <body>
@@ -65,10 +65,10 @@
 			<img src='/img/loading.gif' />
 			<!-- 店铺 -->
 		</div>
-		<div class="hcustom">
+		<!-- <div class="hcustom">
 			<a href="tel:400-900-6688"><i></i><span>400-900-6</span></a>
 			<span style="font-size:12px">全国客服热线:09:30－21:00</span>
-		</div>
+		</div> -->
 		<div class="hservice">
 			<section class="title">
 				<span class="name">仟丝顺品质保证Copyright © 2017 qiansishun.com </span>
