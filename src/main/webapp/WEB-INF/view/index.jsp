@@ -55,12 +55,12 @@
 		<div class="fault-list">
 			 <!-- 百度地图容器 -->
 		</div>
-		<div style="margin-top: 0.2rem;">
+		<!-- <div style="margin-top: 0.2rem;">
 			<a href="about"><img style="width: 100%;" src="/img/head/life.png" /></a>
 			<section class="box hpro-title">
 				<span class="box-flex name">精品快剪</span> <a href="/repair/index" class="more">更多</a>
 			</section>
-		</div>
+		</div> -->
 		<div class="hpro-list">
 			<img src='/img/loading.gif' />
 			<!-- 店铺 -->
