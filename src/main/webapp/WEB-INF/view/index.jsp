@@ -166,8 +166,8 @@
  			      		var html = '<div class="list_store row">'+
  						'<a href="/shear/detail/'+value.id+'">'+
  						imgHtml +
- 						'<img src="http://m.qiansishun.com:8180/shop.img/'+value.mainImageUrl+'" class="shop-img"/>'+
- 						'<span style="background: none repeat scroll 0 0;color: #fff;letter-spacing:0.5px;;text-align: center;position:absolute;top:35%;margin-left:10px;color:#45b5da" ><b>马上预约</b></span>'+
+ 						'<img src="http://m.qiansishun.com:8180/shop.img/'+value.mainImageUrl+'" class="shop-img" style="width: 8.2rem;height: 4.5rem;"/>'+
+ 						
  						'</a>'+
  						'<p class="shop-title">'+value.name+'<span class="shop-text">&nbsp;&nbsp;'+distance+'</span>'+'</p> '+
  						'<p class="shop-text">营业时间：'+value.businessHours+'</p>'+
