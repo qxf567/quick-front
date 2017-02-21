@@ -68,7 +68,7 @@ public class IndexController extends AbstractController {
 	}
 	
         LOGGER.info("openid:"+openid);
-	//获取用户信息
+	/*//获取用户信息
 	Map<String, Object> userInfo = infoManager.getWechatUserInfoByPageAccess(openid);
 	String nickname = null,headimgurl =null;
 	Integer	sex = null;
@@ -84,7 +84,7 @@ public class IndexController extends AbstractController {
 	//1时是男性，值为2时是女性，值为0时是未知
 	model.addAttribute("sex", sex);
 	model.addAttribute("headimgurl", headimgurl);
-	model.addAttribute("userInfo", userInfo);
+	model.addAttribute("userInfo", userInfo);*/
 	
 	// 通过jsapi拿到经纬度
 	String jsapi = wechatManager.getJsapiTicket();
