@@ -339,8 +339,13 @@ public class OrderController extends AbstractController {
 			if(status == null){
 			    //待服务
 			    status = 1;
+			    List<Integer> statusList = new ArrayList<Integer>();
+			    statusList.add(1);
+			    statusList.add(50);
+			    statusList.add(100);
+			    query.setOrderStatusList(statusList);
 			}
-			query.setOrderStatus(status);
+			
 			try {
 			    orderList = orderService.selectByParam(query);
 			    orderVoList = new ArrayList<OrderVo>();

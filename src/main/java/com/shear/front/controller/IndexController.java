@@ -155,7 +155,7 @@ public class IndexController extends AbstractController {
 	
 	HairdresserQuery query = new HairdresserQuery();
 	query.setStatus(1);
-	query.setShopId(Long.valueOf(order.getShopId()));
+	query.setShopId(order.getShopId());
 	List<Hairdresser> list = null;
 	try {
 	    list = hairdresserService.selectByParam(query);

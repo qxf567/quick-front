@@ -9,7 +9,7 @@
     <!-- Pixel Admin's stylesheets -->
     <link type="text/css" rel="stylesheet" href="/css/common.css" />
     <link href="/css/hairstyle.css" rel="stylesheet" type="text/css">
-    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript" src="/js/jquery.lazyload.js"></script>

@@ -28,24 +28,23 @@
 <body>
 <div class="container">
     <div class="addWrap">
-        <div class="swipe" id="mySwipe">
-            <div class="swipe-wrap">
-            	<c:forEach items="${shop.multiImageUrls.split(',')}" var="image">
+            	<%-- <c:forEach items="${shop.multiImageUrls.split(',')}" var="image">
 	            	<div class="img_li"><a href="javascript:;"><img src="http://m.qiansishun.com:8180/shop.img/${image}"/></a></div>
 	            </c:forEach>
                                     <!-- <div class="img_li"><a href="javascript:;"><img src="/img/detail/01.jpg"/></a></div>
                                     <div class="img_li"><a href="javascript:;"><img src="/img/detail/02.jpg"/></a></div>
                                     <div class="img_li"><a href="javascript:;"><img src="/img/detail/03.jpg"/></a></div> -->
-             </div>
-        </div>
-        <ul id="position">
+                                    
+             </div> --%>
+             <img src="http://m.qiansishun.com:8180/shop.img/${shop.mainImageUrl}"/>
+        <%-- <ul id="position">
         	<c:if test="${shop.multiImageUrls ne ''}">
         		<li class="cur"></li>
         	</c:if>
         	<c:forEach items="${shop.multiImageUrls.split(',')}" begin="1">
             	<li class=""></li>
             </c:forEach>
-        </ul>
+        </ul> --%>
     </div><!--banner图End-->
     <div class="store_info">
         <p class="store_name">${shop.name}</p>
@@ -168,11 +167,11 @@
                 <li class="li_list">
                     <div class="user_know">
                         <p class="title">微信下单：</p>
-                        <p><img src="/img/detail/list_style.png"/>关注“纤丝顺”公众号，点击 我要剪发，在线下单</p>
-                        <p class="title">到店扫码下单：</p>
-                        <p><img src="/img/detail/list_style.png"/>在纤丝顺——订单——订单详情，可查看最新排队信息</p>
+                        <p><img src="/img/detail/list_style.png"/>关注“仟丝顺”公众号，点击 我要剪发，在线下单</p>
+                        <p class="title">到店扫码服务：</p>
+                        <p><img src="/img/detail/list_style.png"/>在仟丝顺——订单——订单详情，可查看最新排队信息</p>
                         <p><img src="/img/detail/list_style.png"/>过号不作废，点击——订单详情——刷新，进行重新排号享受服务</p>
-                        <p><img src="/img/detail/list_style.png"/>此页面下单仅限"纤丝顺"${shop.name}内消费使用，其他店不可使用</p>
+                        <p><img src="/img/detail/list_style.png"/>此页面下单仅限"仟丝顺"${shop.name}内消费使用，其他店不可使用</p>
                         <p><img src="/img/detail/list_style.png"/>建议选择特惠时段，避开高峰期以免等待时间过长。</p>
                         <p><img src="/img/detail/list_style.png"/>特惠时段仅限特惠时段使用，过号重排。</p>
                     </div>
@@ -343,7 +342,7 @@ var debug = ${debug};
   
 
     //banner滑动效果处理
-    var bullets = document.getElementById('position').getElementsByTagName('li');
+   /*  var bullets = document.getElementById('position').getElementsByTagName('li');
     var banner = Swipe(document.getElementById('mySwipe'), {
         auto: 10000,
         continuous: true,
@@ -355,7 +354,7 @@ var debug = ${debug};
             }
             bullets[pos].className = 'cur';
         }
-    })
+    }) */
 
     //tab切换部分js -- start
     var page = 'pagenavi' ;
