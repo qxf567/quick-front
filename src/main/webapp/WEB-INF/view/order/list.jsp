@@ -28,8 +28,8 @@
 			<ul id="pagenavi" class="page fixed_top">
 				<li><a href="#" class="active">待服务</a></li>
 				<!--  <li><a href="#">待评价</a></li> -->
+				<li><a href="#">已接单</a></li>
 				<li><a href="#">已完成</a></li>
-				<li><a href="#">全部</a></li>
 			</ul>
 
 			<div id="slider" class="swipe mt37">
@@ -81,7 +81,7 @@
 									<c:if test="${not empty orderList}">
 									<div class="total_main">
 										<c:forEach items="${orderList}" var="order">
-											<c:if test="${order.orderStatus == 100}">
+											<c:if test="${order.orderStatus == 50}">
 												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">订单号:${order.orderId}</p>
 												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">手机号:${order.customerNumber}</p>
 												<p style="font-size: 14px;line-height: 23px;padding: 0 15px;">验票码:${order.serviceCode}</p>
