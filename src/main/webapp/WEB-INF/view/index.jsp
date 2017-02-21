@@ -13,7 +13,7 @@
 		<span></span><span></span><span></span>
 	</div>
 	<div id="warp" class="warp">
-		<div class="city-login cl">
+		<%-- <div class="city-login cl">
 			<a class="logo" href="http://m.quickshear.com"><span>社区快剪</span></a> <span
 				class="tips">${nickname}，仟丝顺欢迎您。</span>
 			<div class="login-warp">
@@ -29,8 +29,8 @@
 				
 				</a>
 			</div>
-		</div>
-		<div id="focus" class="focus">
+		</div> --%>
+		<div id="focus" class="focus" style="height: 5rem;">
 			<div class="hd">
 				<ul>
 					<li>1</li>
@@ -41,13 +41,13 @@
 			<div class="bd">
 				<ul>
 					<li><a href="#">
-							<img _src="/img/head/01.jpg" />
+							<img _src="/img/head/01.jpg" style="height: 5rem;"/>
 					</a></li>
 					 <li><a href="#">
-							<img _src="/img/head/02.jpg" />
+							<img _src="/img/head/02.jpg" style="height: 5rem;"/>
 					</a></li>
 					<li><a href="#">
-							<img _src="/img/head/03.jpg" />
+							<img _src="/img/head/03.jpg" style="height: 5rem;"/>
 					</a></li>
 				</ul>
 			</div>
