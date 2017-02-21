@@ -94,7 +94,7 @@
   </div>
 </main>
 
-<div class="bs-docs-featurette">
+<!-- <div class="bs-docs-featurette">
   <div class="container">
     <h2 class="bs-docs-featurette-title">为所有用户、所有用户需要而设计。</h2>
     <p class="lead">我们通过用户数据，驱动体验与时间的标准化，让您把宝贵的时间放在更重要的事情上，成功更好的自己。</p>
@@ -152,7 +152,7 @@
         </a>
       </div>
     
-    </div>
+    </div> -->
 
     <hr class="half-rule">
 
@@ -168,7 +168,7 @@
   <div class="container">
     
 
-    <p>Copyright 2017, qss Co. Ltd. All Rights Reserved.  重庆仟丝顺美容美发有限公司 网站备案号：渝ICP备17001007号</p>
+    <p>Copyright 2017, qiansishun Co. Ltd. All Rights Reserved.  重庆仟丝顺美容美发有限公司 网站备案号：渝ICP备17001007号</p>
   </div>
 </footer>
 
